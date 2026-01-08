@@ -41,15 +41,11 @@
 body {
   font-family: var(--font-family-main);
   background-color: var(--color-white);
-  
-  /* 1. Ensure the body has height so you can actually see the background */
-  min-height: 100vh;
+    min-height: 100vh;
   width: 100%;
-  /* 2. Corrected Path - try /src/assets/ if ./assets/ fails */
   background-image: url('/src/assets/background.png'); 
-  /* 3. Combined: Repeat the image but ensure it covers the area */
   background-repeat: repeat; 
-  background-size: auto; /* 'auto' keeps the original pattern size while repeating */
+  background-size: auto; 
   background-position: top left;
   overflow-x: hidden;
   padding: 0 60px;
@@ -107,12 +103,11 @@ body {
 }
 
 .social-icon {
-  /* Increased size from 34px to 48px */
   width: 48px;
   height: 48px;
   
   border-radius: 50%;
-  border: 1.5px solid #E0E0E0; /* Slightly thicker border for the larger size */
+  border: 1.5px solid #E0E0E0; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -124,7 +119,7 @@ body {
 .social-icon:hover {
   background-color: #f5f5f5;
   border-color: var(--color-primary-brown);
-  transform: scale(1.1); /* Subtle grow effect on hover */
+  transform: scale(1.1); 
 }
 
 .social-icon img {
@@ -152,8 +147,6 @@ body {
 
 
 /*----SPECIALS-----*/
-/* src/App.css - Append this */
-
 .special-menu-section {
   text-align: center;
   padding: 100px 0;
@@ -274,7 +267,7 @@ body {
   font-family: var(--font-family-main);
   font-weight: 600;
   font-size:15px;
-  color: #FF5C5C; /* Matching visual red-ish price */
+  color: #FF5C5C;
 }
 
 .rating-v2 {
@@ -292,19 +285,15 @@ body {
 .heart-badge {
   width: 56px;
   height: 46px;
-  
   position: absolute;
   top: 0;
   right: 0;
-  
   background-color: var(--color-secondary-yellow); 
   border-top-right-radius: 37.5px;
   border-bottom-left-radius: 42.5px;
-  
   display: flex;
   align-items: center;
   justify-content: center;
-  
   box-shadow: -2px 2px 10px rgba(0,0,0,0.05);
   z-index: 2;
 }
@@ -400,7 +389,6 @@ body {
   width: auto;
   z-index: 3;
   display: block;
-  /* Adjust this to move chef left/right within the leaf */
   margin-left: 40px; 
   filter: drop-shadow(0px 10px 20px rgba(0,0,0,0.2));
 }
@@ -425,9 +413,6 @@ body {
   flex-shrink: 0;
 }
 
-
-
-
 /* --- Testimonials Section --- */
 .testimonials-section {
   padding: 60px;
@@ -438,18 +423,18 @@ body {
 .testimonials-title {
   font-family: 'David Libre', serif;
   font-weight: 700;
-  font-size: 50px; /* Figma spec */
+  font-size: 50px; 
   line-height: 65px;
-  color: #101A24; /* Figma spec */
+  color: #101A24; 
   margin-bottom: 20px;
 }
 
 .testimonials-subtitle {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
-  font-size: 16px; /* Figma spec */
+  font-size: 16px; 
   line-height: 29px;
-  color: #5C6574; /* Figma spec background color used as text color */
+  color: #5C6574;
   max-width: 600px;
   margin: 0 auto 80px auto;
 }
@@ -466,12 +451,10 @@ body {
 /* The Testimonial Card */
 .testimonial-card {
   position: relative;
-  width: 500px; /* Figma spec */
-  height: 360px; /* Figma spec */
-  background: #FAF6F1; /* Figma spec card bg */
-  box-shadow: 0px 0px 30px 0px #00000012; /* Figma spec */
-  
-  /* Applying the "Leaf/Squircle" logic to match image curves */
+  width: 500px; 
+  height: 360px; 
+  background: #FAF6F1; 
+  box-shadow: 0px 0px 30px 0px #00000012;
   border-top-left-radius: 120px;
   border-top-right-radius: 30px;
   border-bottom-left-radius: 30px;
@@ -488,7 +471,7 @@ body {
 /* Floating Avatar Positioning */
 .testimonial-avatar {
   position: absolute;
-  top: -55px; /* Adjusting for 110px circle */
+  top: -55px; 
   width: 80px;
   height: 80px;
   border-radius: 50%;
@@ -511,7 +494,7 @@ body {
 
 /* Body Text within Card */
 .testimonial-text {
-  width: 383px; /* Figma spec */
+  width: 383px; 
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 16px;
@@ -537,12 +520,6 @@ body {
   line-height: 29px;
   color: #5C6574;
 }
-
-
-
-
-
-
 /* Section Layout */
 .services-section {
   display: flex;
@@ -551,12 +528,10 @@ body {
   padding: 80px 10px;
   gap: 10px;
 }
-
 /* Text Content */
 .services-content {
   flex: 1;
 }
-
 .services-subtitle {
   font-family: 'DM Serif Display', serif;
   color: #FFC164;
@@ -591,15 +566,15 @@ body {
 /* Grid & Cards */
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(2, 230px); /* Exact Figma Width */
-  grid-template-rows: repeat(2, 250px);    /* Exact Figma Height */
+  grid-template-columns: repeat(2, 230px);
+  grid-template-rows: repeat(2, 250px);  
   gap: 25px;
 }
 
 .service-card {
   background: #FFFFFF;
   border-radius: 30px;
-  box-shadow: 7px 12px 43px 0px rgba(0, 0, 0, 0.14); /* Exact Figma Shadow */
+  box-shadow: 7px 12px 43px 0px rgba(0, 0, 0, 0.14);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -618,13 +593,13 @@ body {
 }
 
 .service-icon-img {
-  width: 50px; /* Adjust based on your icon size */
+  width: 50px;
   height: auto;
 }
 
 .service-card-title {
   font-family: 'Inter', sans-serif;
-  color: #FFBB00; /* Exact Figma Title Color */
+  color: #FFBB00; 
   font-size: 18px;
   font-weight: 700;
   text-transform: uppercase;
@@ -633,14 +608,11 @@ body {
 
 .service-card-desc {
   font-family: 'Inter', sans-serif;
-  color: #AF9A60; /* Exact Figma Description Color */
+  color: #AF9A60;
   font-size: 16px;
   font-weight: 600;
   line-height: 1.2;
 }
-
-
-
 /* --- FAQ STYLING --- */
 .faq-section {
   padding: 70px 30px;
@@ -650,8 +622,8 @@ body {
 .faq-header {
   font-family: 'Inter', sans-serif;
   font-weight: 700;
-  font-size:30px; /* Figma Size */
-  color: #4E342E; /* Figma Color */
+  font-size:30px;
+  color: #4E342E; 
   margin-bottom: 50px;
 }
 
@@ -671,9 +643,9 @@ body {
 }
 
 .check-circle {
-  width: 30px; /* Figma Width */
-  height: 33px; /* Figma Height */
-  background: #FFBB00; /* Figma Color */
+  width: 30px;
+  height: 33px; 
+  background: #FFBB00;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -684,9 +656,9 @@ body {
 .faq-text {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
-  font-size: 20px; /* Figma Size */
+  font-size: 20px; 
   line-height: 40px;
-  color: #5C6574; /* Figma Color */
+  color: #5C6574;
 }
 
 /* --- NEWSLETTER STYLING --- */
@@ -697,8 +669,8 @@ body {
 }
 
 .newsletter-banner {
-  width: 1000px; /* Figma Width */
-  height: 350px; /* Figma Height */
+  width: 1000px;
+  height: 350px; 
   background-image: url('src/assets/Interior2.png');
   background-size: cover;
   background-position: center;
@@ -713,17 +685,17 @@ body {
 .newsletter-title {
   font-family: 'David Libre', serif;
   font-weight: 700;
-  font-size: 45px; /* Figma Size */
+  font-size: 45px;
   line-height: 58px;
   color: #FFFFFF;
   text-align: center;
 }
 
 .newsletter-input-wrapper {
-  width: 600px; /* Figma Width */
-  height: 60px;  /* Figma Height */
+  width: 600px; 
+  height: 60px; 
   background: #FFFFFF;
-  border-radius: 20px; /* Figma Radius */
+  border-radius: 20px; 
   display: flex;
   align-items: center;
   padding: 0 12px 0 30px;
@@ -750,7 +722,6 @@ body {
   font-size: 16px;
 }
 /* RESPONSIVE */
-
 /* ------------------------------
    Large tablets / small desktops
    ------------------------------ */
