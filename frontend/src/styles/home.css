@@ -1,0 +1,995 @@
+/* src/App.css */
+
+:root {
+  /* Existing Colors */
+  --color-primary-brown: #4E342E;
+  --color-secondary-yellow: #FFBB00;
+  --color-nav-text: #101A24;
+  --color-black: #000000;
+  --color-white: #FFFFFF;
+  
+  /* NEW Colors from Figma Specs */
+  --color-accent-peach: #FFC164;   /* For "Today's Special" */
+  --color-card-bg: #FAF6F1;       /* For Dish Cards */
+  --color-text-gray: #555555;     /* For Descriptions */
+  --color-rating-gray: #454545;   /* For Rating number */
+  --color-btn-light: #EFEFEF;     /* For gray slider button */
+  
+  /* Fonts */
+  --font-family-heading: 'David Libre', serif;
+  --font-family-main: 'Inter', sans-serif;
+  --font-family-special: 'DM Serif Display', serif;
+  --font-family-sans: 'DM Sans', sans-serif;
+
+  --font-family-alt: 'Poppins', sans-serif; /* Replacement for Sofia Pro */
+  --color-text-dark: #2F2F2F;   /* Title color */
+  --color-text-body: #4A4A4F;   /* Body text color */
+  
+  /* Shadows */
+  --shadow-button: 0px 15px 30px 0px rgba(0, 0, 0, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* src/App.css */
+
+body {
+  font-family: var(--font-family-main);
+  background-color: var(--color-white);
+  
+  /* 1. Ensure the body has height so you can actually see the background */
+  min-height: 100vh;
+  width: 100%;
+  /* 2. Corrected Path - try /src/assets/ if ./assets/ fails */
+  background-image: url('/src/assets/background.png'); 
+  /* 3. Combined: Repeat the image but ensure it covers the area */
+  background-repeat: repeat; 
+  background-size: auto; /* 'auto' keeps the original pattern size while repeating */
+  background-position: top left;
+  overflow-x: hidden;
+  padding: 0 60px;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* --- Hero Section --- */
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  padding: 50px 50px;
+}
+
+.hero-content {
+  width: 596px;
+}
+
+.hero-title {
+  font-family: var(--font-family-heading);
+  font-weight: 700;
+  font-size: 60px;
+  line-height: 72px;
+  color: var(--color-primary-brown);
+  margin-bottom: 24px;
+}
+
+.hero-description {
+  font-family: var(--font-family-main);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px; 
+  color: var(--color-black);
+  margin-bottom: 40px;
+  max-width: 450px;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+/* src/App.css */
+
+.hero-socials {
+  margin-top: 80px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.social-icon {
+  /* Increased size from 34px to 48px */
+  width: 48px;
+  height: 48px;
+  
+  border-radius: 50%;
+  border: 1.5px solid #E0E0E0; /* Slightly thicker border for the larger size */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: transparent;
+}
+
+.social-icon:hover {
+  background-color: #f5f5f5;
+  border-color: var(--color-primary-brown);
+  transform: scale(1.1); /* Subtle grow effect on hover */
+}
+
+.social-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; 
+  padding: 10px; 
+  display: block;
+}
+
+.hero-image-container {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.main-hero-img {
+  width: 90%;
+  height: 450px;
+  max-width: 500px;
+  box-shadow: 20px 20px 60px rgba(0,0,0,0.05);
+  border-radius: 20% 5% 20% 5%;
+}
+
+
+/*----SPECIALS-----*/
+/* src/App.css - Append this */
+
+.special-menu-section {
+  text-align: center;
+  padding: 100px 0;
+}
+
+.special-subtitle {
+  font-family: var(--font-family-special);
+  font-size: 50px;
+  color: var(--color-accent-peach);
+  margin-bottom: 10px;
+}
+
+.special-description {
+  font-family: var(--font-family-sans);
+  font-size: 25px;
+  color: var(--color-black);
+  margin: 0 auto 50px auto;
+  font-weight: lighter;
+  line-height: 1.1;
+}
+
+.special-title {
+  font-family: var(--font-family-heading);
+  font-weight: 700;
+  font-size: 35px;
+  color: var(--color-primary-brown);
+}
+
+/* Slider Controls */
+.slider-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  margin-bottom: 30px;
+  padding-right: 40px;
+}
+
+.control-btn {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.control-btn.prev { background-color: var(--color-btn-light); }
+.control-btn.next { background-color: #F5BE32; color: white; }
+
+.control-btn:hover{
+  filter: brightness(0.9);
+}
+
+/* Grid of 4 Cards */
+.special-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+}
+
+.dish-card-v2 {
+  width: 230px;
+  height: 320px;
+  background: var(--color-card-bg);
+  border-radius: 40px;
+  box-shadow: 2px 9px 42px 0px rgba(0, 0, 0, 0.08);
+  position: relative;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.dish-card-v2:hover { transform: translateY(-10px); }
+
+.dish-img-v2 {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 18px;
+  box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
+}
+
+.card-content-v2 {
+  width: 100%;
+  text-align: left;
+  padding: 0 10px;
+}
+
+.card-content-v2 h3 {
+  font-family: var(--font-family-main);
+  font-weight: 600;
+  font-size: 20px;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.card-content-v2 .desc {
+  font-family: var(--font-family-main);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--color-text-gray);
+  margin-bottom: 15px;
+}
+
+.card-footer-v2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price-v2 {
+  font-family: var(--font-family-main);
+  font-weight: 600;
+  font-size:15px;
+  color: #FF5C5C; /* Matching visual red-ish price */
+}
+
+.rating-v2 {
+  font-family: var(--font-family-main);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--color-rating-gray);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.rating-v2 span { color: #F5BE32; } /* Star color */
+
+.heart-badge {
+  width: 56px;
+  height: 46px;
+  
+  position: absolute;
+  top: 0;
+  right: 0;
+  
+  background-color: var(--color-secondary-yellow); 
+  border-top-right-radius: 37.5px;
+  border-bottom-left-radius: 42.5px;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  box-shadow: -2px 2px 10px rgba(0,0,0,0.05);
+  z-index: 2;
+}
+
+.heart-badge svg {
+  width: 20px;
+  height: 206px;
+  margin-left: 5px; 
+  margin-bottom: 5px; 
+}
+
+
+/* --- Head Chef Section --- */
+.chef-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  gap: 60px;
+}
+
+.chef-content {
+  flex: 1;
+  max-width: 530px;
+}
+
+.chef-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  color: #2F2F2F;
+  margin-bottom: 20px;
+}
+
+.chef-description {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  line-height: 28px;
+  color: #4A4A4F;
+  margin-bottom: 40px;
+}
+
+/* Bullet Points */
+.chef-qualities {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.quality-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.quality-icon-circle {
+  width: 54px;
+  height: 54px;
+  background-color: #4E342E;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.quality-text h4 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  color: #2F2F2F;
+  margin-bottom: 4px;
+}
+
+.quality-text p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  line-height: 21px;
+  color: #4A4A4F;
+}
+
+.chef-visuals-wrapper {
+  position: relative;
+  width: 500px; 
+  height: 500px;
+  display: flex;
+  align-items: flex-end; 
+  justify-content: center;
+}
+.chef-img {
+  position: relative;
+  height: 480px;
+  width: auto;
+  z-index: 3;
+  display: block;
+  /* Adjust this to move chef left/right within the leaf */
+  margin-left: 40px; 
+  filter: drop-shadow(0px 10px 20px rgba(0,0,0,0.2));
+}
+
+/* --- Content Styling --- */
+.chef-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 100px 50px;
+}
+
+.quality-icon-circle {
+  width: 50px;
+  height: 50px;
+  background: #4E342E;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+}
+
+
+
+
+/* --- Testimonials Section --- */
+.testimonials-section {
+  padding: 60px;
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.testimonials-title {
+  font-family: 'David Libre', serif;
+  font-weight: 700;
+  font-size: 50px; /* Figma spec */
+  line-height: 65px;
+  color: #101A24; /* Figma spec */
+  margin-bottom: 20px;
+}
+
+.testimonials-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 16px; /* Figma spec */
+  line-height: 29px;
+  color: #5C6574; /* Figma spec background color used as text color */
+  max-width: 600px;
+  margin: 0 auto 80px auto;
+}
+
+/* Grid Layout */
+.testimonials-grid {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  max-width: 1350px;
+  margin: 0 auto;
+}
+
+/* The Testimonial Card */
+.testimonial-card {
+  position: relative;
+  width: 500px; /* Figma spec */
+  height: 360px; /* Figma spec */
+  background: #FAF6F1; /* Figma spec card bg */
+  box-shadow: 0px 0px 30px 0px #00000012; /* Figma spec */
+  
+  /* Applying the "Leaf/Squircle" logic to match image curves */
+  border-top-left-radius: 120px;
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 120px;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+/* Floating Avatar Positioning */
+.testimonial-avatar {
+  position: absolute;
+  top: -55px; /* Adjusting for 110px circle */
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid #fff;
+}
+
+.testimonial-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.stars {
+  color: #FFB400;
+  font-size: 24px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+/* Body Text within Card */
+.testimonial-text {
+  width: 383px; /* Figma spec */
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 29px;
+  color: #5C6574;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.customer-name {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 29px;
+  color: #101A24;
+  margin-bottom: 5px;
+}
+
+.customer-role {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 29px;
+  color: #5C6574;
+}
+
+
+
+
+
+
+/* Section Layout */
+.services-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 80px 10px;
+  gap: 10px;
+}
+
+/* Text Content */
+.services-content {
+  flex: 1;
+}
+
+.services-subtitle {
+  font-family: 'DM Serif Display', serif;
+  color: #FFC164;
+  font-size: 45px;
+  margin-bottom: 10px;
+}
+
+.services-title {
+  font-family: 'Inter', sans-serif;
+  font-size:30px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 25px;
+}
+
+.services-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  color: #555555;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+.explore-btn {
+  width: 120px;
+  height: 50px;
+  border-radius: 40px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+/* Grid & Cards */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 230px); /* Exact Figma Width */
+  grid-template-rows: repeat(2, 250px);    /* Exact Figma Height */
+  gap: 25px;
+}
+
+.service-card {
+  background: #FFFFFF;
+  border-radius: 30px;
+  box-shadow: 7px 12px 43px 0px rgba(0, 0, 0, 0.14); /* Exact Figma Shadow */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+}
+
+.service-icon-wrapper {
+  margin-bottom: 25px;
+}
+
+.service-icon-img {
+  width: 50px; /* Adjust based on your icon size */
+  height: auto;
+}
+
+.service-card-title {
+  font-family: 'Inter', sans-serif;
+  color: #FFBB00; /* Exact Figma Title Color */
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+.service-card-desc {
+  font-family: 'Inter', sans-serif;
+  color: #AF9A60; /* Exact Figma Description Color */
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+
+
+/* --- FAQ STYLING --- */
+.faq-section {
+  padding: 70px 30px;
+  text-align: center;
+}
+
+.faq-header {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size:30px; /* Figma Size */
+  color: #4E342E; /* Figma Color */
+  margin-bottom: 50px;
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  display: flex;
+  align-items: flex-start;
+  text-align: left;
+  gap: 10px;
+}
+
+.check-circle {
+  width: 30px; /* Figma Width */
+  height: 33px; /* Figma Height */
+  background: #FFBB00; /* Figma Color */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.faq-text {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 20px; /* Figma Size */
+  line-height: 40px;
+  color: #5C6574; /* Figma Color */
+}
+
+/* --- NEWSLETTER STYLING --- */
+.newsletter-section {
+  padding: 100px 75px;
+  display: flex;
+  justify-content: center;
+}
+
+.newsletter-banner {
+  width: 1000px; /* Figma Width */
+  height: 350px; /* Figma Height */
+  background-image: url('src/assets/Interior2.png');
+  background-size: cover;
+  background-position: center;
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.newsletter-title {
+  font-family: 'David Libre', serif;
+  font-weight: 700;
+  font-size: 45px; /* Figma Size */
+  line-height: 58px;
+  color: #FFFFFF;
+  text-align: center;
+}
+
+.newsletter-input-wrapper {
+  width: 600px; /* Figma Width */
+  height: 60px;  /* Figma Height */
+  background: #FFFFFF;
+  border-radius: 20px; /* Figma Radius */
+  display: flex;
+  align-items: center;
+  padding: 0 12px 0 30px;
+  box-sizing: border-box;
+}
+
+.newsletter-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  color: #101A24;
+}
+
+.newsletter-input::placeholder {
+  opacity: 0.5;
+}
+.subscribe-btn {
+  width: 100px;
+  height: 45px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 16px;
+}
+/* RESPONSIVE */
+
+/* ------------------------------
+   Large tablets / small desktops
+   ------------------------------ */
+@media (max-width: 1024px) {
+  body {
+    padding: 0 20px;
+  }
+
+  .nav-menu {
+    justify-content: flex-end;
+  }
+
+  .hero-section {
+    flex-direction: column-reverse;
+    gap: 20px;
+  }
+
+  .hero-content,
+  .hero-image-container {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .main-hero-img {
+    max-width: 420px;
+    width: 100%;
+    height: auto; /* maintain aspect ratio */
+  }
+
+  .chef-section {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .special-cards-grid,
+  .services-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .testimonials-grid {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .testimonial-card {
+    width: 45%;
+    max-width: 400px;
+    padding: 30px;
+    height: auto;
+  }
+
+  .testimonial-text {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .newsletter-banner {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+  }
+
+  .newsletter-title {
+    font-size: 36px;
+    line-height: 44px;
+  }
+
+  .newsletter-input-wrapper {
+    width: 80%;
+    max-width: 500px;
+    height: 55px;
+  }
+}
+
+/* ------------------------------
+   Tablets
+   ------------------------------ */
+@media (max-width: 768px) {
+  body {
+    padding: 0 15px;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .hero-btns {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .main-hero-img {
+    max-width: 340px;
+    width: 100%;
+    height: auto;
+  }
+
+  .special-cards-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .faq-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .newsletter-banner {
+    padding: 20px;
+  }
+
+  .testimonials-grid {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .testimonial-card {
+    width: 100%;
+    max-width: 100%;
+    padding: 20px;
+    height: auto;
+  }
+
+  .testimonial-text {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .newsletter-title {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .newsletter-input-wrapper {
+    width: 100%;
+    height: 50px;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+/* ------------------------------
+   Mobile devices
+   ------------------------------ */
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .hero-description {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .main-hero-img {
+    max-width: 260px;
+    width: 100%;
+    height: auto; /* vertical shrink */
+  }
+
+  .hero-btns {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .special-subtitle,
+  .special-title {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .chef-title {
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+  .chef-description {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .testimonial-card {
+    width: 100%;
+    padding: 15px;
+    height: auto;
+  }
+
+  .testimonial-text {
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .customer-name {
+    font-size: 14px;
+  }
+
+  .customer-role {
+    font-size: 12px;
+  }
+
+  .faq-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .newsletter-banner {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+  }
+
+  .newsletter-title {
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+  .newsletter-input-wrapper {
+    width: 100%;
+    height: 45px;
+    padding: 0 10px;
+  }
+
+  .subscribe-btn {
+    width: 90px;
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .services-section {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .services-grid,
+  .special-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
