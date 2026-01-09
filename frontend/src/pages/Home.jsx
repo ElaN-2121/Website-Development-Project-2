@@ -1,7 +1,7 @@
 
 import React from "react";
 import "src/styles/home.css";
-import Button from "../components/Button";  // adjust path if Home.jsx is inside src/pages/
+import Button from "../components/Button";  
 
 // =======================
 // HERO COMPONENT
@@ -170,7 +170,7 @@ const Services = () => {
         <p className="services-description">
           Rooted in passion, we curate unforgettable dining experiences and offer exceptional services, blending culinary artistry with warm hospitality.
         </p>
-        {/* ✅ USE THE IMPORTED BUTTON HERE */}
+        
         <Button text="Explore" variant="normal" className="explore-btn" />
       </div>
       <div className="services-grid">
@@ -218,7 +218,6 @@ const Newsletter = () => (
       </h2>
       <div className="newsletter-input-wrapper">
         <input type="email" placeholder="Enter your email" className="newsletter-input" />
-        {/* ✅ USE THE IMPORTED BUTTON */}
         <Button text="Subscribe" variant="normal" className="subscribe-btn" />
       </div>
     </div>
@@ -258,17 +257,15 @@ sed do eiusmod tempor incididunt</p>
   );
 };
 
-// =======================
-// FINAL HOME COMPONENT
-// =======================
+
 const Home = () => {
   return (
     <>
       <Hero />
       <SpecialDishes />
       <HeadChef />
-      <Services />
       <Testimonials />
+      <Services />
       <FAQ />
       <Newsletter />
     </>
