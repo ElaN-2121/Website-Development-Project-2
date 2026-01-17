@@ -1,17 +1,23 @@
 // src/components/Button.jsx
-import React from 'react';
-import "src/styles/button.css";
+import React from "react";
+import "../styles/Button.css";
+import { Link } from "react-router-dom";
 
+export default function Button({ text, className = "", to, variant = "default" }) {
+  // Combine base class, variant class, and any extra classes passed via props
+  const combinedClasses = `custom-btn btn-${variant} ${className}`.trim();
 
-const Button = ({ text, onClick, className, variant }) => {
-  // If variant is 'normal', use 'normal-btn'. Otherwise, stay 'nav-button'
-  const buttonClass = variant === 'normal' ? 'normal-btn' : 'nav-button';
-  
+  if (to) {
+    return (
+      <Link to={to} className={combinedClasses}>
+        {text}
+      </Link>
+    );
+  }
+
   return (
-    <button className={`${buttonClass} ${className}`} onClick={onClick}>
+    <button className={combinedClasses}>
       {text}
     </button>
   );
-};
-
-export default Button;
+}

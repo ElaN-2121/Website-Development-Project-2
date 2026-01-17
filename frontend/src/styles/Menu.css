@@ -1,0 +1,86 @@
+:root {
+  --color-dark: #231916;
+  --color-gold: #E8B931;
+  --color-cream: #FAF6F1;
+}
+
+.menu-hero {
+  background-color: var(--color-cream);
+  padding: 100px 5%;
+}
+
+.dark-background-wrapper {
+  background-color: var(--color-dark);
+  color: white;
+  padding: 80px 0;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.category-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 40px 0;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  background: transparent;
+  border: 1px solid #444;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.tab-btn.active {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-dark);
+}
+
+/* Highlighted Card Style (Gold) */
+.highlighted-card {
+  background: var(--color-gold) !important;
+  color: var(--color-dark);
+}
+
+.highlighted-card .menu-item-name,
+.highlighted-card .menu-item-price {
+  color: var(--color-dark) !important;
+}/* Dark Theme Section */
+.menu-dark-container {
+  background-color: #231916; /* Primary Brown from design */
+  color: white;
+  padding: 80px 0;
+}
+
+.text-white { color: #FFFFFF; }
+
+.category-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 40px 0;
+}
+
+.tab-btn {
+  background: transparent;
+  border: 1px solid #555;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.tab-btn.active {
+  background: var(--color-secondary-yellow); /* */
+  border-color: var(--color-secondary-yellow);
+  color: #231916;
+}

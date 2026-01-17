@@ -1,0 +1,66 @@
+/* src/styles/Navbar.css */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px; /* Kept from your original design */
+  background-color: var(--color-white); /* Optional: ensures visibility */
+}
+
+/* This makes logo and text side-by-side */
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 12px; /* Adds space between the image and the text */
+}
+
+.logo-img {
+  height: 40px;
+  width: auto; /* Ensures aspect ratio is maintained */
+}
+
+.logo-text {
+  font-family: var(--font-family-main);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-primary-brown);
+  margin: 0; /* Removes default h1 margins that break alignment */
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #101A24;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links a.active {
+  color: #FFBB00;
+}
+
+/* Updated to match the className="nav-btn" in your JSX */
+.nav-btn {
+  background: #4E342E;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+  background: #FFBB00;
+  color: #101A24;
+  transform: translateY(-2px);
+}

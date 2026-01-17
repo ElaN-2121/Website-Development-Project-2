@@ -1,7 +1,8 @@
 
 import React from "react";
-import "src/styles/home.css";
+import "../styles/Home.css";
 import Button from "../components/Button";  
+import FAQ from "../components/FAQ";
 
 // =======================
 // HERO COMPONENT
@@ -18,7 +19,7 @@ const Hero = () => {
           get the richness in every meals we serve.
         </p>
         <div className="hero-btns">
-          <Button text="Menu" className="btn-menu" />
+          <Button text="Menu" className="btn-menu" to="/menu" />
           <Button text="Book a table" className="btn-book-hero" />
         </div>
 
@@ -171,36 +172,11 @@ const Services = () => {
           Rooted in passion, we curate unforgettable dining experiences and offer exceptional services, blending culinary artistry with warm hospitality.
         </p>
         
-        <Button text="Explore" variant="normal" className="explore-btn" />
+        <Button text="Explore" variant="yellow" className="explore-btn" />
       </div>
       <div className="services-grid">
         {services.map(s => (
           <ServiceCard key={s.id} title={s.title} desc={s.desc} icon={s.icon} />
-        ))}
-      </div>
-    </section>
-  );
-};
-
-// =======================
-// FAQ
-// =======================
-const FAQ = () => {
-  const faqItems = Array(6).fill("Lorem ipsum dolor sit amet, consectetur");
-
-  return (
-    <section className="faq-section">
-      <h2 className="faq-header">FAQ</h2>
-      <div className="faq-grid">
-        {faqItems.map((text, index) => (
-          <div className="faq-item" key={index}>
-            <div className="check-circle">
-              <svg width="24" height="17" viewBox="0 0 24 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 8.5L8.5 15L22 2" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-            <p className="faq-text">{text}</p>
-          </div>
         ))}
       </div>
     </section>
@@ -218,7 +194,7 @@ const Newsletter = () => (
       </h2>
       <div className="newsletter-input-wrapper">
         <input type="email" placeholder="Enter your email" className="newsletter-input" />
-        <Button text="Subscribe" variant="normal" className="subscribe-btn" />
+        <Button text="Subscribe" variant="yellow" className="subscribe-btn" />
       </div>
     </div>
   </section>

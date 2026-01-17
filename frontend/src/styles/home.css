@@ -48,12 +48,12 @@ body {
   background-size: auto; 
   background-position: top left;
   overflow-x: hidden;
-  padding: 0 60px;
 }
 
 .container {
   max-width: 1440px;
   margin: 0 auto;
+  padding: 0 60px;
 }
 
 /* --- Hero Section --- */
@@ -522,6 +522,7 @@ body {
 }
 /* Section Layout */
 .services-section {
+  margin:auto 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;

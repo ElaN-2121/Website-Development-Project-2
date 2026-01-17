@@ -1,0 +1,155 @@
+.footer-container {
+  background-color: #faf9f6; /* Light cream background */
+  padding: 60px 8% 30px 8%;
+  color: #555;
+  font-family: 'Arial', sans-serif;
+}
+.logo-img{
+  width:40px;
+  height:40px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.footer-column {
+  flex: 1;
+  min-width: 200px;
+}
+
+.brand-col {
+  flex: 2; /* Gives more space to the description and hours */
+}
+
+/* Logo Styles */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.logo h2 {
+  color: #000;
+  margin: 0;
+  font-size: 24px;
+}
+
+/* Typography */
+.description {
+  line-height: 1.6;
+  font-size: 14px;
+  max-width: 400px;
+  margin-bottom: 30px;
+}
+
+.description a {
+  color: #555;
+  text-decoration: underline;
+}
+
+h4 {
+  color: #000;
+  font-size: 12px;
+  letter-spacing: 1px;
+  margin-bottom: 25px;
+  font-weight: bold;
+}
+
+/* Opening Hours Grid */
+.hours-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.day {
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.time {
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.closed {
+  color: #666;
+}
+
+/* List Styles */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+ul li a {
+  text-decoration: none;
+  color: #555;
+}
+
+/* Social Icons */
+.social-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.icon-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #fceec7; /* Light yellow circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.icon-circle.active {
+  background-color: #ffc107; /* Brighter yellow for first icon */
+}
+
+/* Bottom Bar */
+.footer-divider {
+  border: 0;
+  border-top: 1px solid #e0e0e0;
+  margin: 40px 0 20px 0;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+.legal-links {
+  display: flex;
+  gap: 30px;
+}
+
+.legal-links a {
+  text-decoration: none;
+  color: #555;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+  }
+  .hours-grid {
+    grid-template-columns: 1fr;
+  }
+}

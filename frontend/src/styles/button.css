@@ -1,63 +1,54 @@
+/* --- Base Button Style (Applied to ALL buttons) --- */
+.custom-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-family-main);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none; /* For Link components */
+  /* Top-Left and Bottom-Right rounded as per design */
+  border-radius: 20px 5px 20px 5px; 
+  box-shadow: var(--shadow-button);
+}
 
-/* --- Base Button Style (Reusable) --- */
-.nav-button {
+.custom-btn:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.1);
+}
+
+/* --- Default/Nav Variant --- */
+.btn-default {
   width: 194.87px;
   height: 61.71px;
   background-color: var(--color-primary-brown);
   color: var(--color-white);
-  font-family: var(--font-family-main);
   font-size: 16px;
-  font-weight: 500;
-  border: none;
-  cursor: pointer;
-  box-shadow: var(--shadow-button);
-  /* Top-Left and Bottom-Right rounded */
-  border-radius: 20px 5px 20px 5px;
-  transition: transform 0.2s ease;
-}
-.nav-button:hover {
-  transform: translateY(-3px);
-  filter: brightness(1.2);
-}
-.normal-btn {
-  background-color: #FFBB00; 
-  color: #FFFFFF;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-family: 'Inter', sans-serif;
-  transition: all 0.3s ease;
 }
 
-.normal-btn:hover {
-  filter: brightness(1.1);
-  transform: translateY(-2px);
-}
-
-/* Specific Button Variants from Figma */
+/* --- Home/Hero Menu Variant --- */
 .btn-menu {
   width: 140.03px;
   height: 51.07px;
   background-color: var(--color-primary-brown);
+  color: var(--color-white);
   font-size: 16px;
-  font-weight: 500;
 }
 
-
+/* --- Home/Hero Booking Variant --- */
 .btn-book-hero {
   width: 194.87px;
   height: 52.07px;
   background-color: var(--color-secondary-yellow);
   color: var(--color-white);
   font-size: 16px;
-  font-weight: 500;
 }
 
-/* Header Specific Button Size */
-.btn-header {
-  width: 194.87px;
-  height: 61.71px;
-  background-color: var(--color-primary-brown);
+/* --- Specific variant for FAQ or other sections --- */
+.btn-yellow {
+  background-color: var(--color-secondary-yellow);
+  color: white;
+  padding: 12px 24px;
 }

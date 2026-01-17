@@ -1,0 +1,104 @@
+/* src/styles/MenuCard.css */
+
+.menu-card {
+  background: #FFFFFF;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.menu-card-image img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover; /* Ensures consistent cropping */
+}
+
+.menu-card-info {
+  padding: 24px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-card-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.menu-item-name {
+  font-family: var(--font-family-heading);
+  color: var(--color-primary-brown);
+  font-size: 20px;
+  margin: 0;
+}
+
+.menu-item-price {
+  color: var(--color-secondary-yellow);
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.menu-item-description {
+  font-size: 14px;
+  color: var(--color-text-gray);
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.add-to-cart-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: var(--color-primary-brown);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background: var(--color-secondary-yellow);
+}/* Highlighted Gold Card Logic */
+.card-gold-active {
+  background-color: var(--color-secondary-yellow) !important;
+  color: #231916 !important;
+}
+
+.card-gold-active .menu-item-name,
+.card-gold-active .menu-item-price {
+  color: #231916;
+}
+
+.floating-add-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

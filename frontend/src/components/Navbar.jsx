@@ -1,50 +1,27 @@
-import React from "react";
-import "../styles/Navbar.css";
-
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import "../styles/Navbar.css"; 
+import LogoImg from "../assets/LogoImg.png";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
-    <header className="navbar">
-      <div className="navbar-container">
+    <nav className="navbar">
+      {/* Brand Container */}
+      <Link to="/" className="logo">
+        <img src={LogoImg} alt="Habesha Fest Logo" className="logo-img" />
+        <h1 className="logo-text">Habesha Fest</h1> 
+      </Link>
 
-        {/* Logo */}
-        <div className="navbar-logo">
-          <img src="/logo.svg" alt="Restaurant Logo" />
-          <span>Restaurant</span>
-        </div>
+      <ul className="nav-links">
+        <li><NavLink to="/" end>Home</NavLink></li>
+        <li><NavLink to="/menu">Menu</NavLink></li>
+        <li><NavLink to="/reservation">Reservation</NavLink></li>
+        <li><NavLink to="/hotel">Hotel</NavLink></li>
+      </ul>
 
-        {/* Desktop Links */}
-        <nav className={`navbar-links ${isOpen ? "open" : ""}`}>
-          <NavLink to="/" onClick={() => setIsOpen(false)}>Menu</NavLink>
-          <NavLink to="/events" onClick={() => setIsOpen(false)}>Events</NavLink>
-          <NavLink to="/gallery" onClick={() => setIsOpen(false)}>Gallery</NavLink>
-          <NavLink to="/about" onClick={() => setIsOpen(false)}>About</NavLink>
-          <NavLink to="/contact" onClick={() => setIsOpen(false)}>Contact</NavLink>
-
-          <button className="btn-primary mobile-only">
-            Book a table
-          </button>
-        </nav>
-
-        {/* Desktop CTA */}
-        <div className="navbar-cta desktop-only">
-          <button className="btn-primary">Book a table</button>
-        </div>
-
-        {/* Hamburger */}
-        <button
-          className="hamburger"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          ☰
-        </button>
-
-      </div>
-    </header>
+      <NavLink to="/reservation" className="nav-btn">
+        Book a table
+      </NavLink>
+    </nav>
   );
 };
 
