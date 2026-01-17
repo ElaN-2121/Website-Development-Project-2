@@ -1,56 +1,99 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import "../styles/FAQ.css";
+import "../styles/Button.css";
+import Button from "./Button";
+import Gate from "../assets/Gallery/drinks.jpg";
 
-const faqs = [
-  { q: "What are your restaurant's hours of operation?", a: "Our restaurant is open Monday to Sunday from 11:00 AM to 10:00 PM." },
-  { q: "Do I need a reservation to dine?", a: "No, but we recommend booking in advance during peak hours." },
-  { q: "Can I modify my reservation after booking?", a: "Yes, modifications are allowed up to 24 hours before your reservation." },
-  { q: "Do you offer takeout or delivery services?", a: "Yes, we provide both takeout and delivery options." },
-  { q: "Are there vegetarian or gluten-free options available?", a: "Yes, we cater to vegetarian and gluten-free diets." },
-  { q: "Can I host a private event at your restaurant?", a: "Yes, contact us for private event arrangements." },
-  { q: "Do you accommodate requests for celebrations?", a: "Absolutely! Let us know your requirements." },
+const faqData = [
+  {
+    question: "What are your restaurant's hours of operation?",
+    answer: "Our restaurant is open Monday to Sunday from 11:00 AM to 10:00 PM."
+  },
+  {
+    question: "Do I need a reservation to dine?",
+    answer: "While walk-ins are welcome, we recommend reservations for dinner and weekends."
+  },
+  {
+    question: "Can I modify my reservation after booking?",
+    answer: "Yes, you can modify or cancel your reservation up to 2 hours before your scheduled time."
+  },
+  {
+    question: "Do you offer takeout or delivery services?",
+    answer: "Yes, we offer both takeout and delivery through our website and major delivery apps."
+  },
+  {
+    question: "Are there vegetarian or gluten-free available?",
+    answer: "Absolutely! We have a dedicated section of our menu for various dietary needs."
+  },
+  {
+    question: "Can I host a private event at your restaurant?",
+    answer: "We offer private dining options for groups up to 50 people. Please contact our events manager."
+  },
+  {
+    question: "Do you accommodate requests for celebrations?",
+    answer: "Yes, we love being part of your special days. Let us know if it's a birthday or anniversary!"
+  }
 ];
 
-function FAQ() {
-  const [activeIndex, setActiveIndex] = useState(0); 
+export default function FAQ() {
+  const [openIndex, setOpenIndex] = useState(0);
+
+  const toggleAccordion = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
 
   return (
     <section className="faq-section">
-      <div className="section-container faq-grid">
-        <div className="faq-content-side">
+      <div className="section-container">
+        {/* Header Row */}
+        <div className="faq-header-row">
           <h2 className="faq-title">Your Questions Answered, Enjoy a Seamless Experience!</h2>
-          
-          <div className="accordion">
-            {faqs.map((faq, idx) => (
-              <div key={idx} className={`faq-item ${activeIndex === idx ? 'active' : ''}`}>
-                <button
-                  className="faq-question-btn"
-                  onClick={() => setActiveIndex(activeIndex === idx ? null : idx)}
-                >
-                  <span>{faq.q}</span>
-                  <span className="faq-icon">{activeIndex === idx ? '−' : '+'}</span>
-                </button>
-                <div className="faq-answer-container">
-                  <p className="faq-answer-text">{faq.a}</p>
-                </div>
-              </div>
-            ))}
+          <div className="faq-header-info">
+            <p className="faq-subtitle">
+              Explore our FAQs to find answers to common inquiries, ensuring a smooth and enjoyable dining experience for all our guests.
+            </p>
+            <button className="see-more-btn">See More</button>
           </div>
         </div>
 
-        <div className="faq-image-side">
-          <div className="faq-image-wrapper">
-             <img 
-               src="/src/assets/Restaurant_interior.png" 
-               alt="Restaurant Interior" 
-               className="faq-main-img" 
-             />
-             <button className="faq-see-more">See More</button>
+        {/* FAQ Content Grid */}
+        <div className="faq-grid-layout">
+          <div className="accordion-wrapper">
+            {faqData.map((item, index) => (
+              <div 
+                key={index} 
+                className={`faq-item ${openIndex === index ? "active" : ""}`}
+                onClick={() => toggleAccordion(index)}
+              >
+                {/* Line 1: Question and Icon */}
+                <div className="faq-question-row">
+                  <span className="question-text">{item.question}</span>
+                  <div className="faq-icon-container">
+                    {openIndex === index ? "∨" : "∧"}
+                  </div>
+                </div>
+                
+                {openIndex === index && (
+                  <div className="faq-answer-row">
+                    <p>{item.answer}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <div className="faq-image-column">
+            <div className="faq-image-container">
+               <img 
+                 src={Gate} 
+                 alt="Restaurant Interior"
+                 className="faq-interior-img"
+               />
+               <div className="image-overlay"></div>
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
 }
-
-export default FAQ;

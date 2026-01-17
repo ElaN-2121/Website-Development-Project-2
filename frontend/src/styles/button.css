@@ -5,16 +5,18 @@
   justify-content: center;
   border: none;
   cursor: pointer;
+  color: inherit; 
   font-family: var(--font-family-main);
   font-weight: 500;
   transition: all 0.3s ease;
-  text-decoration: none; /* For Link components */
-  /* Top-Left and Bottom-Right rounded as per design */
+  text-decoration: none; 
   border-radius: 20px 5px 20px 5px; 
   box-shadow: var(--shadow-button);
+  outline: none;
 }
 
 .custom-btn:hover {
+  text-decoration: none;
   transform: translateY(-3px);
   filter: brightness(1.1);
 }
@@ -51,4 +53,16 @@
   background-color: var(--color-secondary-yellow);
   color: white;
   padding: 12px 24px;
+  
+}
+.btn-white{
+  background-color: white;
+  color: #231916;
+  padding: 12px 24px;
+}
+.btn-white:hover {
+  border: var(--color-secondary-yellow) 1px solid;
+}
+.btn-yellow:hover {
+  border: white 1px solid;
 }

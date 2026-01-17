@@ -3,8 +3,9 @@ import React from "react";
 import "../styles/Button.css";
 import { Link } from "react-router-dom";
 
-export default function Button({ text, className = "", to, variant = "default" }) {
-  // Combine base class, variant class, and any extra classes passed via props
+// ADD 'onClick' here to the props destructuring
+export default function Button({ text, className = "", to, variant = "default", onClick }) {
+  
   const combinedClasses = `custom-btn btn-${variant} ${className}`.trim();
 
   if (to) {
@@ -16,7 +17,7 @@ export default function Button({ text, className = "", to, variant = "default" }
   }
 
   return (
-    <button className={combinedClasses}>
+    <button className={combinedClasses} onClick={onClick}>
       {text}
     </button>
   );

@@ -1,6 +1,5 @@
 import React from "react";
 import "../styles/FooterTwo.css";
-// Note: You can use library like react-icons for the social media icons
 import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import FooterBackground from "../assets/footerBackground.png";
 import Logo from "../assets/Logo.png";
@@ -46,7 +45,6 @@ const Footer = () => {
             </div>
           </div>
         </div>
-
         {/* Column 2: Navigation */}
         <div className="footer-column">
           <h4>NAVIGATION</h4>
@@ -65,7 +63,6 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-
         {/* Column 3: Dishes */}
         <div className="footer-column">
           <h4>DISHES</h4>
@@ -76,21 +73,39 @@ const Footer = () => {
             <li>Lumpia w/Suace</li>
           </ul>
         </div>
-
-        {/* Column 4: Social Media */}
         <div className="footer-column">
           <h4>FOLLOW US</h4>
           <div className="social-icons">
-            <a href="#" className="icon-circle active">
+            <a
+              href="https://facebook.com/yourpage"
+              className="icon-circle active"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaFacebookF />
             </a>
-            <a href="#" className="icon-circle">
+            <a
+              href="https://instagram.com/yourhandle"
+              className="icon-circle"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaInstagram />
             </a>
-            <a href="#" className="icon-circle">
+            <a
+              href="https://twitter.com/yourprofile"
+              className="icon-circle"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaTwitter />
             </a>
-            <a href="#" className="icon-circle">
+            <a
+              href="https://youtube.com/yourchannel"
+              className="icon-circle"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaYoutube />
             </a>
           </div>
@@ -100,7 +115,7 @@ const Footer = () => {
       <hr className="footer-divider" />
 
       <div className="footer-bottom">
-        <p>© 2022 Restaurants. All Right Reserved</p>
+        <p>© 2026 Habesha Fest Restaurants. All Right Reserved</p>
         <div className="legal-links">
           <a href="#terms">Terms of Service</a>
           <a href="#privacy">Privacy Policy</a>

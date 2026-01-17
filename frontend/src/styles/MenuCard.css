@@ -102,3 +102,56 @@
   align-items: center;
   justify-content: center;
 }
+/* Layout Tweaks */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Forces 4 columns as per design */
+  gap: 24px;
+  margin-top: 40px;
+}
+
+/* Gold Card Specifics */
+.card-gold-active {
+  background-color: #E8B931 !important; /* The Gold from design */
+  color: #231916 !important;
+  border-radius: 12px;
+}
+
+.card-gold-active .menu-item-name,
+.card-gold-active .menu-item-description,
+.card-gold-active .menu-item-price {
+  color: #231916 !important;
+}
+
+.menu-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.rating-stars {
+  color: #E8B931;
+  letter-spacing: 2px;
+}
+.rating-stars:hover{
+  color: #ffffff;
+}
+
+/* Hero Badge Style */
+.quality-badge-box {
+  background: white;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  width: fit-content;
+}
+
+.badge-icon {
+  background: #E8B931;
+  padding: 8px;
+  border-radius: 6px;
+}

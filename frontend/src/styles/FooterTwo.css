@@ -1,5 +1,5 @@
 .footer-container {
-  background-color: #faf9f6; /* Light cream background */
+  background-color: #faf9f6; 
   padding: 60px 8% 30px 8%;
   color: #555;
   font-family: 'Arial', sans-serif;
@@ -22,7 +22,7 @@
 }
 
 .brand-col {
-  flex: 2; /* Gives more space to the description and hours */
+  flex: 2;
 }
 
 /* Logo Styles */
@@ -103,11 +103,12 @@ ul li a {
   gap: 15px;
 }
 
+
 .icon-circle {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #fceec7; /* Light yellow circle */
+  background-color: #fceec7; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -116,11 +117,11 @@ ul li a {
   transition: 0.3s;
 }
 
-.icon-circle.active {
-  background-color: #ffc107; /* Brighter yellow for first icon */
+.icon-circle:hover {
+  background-color: #ffc107;
+  transform: translateY(-3px);
 }
 
-/* Bottom Bar */
 .footer-divider {
   border: 0;
   border-top: 1px solid #e0e0e0;
@@ -144,7 +145,7 @@ ul li a {
   color: #555;
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 768px) {
   .footer-content {
     flex-direction: column;
