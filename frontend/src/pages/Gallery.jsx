@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "../styles/Gallery.css";
 import Button from "../components/Button";
+
+// Image Imports
 import HeroImg from "../assets/Gallery/restaurant view.png";
 import Dining from "../assets/Gallery/dining.png";
 import FamilyReunion from "../assets/Gallery/corporate event.jpg"
@@ -14,28 +16,22 @@ import Birthday2 from "../assets/Gallery/birthday2.png";
 import DiningTable from "../assets/Gallery/seating arrangement.jpg";
 import LastImage from "../assets/Gallery/image2.png";
 
+// --- IMPORT VIDEO FILE ---
+import CelebrationVid from "../assets/Gallery/Celebration.mp4";
+import DiningTogether from "../assets/Gallery/Dining Together.mp4";
+import Hangout from "../assets/Gallery/Hangout.mp4";
+import useScrollReveal from "../components/UseScrollReveal";
 
-
-// 1. Hero Section (Updated to use your custom Button.jsx)
 const HeroSection = () => {
+  const [ref, show] = useScrollReveal();
   return (
-    <section className="hero-container">
-      <h1 className="hero-title">
-        Reserve Your Table, Savor Every Moment with Us
-      </h1>
-
+    <section ref={ref} className={`hero-container reveal ${show ? "show" : ""}`}>
+      <h1 className="hero-title">Reserve Your Table, Savor Every Moment with Us</h1>
       <div className="hero-grid">
         <div className="image-wrapper">
-          <img 
-            src={HeroImg}
-            alt="Restaurant Interior" 
-            className="main-hero-img"
-          />
-          <div className="quality-card">
-            <p>Your perfect dining experience awaits</p>
-          </div>
+          <img src={HeroImg} alt="Restaurant Interior" className="main-hero-img" />
+          <div className="quality-card"><p>Your perfect dining experience awaits</p></div>
         </div>
-
         <div className="text-wrapper">
           <p className="description">
             Book your table effortlessly and enjoy a delightful dining experience 
@@ -51,13 +47,11 @@ const HeroSection = () => {
   );
 };
 
-// 2. Photo Section (Filterable Bento Grid)
 const GallerySection = () => {
+  const [sectionRef, sectionShow] = useScrollReveal();
   const [activeCategory, setActiveCategory] = useState('All');
-
   const categories = ['All', 'Private Wedding', 'Family Reunion', 'Private Dining', 'Birthday Celebration'];
 
-  // Mock data for the grid items
   const galleryItems = [
     { id: 1, category: 'Private Wedding', size: 'large', img: Wedding1 },
     { id: 2, category: 'Family Reunion', size: 'square', img: FamilyReunion2 },
@@ -77,11 +71,13 @@ const GallerySection = () => {
     : galleryItems.filter(item => item.category === activeCategory);
 
   return (
-    <section className="gallery-section">
+    <section
+      ref={sectionRef}
+      className={`gallery-section reveal ${sectionShow ? "show" : ""}`}
+    >
       <div className="gallery-header">
         <h1>Capturing Moments, <br /> Creating Lasting Memories Together.</h1>
       </div>
-
       <div className="filter-bar">
         {categories.map((cat) => (
           <button 
@@ -93,7 +89,6 @@ const GallerySection = () => {
           </button>
         ))}
       </div>
-
       <div className="bento-grid">
         {filteredItems.map((item) => (
           <div 
@@ -109,37 +104,35 @@ const GallerySection = () => {
   );
 };
 
-// 3. Video Section (3D Cinema Style with Playlist)
 const VideoSection = () => {
+  const [ref, show] = useScrollReveal();
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
   const playlist = [
     { 
       id: "local-1", 
-      type: "local", 
-      title: "Main Venue Tour", 
-      // Import your local video at the top of the file: import VenueVid from "../assets/video.mp4"
-      src: "/path-to-your-local-video.mp4", 
+      title: "Reunion with friends", 
+      src: CelebrationVid, 
       thumb: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4" 
     },
     { 
-      id: "dQw4w9WgXcQ", 
-      type: "youtube", 
-      title: "Private Dining Experience", 
-      thumb: "https://images.unsplash.com/photo-1559339352-11d035aa65de" 
+      id: "local-2", 
+      title: "Traditional Coffee Ceremony", 
+      src: DiningTogether, 
+      thumb: "https://images.unsplash.com/photo-1504674900247-0877df9cc836" 
     },
     { 
-      id: "3X3X3X3X3X3", 
-      type: "youtube", 
-      title: "Traditional Coffee Ceremony", 
+      id: "local-3", 
+      title: "Casual Hangout Vibes", 
+      src: Hangout, 
       thumb: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b" 
     }
   ];
 
   const handleVideoChange = (index) => {
     setCurrentVideoIndex(index);
-    setIsPlaying(true); 
+    setIsPlaying(true);
   };
 
   const currentVideo = playlist[currentVideoIndex];
@@ -147,18 +140,22 @@ const VideoSection = () => {
   const prevIdx = (currentVideoIndex - 1 + playlist.length) % playlist.length;
 
   return (
-    <section className="video-tour">
+    <section ref={ref} className={`video-tour reveal ${show ? "show" : ""}`}>
       <div className="video-header">
         <h2 className="glitch-text">Experience the Atmosphere</h2>
-        <span>Take a virtual journey through our stunning spaces</span>
+        <span>Take a virtual journey through our stunning spaces and event setups.</span>
         <p className="current-title">Watching: {currentVideo.title}</p>
       </div>
 
       <div className="video-stage-container">
         <div className={`video-stage ${isPlaying ? "is-playing" : ""}`}>
           
+          {/* Left Wing (Previous) */}
           <div className="video-wing left-wing" onClick={() => handleVideoChange(prevIdx)}>
-            <div className="wing-overlay"><span>PREVIOUS</span></div>
+            <div className="wing-overlay">
+              <span className="nav-label">PREVIOUS</span>
+              <span className="nav-title">{playlist[prevIdx].title}</span>
+            </div>
             <div className="wing-content" style={{backgroundImage: `url(${playlist[prevIdx].thumb})`}}></div>
           </div>
 
@@ -175,28 +172,26 @@ const VideoSection = () => {
                 </div>
               </div>
             ) : (
-              // CONDITIONAL RENDERING LOGIC
-              currentVideo.type === "youtube" ? (
-                <iframe 
-                  width="100%" height="100%" 
-                  src={`https://www.youtube.com/embed/${currentVideo.id}?autoplay=1&modestbranding=1`} 
-                  title={currentVideo.title} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen
-                ></iframe>
-              ) : (
-                <video 
-                  width="100%" height="100%" 
-                  controls autoPlay 
-                  className="local-video-player"
-                >
-                  <source src={currentVideo.src} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              )
+              <video 
+                key={currentVideo.src} 
+                className="local-video-player" 
+                width="100%" 
+                height="100%" 
+                controls 
+                autoPlay
+              >
+                <source src={currentVideo.src} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
             )}
           </div>
 
+          {/* Right Wing (Next) */}
           <div className="video-wing right-wing" onClick={() => handleVideoChange(nextIdx)}>
-            <div className="wing-overlay"><span>NEXT UP</span></div>
+            <div className="wing-overlay">
+              <span className="nav-label">NEXT UP</span>
+              <span className="nav-title">{playlist[nextIdx].title}</span>
+            </div>
             <div className="wing-content" style={{backgroundImage: `url(${playlist[nextIdx].thumb})`}}></div>
           </div>
           
@@ -206,27 +201,32 @@ const VideoSection = () => {
     </section>
   );
 };
-// 4. Instagram Section (Clickable User Profiles)
+
 const InstagramSection = () => {
+  const [ref, show] = useScrollReveal();
   const posts = [
-    { id: 1, user: "estherhoward", profileUrl: "https://instagram.com/estherhoward", img: Birthday2, description:"My baby boy just turned 10. Thank you for an amazing service Habesha Fest. # Celebrations" },
-    { id: 2, user: "habesha_fan", profileUrl: "https://instagram.com/habesha_fan", img: FamilyReunion2, description:"Had a wonderful family reunion here. The ambiance and food were top-notch! #FamilyTime" },
-    { id: 3, user: "Selamawit Abay", profileUrl: "https://instagram.com/foodie_ethiopia", img: Wedding2, description:"The perfect venue for our wedding! Everything was flawless. #WeddingGoals" },
+    { id: 1, user: "jonashoward",avatar: "https://i.pravatar.cc/150?u=bluey", profileUrl: "https://instagram.com/estherhoward", img: Birthday2, description:"My baby boy just turned 10. Thank you for an amazing service Habesha Fest. # Celebrations" },
+    { id: 2, user: "habesha_fan", avatar: "https://i.pravatar.cc/150?u=julia",profileUrl: "https://instagram.com/habesha_fan", img: FamilyReunion2, description:"Had a wonderful family reunion here. The ambiance and food were top-notch! #FamilyTime" },
+    { id: 3, user: "SelamawitAbay", avatar: "https://i.pravatar.cc/150?u=32", profileUrl: "https://instagram.com/foodie_ethiopia", img: Wedding2, description:"The perfect venue for our wedding! Everything was flawless. #WeddingGoals" },
   ]; 
 
   return (
-    <section className="instagram-section">
+    <section
+      ref={ref}
+      className={`instagram-section reveal ${show ? "show" : ""}`}
+    >
       <div className="insta-header">
         <div className="header-left"><h1>Real Moments, Real Customers</h1></div>
         <button className="see-more-btn" onClick={() => window.open('https://instagram.com/habesha_fest', '_blank')}>See More</button>
       </div>
-
       <div className="posts-grid">
         {posts.map((post) => (
           <div key={post.id} className="insta-card">
-            {/* Clicking this takes user to Instagram profile */}
             <div className="card-user" onClick={() => window.open(post.profileUrl, '_blank')} style={{cursor: 'pointer'}}>
-              <div className="user-avatar"></div>
+              <div 
+                className="user-avatar" 
+                style={{backgroundImage: `url(${post.avatar})`, backgroundSize: 'cover'}}
+              ></div>
               <span className="user-name">@{post.user}</span>
             </div>
             <div className="card-image-placeholder" style={{backgroundImage: `url(${post.img})`, backgroundSize: 'cover'}}></div>

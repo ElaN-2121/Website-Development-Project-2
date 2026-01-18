@@ -1,4 +1,18 @@
-/* --- Global Styles & Variables --- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: opacity, transform;
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.35s ease-out,
+    transform 0.35s ease-out;
+}
+
 :root {
   --brand-brown: #3d2b26;
   --brand-gold: #ffb800;
@@ -177,58 +191,22 @@ p {
 }
 
 /* --- 3D Video Stage Styling --- */
-/* --- 3D Video Stage --- */
-.glitch-text {
-  font-size: 2.8rem;
-  margin-bottom: 20px;
-  line-height: 1.2;
-  color: white;
-}
-.video-header span {
-  color: #cdcdcd;
-  margin-top: 10px;
-  font-size: 0.8rem;
-}
 .video-tour {
   background-color: var(--brand-brown);
   padding: 100px 0;
   text-align: center;
 }
-/* Ensure local video fills the screen container */
-.local-video-player {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* This makes it look like the YouTube player */
-  background: #000;
-}
 
-/* Allow the play button container to be clickable */
-.play-pulse-container {
-  position: relative;
-  width: 80px;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.play-icon-large {
-  font-size: 2rem;
+.glitch-text {
+  font-size: 2.8rem;
   color: white;
-  z-index: 10;
+  margin-bottom: 10px;
 }
-.current-title {
-  color: var(--brand-gold);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 0.9rem;
-  margin-top: 10px;
-}
+
+.video-header span { color: #cdcdcd; font-size: 0.9rem; }
+.current-title { color: var(--brand-gold); margin-top: 15px; font-weight: bold; }
 
 .video-stage-container {
-  background-color: var(--brand-brown);
-  position: relative;
   max-width: 1200px;
   margin: 50px auto 0;
   perspective: 2000px;
@@ -239,7 +217,27 @@ p {
   align-items: center;
   justify-content: center;
   transform-style: preserve-3d;
-  transition: transform 0.8s ease;
+}
+
+.local-video-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+  display: block;
+}
+
+.video-stage-container {
+  max-width: 1200px;
+  margin: 50px auto 0;
+  perspective: 2000px;
+}
+
+.video-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
 }
 
 .video-main-screen {
@@ -248,63 +246,85 @@ p {
   background: #000;
   z-index: 10;
   position: relative;
-  border: 4px solid #3d2b26;
+  border: 4px solid #2a1d1a;
   box-shadow: 0 50px 100px rgba(0, 0, 0, 0.8);
+}
+
+.local-video-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .video-wing {
   flex: 0 0 20%;
   height: 380px;
-  position: relative;
   cursor: pointer;
   overflow: hidden;
-  transition: all 0.5s ease;
+  position: relative;
+  transition: 0.5s ease, flex 0.5s ease;
+  z-index: 1;
 }
 
-.left-wing {
-  transform: rotateY(40deg) translateZ(-50px);
-  margin-right: -8%;
+.left-wing { 
+    transform: rotateY(40deg) translateZ(-50px); 
+    margin-right: -8%; 
 }
-.right-wing {
-  transform: rotateY(-40deg) translateZ(-50px);
-  margin-left: -8%;
+.right-wing { 
+    transform: rotateY(-40deg) translateZ(-50px); 
+    margin-left: -8%; 
 }
 
 .wing-content {
   width: 100%;
   height: 100%;
   background-size: cover;
-  filter: grayscale(0.6) brightness(0.5);
-  transition: filter 0.3s ease;
+  background-position: center;
+  filter: grayscale(0.8) brightness(0.3);
+  transition: filter 0.4s ease;
 }
 
-.video-wing:hover .wing-content {
-  filter: grayscale(0) brightness(0.8);
-}
+.video-wing:hover .wing-content { filter: grayscale(0) brightness(0.7); }
 
 .wing-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: 0.3s;
+  background: rgba(61, 43, 38, 0.6); 
+  transition: opacity 0.3s ease;
   z-index: 5;
+  text-align: center;
+  padding: 15px;
 }
 
-.video-wing:hover .wing-overlay {
-  opacity: 1;
-}
-.wing-overlay span {
-  color: var(--brand-gold);
-  border: 1px solid;
-  padding: 5px 10px;
-  font-size: 0.7rem;
+.video-wing:hover .wing-overlay { opacity: 1; }
+.wing-overlay span { color: var(--brand-gold); border: 1px solid; padding: 5px 10px; font-size: 0.7rem; }
+
+.video-poster-overlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
 }
 
-/* Pulse Animation */
+.play-pulse-container { position: relative; width: 80px; height: 80px; }
+.play-btn-glass {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .pulse-ring {
   position: absolute;
   width: 100%;
@@ -315,40 +335,18 @@ p {
 }
 
 @keyframes pulse-vid {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
 }
 
 .stage-floor {
   height: 60px;
   width: 80%;
   margin: -30px auto 0;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(255, 184, 0, 0.15) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(ellipse at center, rgba(255, 184, 0, 0.15) 0%, transparent 70%);
   transform: rotateX(80deg);
 }
 
-.video-poster-overlay {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1200");
-  background-size: cover;
-}
 
 .poster-caption {
   margin-top: 20px;
@@ -396,6 +394,7 @@ p {
   border-radius: 15px;
   overflow: hidden;
   color: #222;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .insta-card:hover {
   box-shadow: 0 0 20px 5px rgba(255, 184, 0, 0.2);
@@ -406,7 +405,7 @@ p {
   align-items: center;
   padding: 15px;
   gap: 12px;
-  transition: background 0.2s;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .card-user:hover {
@@ -414,16 +413,18 @@ p {
 }
 
 .user-avatar {
-  width: 40px;
-  height: 40px;
-  background: #eee;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   border: 2px solid var(--brand-gold);
+  background-color: #eee;
+  flex-shrink: 0; 
 }
 
 .user-name {
   font-weight: 700;
   font-size: 0.95rem;
+  color: var(--brand-brown);
 }
 
 .card-image-placeholder {
