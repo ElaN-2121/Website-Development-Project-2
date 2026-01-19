@@ -9,6 +9,7 @@
 .menu-page-wrapper {
   font-family: var(--font-main);
   background-color: var(--color-cream);
+  margin:0;
 }
 
 
@@ -21,7 +22,7 @@
 
 .section-container {
   max-width: 1300px;
-  margin: 0 auto;
+  margin: 0 0;
   padding: 0 5%;
 }
 
@@ -31,7 +32,6 @@ html {
 }
 .menu-hero {
   position: relative;
-  padding: 80px 20px 120px 20px;
   overflow: hidden;
   text-align: center;
   z-index: 1;

@@ -1,17 +1,18 @@
-
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  will-change: opacity, transform;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.reveal.show {
-  opacity: 1;
-  transform: translateY(0);
-  transition:
-    opacity 0.35s ease-out,
-    transform 0.35s ease-out;
+.animate-hero {
+  animation: fadeInUp 0.8s ease-out forwards;
 }
+
 
 :root {
   --brand-brown: #3d2b26;

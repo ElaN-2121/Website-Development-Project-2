@@ -53,7 +53,7 @@
   background: #4E342E;
   color: white;
   padding: 12px 24px;
-  border-radius: 30px;
+  border-radius: 20px 5px 20px 5px;
   text-decoration: none;
   font-weight: 500;
   transition: all 0.3s ease;

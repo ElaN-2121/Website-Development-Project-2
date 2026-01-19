@@ -10,9 +10,12 @@
   font-weight: 500;
   transition: all 0.3s ease;
   text-decoration: none; 
-  border-radius: 20px 5px 20px 5px; 
+  border-radius: 20px 5px 20px 5px !important; 
   box-shadow: var(--shadow-button);
   outline: none;
+  white-space: nowrap; 
+  /* Use min-width instead of fixed width to allow buttons to grow with text */
+  padding: 0 24px;
 }
 
 .custom-btn:hover {
@@ -58,10 +61,11 @@
 .btn-white{
   background-color: white;
   color: #231916;
-  padding: 12px 24px;
+  border-radius: 20px 5px 20px 5px;
 }
 .btn-white:hover {
   border: var(--color-secondary-yellow) 1px solid;
+  border-radius: 20px 5px 20px 5px;
 }
 .btn-yellow:hover {
   border: white 1px solid;

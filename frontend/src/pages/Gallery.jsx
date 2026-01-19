@@ -20,12 +20,10 @@ import LastImage from "../assets/Gallery/image2.png";
 import CelebrationVid from "../assets/Gallery/Celebration.mp4";
 import DiningTogether from "../assets/Gallery/Dining Together.mp4";
 import Hangout from "../assets/Gallery/Hangout.mp4";
-import useScrollReveal from "../components/UseScrollReveal";
 
 const HeroSection = () => {
-  const [ref, show] = useScrollReveal();
   return (
-    <section ref={ref} className={`hero-container reveal ${show ? "show" : ""}`}>
+    <section className={"hero-container animate-hero"}>
       <h1 className="hero-title">Reserve Your Table, Savor Every Moment with Us</h1>
       <div className="hero-grid">
         <div className="image-wrapper">
@@ -48,7 +46,6 @@ const HeroSection = () => {
 };
 
 const GallerySection = () => {
-  const [sectionRef, sectionShow] = useScrollReveal();
   const [activeCategory, setActiveCategory] = useState('All');
   const categories = ['All', 'Private Wedding', 'Family Reunion', 'Private Dining', 'Birthday Celebration'];
 
@@ -72,8 +69,7 @@ const GallerySection = () => {
 
   return (
     <section
-      ref={sectionRef}
-      className={`gallery-section reveal ${sectionShow ? "show" : ""}`}
+      className={"gallery-section animate-hero"}
     >
       <div className="gallery-header">
         <h1>Capturing Moments, <br /> Creating Lasting Memories Together.</h1>
@@ -105,7 +101,6 @@ const GallerySection = () => {
 };
 
 const VideoSection = () => {
-  const [ref, show] = useScrollReveal();
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
@@ -140,7 +135,7 @@ const VideoSection = () => {
   const prevIdx = (currentVideoIndex - 1 + playlist.length) % playlist.length;
 
   return (
-    <section ref={ref} className={`video-tour reveal ${show ? "show" : ""}`}>
+    <section className={"video-tour animate-hero"}>
       <div className="video-header">
         <h2 className="glitch-text">Experience the Atmosphere</h2>
         <span>Take a virtual journey through our stunning spaces and event setups.</span>
@@ -203,7 +198,6 @@ const VideoSection = () => {
 };
 
 const InstagramSection = () => {
-  const [ref, show] = useScrollReveal();
   const posts = [
     { id: 1, user: "jonashoward",avatar: "https://i.pravatar.cc/150?u=bluey", profileUrl: "https://instagram.com/estherhoward", img: Birthday2, description:"My baby boy just turned 10. Thank you for an amazing service Habesha Fest. # Celebrations" },
     { id: 2, user: "habesha_fan", avatar: "https://i.pravatar.cc/150?u=julia",profileUrl: "https://instagram.com/habesha_fan", img: FamilyReunion2, description:"Had a wonderful family reunion here. The ambiance and food were top-notch! #FamilyTime" },
@@ -212,8 +206,7 @@ const InstagramSection = () => {
 
   return (
     <section
-      ref={ref}
-      className={`instagram-section reveal ${show ? "show" : ""}`}
+      className={"instagram-section animate-hero"}
     >
       <div className="insta-header">
         <div className="header-left"><h1>Real Moments, Real Customers</h1></div>
