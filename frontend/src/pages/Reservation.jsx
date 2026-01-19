@@ -1,15 +1,15 @@
 import React from "react";
+import "../styles/Reservation.css";
 import Button from "../components/Button";
 import FAQ from "../components/FAQ";
-
-// Images served from public/assets
-import HeroImage from "../assets/reservation.png";
-import InteriorImage from "../assets/Interior2.png"; // Placeholder for events image
+//Image imports
+import HeroImage from "../assets/Gallery/reservation.png";
+import InteriorImage from "../assets/homeAssets/Interior2.png";
 
 const Reservation = () => {
   return (
     <div className="reservation-page">
-      {/* --- Hero Section --- */}
+      {/*Hero Section*/}
       <section className="reservation-hero">
         <h1 className="reservation-title">
           Reserve Your Table, Savor Every Moment with Us
@@ -37,7 +37,7 @@ const Reservation = () => {
         </div>
       </section>
 
-      {/* --- Reservation Form Section --- */}
+      {/* Reservation Form Section*/}
       <section className="reservation-form-section">
         <div className="reservation-form-container">
           <div className="form-header">
@@ -138,7 +138,7 @@ const Reservation = () => {
         </div>
       </section>
 
-      {/* --- Events Section --- */}
+      {/*Events Section*/}
       <section className="events-section">
         <div className="events-content">
           <span className="events-eyebrow">Events & Private Dining</span>
