@@ -208,10 +208,22 @@
   color: #fff;
   font-family: "Inter", sans-serif;
 }
+input[type="date"]::-webkit-datetime-edit {
+  color: var(--res-text-muted);
+}
 
-/* .form-select {
-  color: var(--res-date-color);
-} */
+.form-select option {
+  background-color: var(--res-dark-bg);
+  color: var(--res-text-light);
+}
+
+.form-select option:checked {
+  background-color: var(--res-yellow);
+  color: #231916;
+}
+.form-select option:hover {
+  background-color: var(--res-yellow);
+}
 
 .form-input:focus,
 .form-select:focus,
