@@ -43,7 +43,7 @@ body {
   background-color: var(--color-white);
     min-height: 100vh;
   width: 100%;
-  background-image: url('/src/assets/background.png'); 
+  background-image: url('/src/assets/homeAssets/background.png'); 
   background-repeat: repeat; 
   background-size: auto; 
   background-position: top left;
@@ -139,7 +139,7 @@ body {
 
 .main-hero-img {
   width: 90%;
-  height: 450px;
+  height: 400px;
   max-width: 500px;
   box-shadow: 20px 20px 60px rgba(0,0,0,0.05);
   border-radius: 20% 5% 20% 5%;
@@ -181,6 +181,7 @@ body {
   justify-content: flex-end;
   gap: 20px;
   margin-bottom: 30px;
+  margin-top: 50px;
   padding-right: 40px;
 }
 
@@ -414,33 +415,33 @@ body {
 }
 
 /* --- Testimonials Section --- */
-.testimonials-section {
+.home-testimonials-section {
   padding: 60px;
   background-color: #ffffff;
   text-align: center;
 }
 
-.testimonials-title {
+.home-testimonials-title {
   font-family: 'David Libre', serif;
   font-weight: 700;
   font-size: 50px; 
   line-height: 65px;
   color: #101A24; 
-  margin-bottom: 20px;
+  margin-bottom: 100px;
 }
 
-.testimonials-subtitle {
+.home-testimonials-subtitle {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 16px; 
   line-height: 29px;
   color: #5C6574;
   max-width: 600px;
-  margin: 0 auto 80px auto;
+  margin: 10px auto 100px auto;
 }
 
 /* Grid Layout */
-.testimonials-grid {
+.home-testimonials-grid {
   display: flex;
   justify-content: center;
   gap: 60px;
@@ -449,10 +450,10 @@ body {
 }
 
 /* The Testimonial Card */
-.testimonial-card {
+.home-testimonial-card {
   position: relative;
   width: 500px; 
-  height: 360px; 
+  height: 430px; 
   background: #FAF6F1; 
   box-shadow: 0px 0px 30px 0px #00000012;
   border-top-left-radius: 120px;
@@ -469,7 +470,7 @@ body {
 }
 
 /* Floating Avatar Positioning */
-.testimonial-avatar {
+.home-testimonial-avatar {
   position: absolute;
   top: -55px; 
   width: 80px;
@@ -479,7 +480,7 @@ body {
   border: 4px solid #fff;
 }
 
-.testimonial-avatar img {
+.home-testimonial-avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -489,11 +490,10 @@ body {
   color: #FFB400;
   font-size: 24px;
   margin-bottom: 10px;
-  margin-top: 10px;
 }
 
 /* Body Text within Card */
-.testimonial-text {
+.home-testimonial-text {
   width: 383px; 
   font-family: 'Inter', sans-serif;
   font-weight: 400;
@@ -672,7 +672,7 @@ body {
 .newsletter-banner {
   width: 1000px;
   height: 350px; 
-  background-image: url('src/assets/Interior2.png');
+  background-image: url('src/assets/homeAssets/Restaurant_interior.png');
   background-size: cover;
   background-position: center;
   border-radius: 40px;
@@ -749,7 +749,7 @@ body {
   .main-hero-img {
     max-width: 420px;
     width: 100%;
-    height: auto; /* maintain aspect ratio */
+    height: 1000px; /* maintain aspect ratio */
   }
 
   .chef-section {
@@ -964,4 +964,27 @@ body {
   .special-cards-grid {
     grid-template-columns: 1fr;
   }
+}
+
+
+
+/* 1. Define the animation (same as your menu page) */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 2. Apply it to your main wrapper */
+.home-page-wrapper {
+  /* Or your page background color */
+  
+  /* THIS IS THE ANIMATION PART */
+  animation: fadeInUp 1.2s ease-out forwards;
+  will-change: transform, opacity; 
 }
