@@ -353,8 +353,6 @@
   transform: scale(0.2);
   pointer-events: none;
 }
-
-/* FIXED: Renamed to avoid Navbar conflict */
 .carousel-nav-btn {
   width: 56px;
   height: 56px;
@@ -414,16 +412,14 @@
   background-color: #0A0A0A;
   display: flex;
   justify-content: center;
-  /* Removes any height forcing */
   height: auto; 
   overflow: hidden;
-  padding-bottom: 20px; /* This is the ONLY thing determining the bottom edge */
+  padding-bottom: 20px; 
 }
 
 .form-container-main {
   display: flex;
   width: 100%;
-  /* Important: This makes the container only as tall as the form content */
   align-items: flex-start; 
 }
 
@@ -435,7 +431,6 @@
 
 .form-hero-img {
   width: 100%;
-  /* Limits image height so it doesn't stretch the black background */
   max-height: 550px; 
   object-fit: cover;
   display: block;
@@ -446,7 +441,6 @@
 .form-content-column {
   margin-top: 40px;
   width: 650px;
-  /* Padding controls the space inside the black area */
   padding: 0px 40px 20px 40px; 
   display: flex;
   flex-direction: column;
@@ -551,7 +545,7 @@
 
 /* === TESTIMONIALS SECTION === */
 .testimonials-section {
-  background: #4E342E; /* Updated to requested brown shade */
+  background: #4E342E; 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -580,7 +574,7 @@ font-family: 'Inter Tight', sans-serif;
   position: absolute;
   font-family: 'Inclusive Sans', sans-serif;
   font-size: 160px;
-  color: #FFC62B; /* Gold quotes */
+  color: #FFC62B; 
   opacity: 0.6;
   line-height: 1;
 }
@@ -605,7 +599,7 @@ font-family: 'Inter Tight', sans-serif;
 }
 
 .gold-text {
-  color: #FFC62B; /* Hex for var(--Color, #FFC62B) */
+  color: #FFC62B; 
 }
 
 .white-text {
@@ -633,9 +627,9 @@ font-family: 'Inter Tight', sans-serif;
 .testimonial-white-base {
   width: 100%;
   height: 100%;
-  background: #FFFFFF; /* Pure white background for image card */
+  background: #FFFFFF;
   border-radius: 20px;
-  padding: 10px; /* Optional: creates a small white border effect */
+  padding: 10px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   overflow: hidden;
 }
@@ -700,10 +694,7 @@ font-family: 'Inter Tight', sans-serif;
   border-color: #FFC62B;
 }
 
-
-
-
-/* ===REVIEW CARDS (SECTION 5 ONLY) === */
+/* ===REVIEW CARDS SECTION=== */
 .reviews-display-section {
   background: #4E342E;
   display: flex;
@@ -725,7 +716,7 @@ font-family: 'Inter Tight', sans-serif;
 .reviews-stage-area {
   position: relative;
   width: 100%;
-  height: 380px; /* Anchors the height */
+  height: 380px; 
   perspective: 2000px;
 }
 
@@ -733,8 +724,7 @@ font-family: 'Inter Tight', sans-serif;
   position: absolute;
   top: 0;
   left: 50%;
-  /* This centers the card perfectly regardless of width */
-  margin-left: -313px; /* Exactly half of 627px */
+  margin-left: -313px; 
   width: 627px;
   transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform, opacity;
@@ -798,8 +788,7 @@ font-family: 'Inter Tight', sans-serif;
   margin: 0;
 }
 
-/* --- 3D POSITIONING (FIXED CENTERING) --- */
-
+/* --- 3D POSITIONING --- */
 .review-card-3d.rev-center {
   z-index: 10;
   transform: translate3d(0, 0, 0) scale(1);
@@ -808,19 +797,16 @@ font-family: 'Inter Tight', sans-serif;
 
 .review-card-3d.rev-left {
   z-index: 5;
-  /* Pushes left, pulls back, rotates */
   transform: translate3d(-180px, 0, -250px) rotateY(20deg) scale(0.85);
   opacity: 0.6;
 }
 
 .review-card-3d.rev-right {
   z-index: 5;
-  /* Pushes right, pulls back, rotates */
   transform: translate3d(180px, 0, -250px) rotateY(-20deg) scale(0.85);
   opacity: 0.6;
 }
 
-/* HIDE TEXT ON BACKGROUND CARDS */
 .review-card-3d.rev-left .review-glass-container *,
 .review-card-3d.rev-right .review-glass-container *,
 .review-card-3d.rev-hidden .review-glass-container * {
@@ -832,22 +818,18 @@ font-family: 'Inter Tight', sans-serif;
   transform: translate3d(0, 0, -500px);
 }
 
-/* --- BUTTON CLOSENESS FIX --- */
-
 .reviews-controls-block {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px; /* Space between arrows and the See More button */
-  margin-top: -60px; /* THIS PULLS IT UP CLOSE TO THE CARDS */
+  gap: 15px; 
+  margin-top: -60px; 
   z-index: 20;
   position: relative;
 }
 
-/* Container to match your top positioning */
 .testimonial-container {
   position: relative;
-  /* width: 100%; fills the entire screen width */
   width: 100%; 
   margin: 0;
   display: flex;
@@ -856,23 +838,21 @@ font-family: 'Inter Tight', sans-serif;
 }
 
 .header-image {
-  /* width: 100%; ensures the image stretches to fill the screen */
   width: 100%;
   height: 250px;
   display: block;
-  object-fit: cover; /* This makes the image "cover" the area without stretching */
+  object-fit: cover;
 }
 
 .yellow-card {
   background: #FFBB00;
-  /* width: 100%; ensures the card matches the image and screen width */
   width: 100%;
   height: 350px;
   opacity: 1;
   margin-bottom: 0px;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box; /* Essential to keep padding inside the 100% width */
+  box-sizing: border-box; 
   padding: 10px 50px;
 }
 
@@ -896,7 +876,6 @@ font-family: 'Inter Tight', sans-serif;
 }
 
 
-/* For smaller screens, we reduce padding and font size so it doesn't break */
 @media (max-width: 768px) {
   .yellow-card {
     padding: 40px 20px;
@@ -906,8 +885,6 @@ font-family: 'Inter Tight', sans-serif;
     line-height: 36px;
   }
 }
-
-/* 1. Define the animation (same as your menu page) */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -919,12 +896,9 @@ font-family: 'Inter Tight', sans-serif;
   }
 }
 
-/* 2. Apply it to your main wrapper */
 .events-page-wrapper {
   font-family: 'Inter Tight', sans-serif;
   background-color: #0A0A0A; /* Or your page background color */
-  
-  /* THIS IS THE ANIMATION PART */
-  animation: fadeInUp 1.2s ease-out forwards;
+    animation: fadeInUp 1.2s ease-out forwards;
   will-change: transform, opacity; 
 }

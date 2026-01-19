@@ -966,9 +966,6 @@ body {
   }
 }
 
-
-
-/* 1. Define the animation (same as your menu page) */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -979,12 +976,7 @@ body {
     transform: translateY(0);
   }
 }
-
-/* 2. Apply it to your main wrapper */
 .home-page-wrapper {
-  /* Or your page background color */
-  
-  /* THIS IS THE ANIMATION PART */
   animation: fadeInUp 1.2s ease-out forwards;
   will-change: transform, opacity; 
 }

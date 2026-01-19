@@ -14,11 +14,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/menu" element={<Menu />} />
           <Route path="/Gallery" element={<Gallery />} />
-          
-          {/* Matches your Navbar link: "/Events&Testimonials" */}
           <Route path="/EventsTestimonials" element={<EventsTestimonials />} />
-          
-          {/* Added this so your 'Book a table' button works */}
           <Route path="/reservation" element={<div>Reservation Page</div>} />
         </Route>
       </Routes>
