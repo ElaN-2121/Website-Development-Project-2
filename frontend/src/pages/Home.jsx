@@ -39,7 +39,7 @@ const Hero = () => {
 
       <div className="hero-image-container">
         <img 
-          src="/src/assets/Restaurant_interior.png" 
+          src="/src/assets/homeAssets/HeroImage.png" 
           alt="Restaurant Interior" 
           className="main-hero-img" 
         />
@@ -77,10 +77,10 @@ const DishCard = ({ item }) => {
 
 const SpecialDishes = () => {
   const specialData = [
-    { id: 1, name: "Fattoush salad", price: "$24.00", rating: "4.9", img: "/src/assets/Fattoush salad.png" },
-    { id: 2, name: "Fish and Veggie", price: "$24.00", rating: "4.9", img: "/src/assets/Fish and Veggie.png" },
-    { id: 3, name: "Egg and Cucumber", price: "$24.00", rating: "4.9", img: "/src/assets/Egg and Cucumber.png" },
-    { id: 4, name: "Fattoush salad", price: "$24.00", rating: "4.9", img: "/src/assets/Fattoush salad(2).png" },
+    { id: 1, name: "Tibs", price: "$12.00", rating: "5", img: "/src/assets/menuAssets/tibs.png" },
+    { id: 2, name: "Chicken Salad", price: "$40.00", rating: "4.9", img: "/src/assets/menuAssets/chicken salad.png "},
+    { id: 3, name: "Kitfo", price: "$50.00", rating: "4.9", img:"/src/assets/menuAssets/kitfo.jpg"  },
+    { id: 4, name: "Fish Cotelete", price: "$50.00", rating: "4.9", img: "/src/assets/menuAssets/fish cot.png" },
   ];
 
   return (
@@ -93,8 +93,7 @@ const SpecialDishes = () => {
       <h1 className="special-title">Our Special Dishes</h1>
 
       <div className="slider-controls">
-        <button className="control-btn prev">{"<"}</button>
-        <button className="control-btn next">{">"}</button>
+        <Button text="View More" className="btn-book-hero" to="/menu" />
       </div>
 
       <div className="special-cards-grid">
@@ -136,7 +135,7 @@ const HeadChef = () => {
         </div>
       </div>
       <div className="chef-visuals-wrapper">
-        <img src="/src/assets/HeadChef.png" alt="Head Chef" className="chef-img" />
+        <img src="/src/assets/homeAssets/HeadChef.png" alt="Head Chef" className="chef-img" />
       </div>
     </section>
   );
@@ -205,30 +204,34 @@ const Newsletter = () => (
 // =======================
 const Testimonials = () => {
   const reviews = [
-    { id: 1, name: "Ama Ampomah", role: "CEO & Founder Inc", image: "/src/assets/Ama.png", text: "Lorem ipsum dolor sit amet consectetur. Tortor massa nisl quam sit. Vitae congue ultrices neque penatibus mi in quisque. Leo in cursus enim magnis ante. Proin iaculis platea ipsum sagittis ac eu aliquam quis. Ornare tincidunt tempus semper" },
-    { id: 2, name: "Kweku Annan", role: "CEO & Founder Inc", image: "/src/assets/Kweku.png", text: "Lorem ipsum dolor sit amet consectetur. Tortor massa nisl quam sit. Vitae congue ultrices neque penatibus mi in quisque. Leo in cursus enim magnis ante. Proin iaculis platea ipsum sagittis ac eu aliquam quis. Ornare tincidunt tempus semper" }
+    { id: 1, name: "Yonas Birhan", role: "Verified Customer", image: "/src/assets/customers/Yonas Birhan.jpg", text: "A truly authentic experience! The flavors of the communal platters reminded me so much of home. The service was warm and personal, and the live music added a beautiful, soulful touch to our anniversary dinner. We've been to many restaurants, but none capture the heart and heritage of our culture quite like this place. It was more than just a meal; it was a celebration of identity.", },
+    { id: 2, name: "Lulit Mekonnen", role: "Verified Customer", image: "/src/assets/customers/Lulit Mekonnen.jpg", text:"The corporate event was handled with such professionalism. The catering was exquisite, and the ambiance was exactly what we needed for our partners. Every detail was taken care of, from the presentation of the appetizers to the seamless flow of the evening program. It provided the perfect sophisticated backdrop for our high-level networking and partnership discussions.", }
   ];
 
   return (
-    <section className="testimonials-section">
-      <div className="testimonials-header">
-        <h2 className="testimonials-title">Our Happy Customers</h2>
-        <p className="testimonials-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-sed do eiusmod tempor incididunt</p>
+    <section className="home-testimonials-section">
+      <div className="home-testimonials-header">
+        <h2 className="home-testimonials-title">Our Happy Customers</h2>
       </div>
-      <div className="testimonials-grid">
+      <div className="home-testimonials-grid">
         {reviews.map(r => (
-          <div className="testimonial-card" key={r.id}>
-            <div className="testimonial-avatar"><img src={r.image} alt={r.name} /></div>
-            <div className="testimonial-content">
+          <div className="home-testimonial-card" key={r.id}>
+            <div className="home-testimonial-avatar"><img src={r.image} alt={r.name} /></div>
+            <div className="home-testimonial-content">
               <div className="stars">★★★★★</div>
-              <p className="testimonial-text">{r.text}</p>
+              <p className="home-testimonial-text">{r.text}</p>
               <h4 className="customer-name">{r.name}</h4>
               <p className="customer-role">{r.role}</p>
             </div>
           </div>
+          
         ))}
       </div>
+<Button 
+  text="View More" 
+  className="btn-book-hero" 
+  to="/Events&Testimonials#testimonials" 
+/>
     </section>
   );
 };
@@ -236,7 +239,7 @@ sed do eiusmod tempor incididunt</p>
 
 const Home = () => {
   return (
-    <>
+    <div className="home-page-wrapper">
       <Hero />
       <SpecialDishes />
       <HeadChef />
@@ -244,7 +247,7 @@ const Home = () => {
       <Services />
       <FAQ />
       <Newsletter />
-    </>
+    </div>
   );
 };
 
