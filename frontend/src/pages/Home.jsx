@@ -230,7 +230,7 @@ const Testimonials = () => {
 <Button 
   text="View More" 
   className="btn-book-hero" 
-  to="/Events&Testimonials#testimonials" 
+  to="/EventsTestimonials#testimonials" 
 />
     </section>
   );
