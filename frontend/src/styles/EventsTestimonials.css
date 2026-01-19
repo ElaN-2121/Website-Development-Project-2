@@ -1,0 +1,930 @@
+/* --- OVERALL CONTAINER --- */
+.container {
+  width: 100%;
+  min-height: 1024px;
+  background-color: #FFEFC2;
+  display: flex;
+  justify-content: center;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  font-family: 'Inter Tight', sans-serif;
+  box-sizing: border-box;
+}
+
+.content-wrapper {
+  width: 90%;
+  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- HEADER ROW STYLING --- */
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 60px;
+  gap: 20px;
+}
+
+.main-title {
+  width: 500px;
+  font-family: 'Inter Tight';
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 56px;
+  color: #1B1B1B;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.header-right-text {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+
+.header-desc {
+  font-family: 'Inter Tight';
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 20px;
+  color: #070707;
+  margin-bottom: 16px;
+}
+
+.see-more-btn {
+  width: 130px;
+  height: 36px;
+  background: #FFBB00;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  color: #070707;
+}
+
+/* --- MAIN CONTENT ROW --- */
+.main-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.accordion-container {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-right: 40px;
+  flex-shrink: 0;
+}
+
+.accordion-item {
+  width: 100%;
+  min-height: 54px;
+  background: #FFF9E5;
+  border-radius: 12px;
+  padding: 14px 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.accordion-item.active {
+  background: #FFBB00;
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-title {
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 32px;
+  color: #070707;
+}
+
+.accordion-item.active .item-title {
+  color: #FFFFFF;
+}
+
+.circle-btn {
+  width: 48px;
+  height: 48px;
+  background: #FFFFFF;
+  border-radius: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+
+.item-description {
+  margin-top: 10px;
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #FFFFFF;
+  width: 90%;
+}
+
+.event1stimage-section {
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 1;
+}
+
+.event1stimage-container {
+  width: 500px;
+  height: 500px;
+  border-radius: 12px;
+  overflow: hidden;    
+  flex-shrink: 0;
+}
+
+.event1stimage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* === PERFECT EVENTS SECTION === */
+.perfect-events-section {
+  width: 100%;
+  min-height: 1024px;
+  background-color: #4E342E;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 0;
+  box-sizing: border-box;
+}
+
+.perfect-events-wrapper {
+  width: 1150px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.perfect-events-header {
+  text-align: center;
+  margin-bottom: 60px;
+  max-width: 700px;
+}
+
+.perfect-events-title {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 56px;
+  color: #FFFFFF;
+  margin-bottom: 24px;
+}
+
+.perfect-events-subtitle {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #FFFFFF;
+  opacity: 0.9;
+}
+
+.perfect-events-grid {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+  height: 600px;
+}
+
+.perfect-events-col-left {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.perfect-events-img-large {
+  width: 100%;
+  height: 60%;
+  background: #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.perfect-events-row-bottom {
+  display: flex;
+  gap: 24px;
+  height: 40%;
+}
+
+.perfect-events-img-small {
+  flex: 1;
+  background: #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.perfect-events-col-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.perfect-events-img-medium {
+  flex: 1;
+  background: #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.perfect-events-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+
+/* === UNFORGETTABLE MOMENTS SECTION === */
+.unforgettable-section {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #4E342E;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 80px;
+  overflow: hidden;
+}
+
+.unforgettable-title {
+  max-width: 850px;
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 1.2;
+  text-align: center;
+  color: #FFFFFF;
+  margin: 80px 20px 100px 20px;
+}
+
+.carousel-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  perspective: 1500px;
+}
+
+.carousel-stage {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  height: 430px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-card {
+  position: absolute;
+  width: 550px;
+  height: 450px;
+  background: #333;
+  border-radius: 12px;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.carousel-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-card.center {
+  z-index: 10;
+  transform: translateZ(200px);
+  opacity: 1;
+}
+
+.carousel-card.left-1 {
+  transform: translateX(-380px) rotateY(30deg) scale(0.8);
+  z-index: 8;
+  opacity: 0.6;
+}
+
+.carousel-card.left-2 {
+  transform: translateX(-650px) rotateY(45deg) scale(0.6);
+  z-index: 6;
+  opacity: 0.2;
+}
+
+.carousel-card.right-1 {
+  transform: translateX(380px) rotateY(-30deg) scale(0.8);
+  z-index: 8;
+  opacity: 0.6;
+}
+
+.carousel-card.right-2 {
+  transform: translateX(650px) rotateY(-45deg) scale(0.6);
+  z-index: 6;
+  opacity: 0.2;
+}
+
+.carousel-card.hidden {
+  opacity: 0;
+  transform: scale(0.2);
+  pointer-events: none;
+}
+
+/* FIXED: Renamed to avoid Navbar conflict */
+.carousel-nav-btn {
+  width: 56px;
+  height: 56px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  z-index: 100;
+  font-size: 24px;
+  color: #1B1B1B; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.carousel-nav-btn.left { left: 5%; }
+.carousel-nav-btn.right { right: 5%; }
+.carousel-nav-btn:hover{
+    background-color: #FFBB00;
+}
+.unforgettable-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 700px;
+  z-index: 10;
+}
+
+.moment-name {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 600;
+  font-size: 28px;
+  color: #FFFFFF;
+  margin-bottom: 5px;
+  margin-top: 30px;
+}
+
+.moment-desc {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #F5F5F5;
+  opacity: 1;
+}
+
+
+/* === EVENT FORM SECTION === */
+.event-form-section {
+  width: 100%;
+  background-color: #0A0A0A;
+  display: flex;
+  justify-content: center;
+  /* Removes any height forcing */
+  height: auto; 
+  overflow: hidden;
+  padding-bottom: 20px; /* This is the ONLY thing determining the bottom edge */
+}
+
+.form-container-main {
+  display: flex;
+  width: 100%;
+  /* Important: This makes the container only as tall as the form content */
+  align-items: flex-start; 
+}
+
+/* Left Image Column */
+.form-image-column {
+  flex: 1;
+  margin: 40px 50px 0px 20px;
+}
+
+.form-hero-img {
+  width: 100%;
+  /* Limits image height so it doesn't stretch the black background */
+  max-height: 550px; 
+  object-fit: cover;
+  display: block;
+  border-radius: 4px;
+}
+
+/* Right Content Column */
+.form-content-column {
+  margin-top: 40px;
+  width: 650px;
+  /* Padding controls the space inside the black area */
+  padding: 0px 40px 20px 40px; 
+  display: flex;
+  flex-direction: column;
+  background: #0A0A0A;
+}
+
+.form-title {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 40px;
+  color: #FFFFFF;
+  margin-bottom: 12px;
+}
+
+.form-subtitle {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #FFFFFF;
+  margin-bottom: 30px;
+  max-width: 417px;
+}
+
+/* Form Styling */
+.event-inquiry-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.form-row {
+  display: flex;
+  gap: 14px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.input-group label {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.4;
+  color: #FFFFFF;
+}
+
+.input-group input, 
+.input-group textarea {
+  background: #333333;
+  border-radius: 8px;
+  padding: 10px;
+  color: #FFFFFF;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 16px;
+  border: 0.5px solid;
+  border-image-source: linear-gradient(90deg, #FFFFFF 0%, #D9A005 100%);
+  border-image-slice: 1;
+}
+
+.input-group textarea {
+  min-height: 80px;
+  resize: none;
+}
+
+/* Button Styling */
+.form-submit-btn {
+  width: 100%;
+  height: 42px;
+  background: #FFBB00;
+  border-radius: 12px;
+  border: none;
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #4E342E;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* Footer Section */
+.form-footer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.terms-text, .copyright-text{
+  font-family: 'Inter', sans-serif;
+  color:white;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+.terms {
+  color :#FFC62B;
+}
+
+/* === TESTIMONIALS SECTION === */
+.testimonials-section {
+  background: #4E342E; /* Updated to requested brown shade */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+.testimonials-title{
+font-family: 'Inter Tight', sans-serif;
+  font-weight: 800;
+  line-height: 1.2;
+  text-transform: uppercase;
+  display: inline;
+  color: white;
+  margin-bottom: 80px;
+  margin-top: 100px;
+  font-size: 40px;
+}
+.quote-container {
+  position: relative;
+  width: 90%;
+  max-width: 1100px;
+  text-align: center;
+  margin-bottom:20px;
+}
+
+.big-quote {
+  position: absolute;
+  font-family: 'Inclusive Sans', sans-serif;
+  font-size: 160px;
+  color: #FFC62B; /* Gold quotes */
+  opacity: 0.6;
+  line-height: 1;
+}
+
+.left-quote {
+  top: -60px;
+  left: -20px;
+}
+
+.right-quote {
+  bottom: -80px;
+  right: -20px;
+}
+
+.testimonial-text {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  display: inline;
+}
+
+.gold-text {
+  color: #FFC62B; /* Hex for var(--Color, #FFC62B) */
+}
+
+.white-text {
+  color: #FFFFFF;
+}
+
+/* 3D Stage Styling */
+.testimonial-stage {
+  position: relative;
+  height: 380px;
+  width: 100%;
+  perspective: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.testimonial-3d-card {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.testimonial-white-base {
+  width: 100%;
+  height: 100%;
+  background: #FFFFFF; /* Pure white background for image card */
+  border-radius: 20px;
+  padding: 10px; /* Optional: creates a small white border effect */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  overflow: hidden;
+}
+
+.testimonial-img-only {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* 3D Overlap Positions */
+.testimonial-3d-card.center {
+  z-index: 10;
+  transform: translateX(0) scale(1.1);
+  opacity: 1;
+}
+
+.testimonial-3d-card.left-1 {
+  z-index: 5;
+  transform: translateX(-200px) rotateY(25deg) scale(0.85);
+  opacity: 0.5;
+}
+
+.testimonial-3d-card.right-1 {
+  z-index: 5;
+  transform: translateX(200px) rotateY(-25deg) scale(0.85);
+  opacity: 0.5;
+}
+
+.testimonial-info-block {
+  text-align: center;
+}
+
+.testimonial-name-active {
+  color: white;
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.testimonial-nav-btns {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.nav-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.5);
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.nav-circle:hover {
+  background: #FFC62B;
+  color: #4E342E;
+  border-color: #FFC62B;
+}
+
+
+
+
+/* ===REVIEW CARDS (SECTION 5 ONLY) === */
+.reviews-display-section {
+  background: #4E342E;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 90px;
+}
+
+.reviews-carousel-wrapper {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.reviews-stage-area {
+  position: relative;
+  width: 100%;
+  height: 380px; /* Anchors the height */
+  perspective: 2000px;
+}
+
+.review-card-3d {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  /* This centers the card perfectly regardless of width */
+  margin-left: -313px; /* Exactly half of 627px */
+  width: 627px;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+}
+
+.review-glass-container {
+  width: 627px;
+  height: auto;
+  min-height: 300px;
+  padding: 30px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(25px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.review-body-text {
+  font-family: 'Inter Tight', sans-serif;
+  color: #FFFFFF;
+  font-size: 16px;
+  line-height: 24px;
+  margin: 15px 0 0 0;
+}
+
+.review-footer-avatar-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: auto;
+}
+
+.rev-avatar-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  flex-shrink: 0;
+}
+
+.rev-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.rev-user-name {
+  color: #FFFFFF;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  margin: 0;
+}
+
+.rev-user-title {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  margin: 0;
+}
+
+/* --- 3D POSITIONING (FIXED CENTERING) --- */
+
+.review-card-3d.rev-center {
+  z-index: 10;
+  transform: translate3d(0, 0, 0) scale(1);
+  opacity: 1;
+}
+
+.review-card-3d.rev-left {
+  z-index: 5;
+  /* Pushes left, pulls back, rotates */
+  transform: translate3d(-180px, 0, -250px) rotateY(20deg) scale(0.85);
+  opacity: 0.6;
+}
+
+.review-card-3d.rev-right {
+  z-index: 5;
+  /* Pushes right, pulls back, rotates */
+  transform: translate3d(180px, 0, -250px) rotateY(-20deg) scale(0.85);
+  opacity: 0.6;
+}
+
+/* HIDE TEXT ON BACKGROUND CARDS */
+.review-card-3d.rev-left .review-glass-container *,
+.review-card-3d.rev-right .review-glass-container *,
+.review-card-3d.rev-hidden .review-glass-container * {
+  opacity: 0 !important;
+}
+
+.review-card-3d.rev-hidden {
+  opacity: 0;
+  transform: translate3d(0, 0, -500px);
+}
+
+/* --- BUTTON CLOSENESS FIX --- */
+
+.reviews-controls-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px; /* Space between arrows and the See More button */
+  margin-top: -60px; /* THIS PULLS IT UP CLOSE TO THE CARDS */
+  z-index: 20;
+  position: relative;
+}
+
+/* Container to match your top positioning */
+.testimonial-container {
+  position: relative;
+  /* width: 100%; fills the entire screen width */
+  width: 100%; 
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+}
+
+.header-image {
+  /* width: 100%; ensures the image stretches to fill the screen */
+  width: 100%;
+  height: 250px;
+  display: block;
+  object-fit: cover; /* This makes the image "cover" the area without stretching */
+}
+
+.yellow-card {
+  background: #FFBB00;
+  /* width: 100%; ensures the card matches the image and screen width */
+  width: 100%;
+  height: 350px;
+  opacity: 1;
+  margin-bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box; /* Essential to keep padding inside the 100% width */
+  padding: 10px 50px;
+}
+
+.quote {
+  color: #FFFFFF;
+  font-family: "SF Pro Display", -apple-system, sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 48px;
+}
+
+.author-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.author-description{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* For smaller screens, we reduce padding and font size so it doesn't break */
+@media (max-width: 768px) {
+  .yellow-card {
+    padding: 40px 20px;
+  }
+  .quote {
+    font-size: 28px;
+    line-height: 36px;
+  }
+}
+
+/* 1. Define the animation (same as your menu page) */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 2. Apply it to your main wrapper */
+.events-page-wrapper {
+  font-family: 'Inter Tight', sans-serif;
+  background-color: #0A0A0A; /* Or your page background color */
+  
+  /* THIS IS THE ANIMATION PART */
+  animation: fadeInUp 1.2s ease-out forwards;
+  will-change: transform, opacity; 
+}
