@@ -1,8 +1,11 @@
 import { Link, NavLink } from "react-router-dom";
 import "../styles/Navbar.css";
 import LogoImg from "../assets/LogoImg.png";
+import { useAuth } from "../context/AuthContext"; 
 
 const Navbar = () => {
+  const { user, logout } = useAuth();
+
   return (
     <nav className="navbar">
       <Link to="/home" className="logo">
@@ -14,13 +17,10 @@ const Navbar = () => {
         <li><NavLink to="/home" end>Home</NavLink></li>
         <li><NavLink to="/menu">Menu</NavLink></li>
         <li><NavLink to="/reservation">Reservation</NavLink></li>
-        <li>
-          {/* MATCHED TO APP.JSX */}
-          <NavLink to="/EventsTestimonials">Events&Testimonials</NavLink>
-        </li>
-        <li><NavLink to="/Gallery">Gallery</NavLink></li>
+        <li><NavLink to="/events">Events & Testimonials</NavLink></li>
+        <li><NavLink to="/gallery">Gallery</NavLink></li>
         <li><NavLink to="/contact">Contact Us</NavLink></li>
-      </ul>
+        </ul>
 
       <NavLink to="/reservation" className="nav-btn">
         Book a table
