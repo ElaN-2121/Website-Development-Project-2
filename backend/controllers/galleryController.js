@@ -1,9 +1,9 @@
-const MenuItem = require("../models/MenuItem");
+const GalleryItem = require("../models/GalleryItem");
 const getReqData = require("../utils/parseBody");
 
-const getMenuItems = async (req, res) => {
+const getGalleryItems = async (req, res) => {
   try {
-    const items = await MenuItem.find();
+    const items = await GalleryItem.find();
     res.writeHead(200, { "Content-Type": "application/json" });
     res.end(JSON.stringify(items));
   } catch(err) {
@@ -12,10 +12,10 @@ const getMenuItems = async (req, res) => {
   }
 };
 
-const createMenuItem = async (req, res) => {
+const createGalleryItem = async (req, res) => {
   try {
     const body = await getReqData(req);
-    const item = await MenuItem.create(body);
+    const item = await GalleryItem.create(body);
     res.writeHead(201, { "Content-Type": "application/json" });
     res.end(JSON.stringify(item));
   } catch(err) {
@@ -24,4 +24,4 @@ const createMenuItem = async (req, res) => {
   }
 };
 
-module.exports = { getMenuItems, createMenuItem };
+module.exports = { getGalleryItems, createGalleryItem };

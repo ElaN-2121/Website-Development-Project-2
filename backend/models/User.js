@@ -11,11 +11,8 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Hash password before saving
-// REMOVE the 'done' or 'next' parameter from the function signature
+
 userSchema.pre("save", async function () { 
-  // If the password hasn't been modified, simply return.
-  // Mongoose sees the function is finished and moves on.
   if (!this.isModified("password")) return;
 
   try {
