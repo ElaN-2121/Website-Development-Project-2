@@ -1,10 +1,10 @@
 import React from "react";
+import "../styles/Contact.css";
 import Button from "../components/Button";
 import FAQ from "../components/FAQ";
 import GetInTouch from "../assets/Reservation_ContectUs_assets/get in touch.png";
 import ContactImg from "../assets/Reservation_ContectUs_assets/contactUs.png";
-import ImageFeature from "../assets/Gallery/image.png";
-import MapImg from "../assets/map.png";
+import MapImg from "../assets/Reservation_ContectUs_assets/map.png";
 import IgIcon from "../assets/icons/ph--instagram-logo-thin.png";
 import messageIcon from "../assets/icons/mage--message-dots-round.png";
 import locationIcon from "../assets/icons/system-uicons--location.png";
