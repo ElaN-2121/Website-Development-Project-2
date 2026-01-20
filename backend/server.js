@@ -5,6 +5,13 @@ const authRoutes = require("./routes/authRoutes");
 const profileRoutes = require("./routes/profileRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 
+const menuRoutes = require("./routes/menuRoutes");
+const reservationRoutes = require("./routes/reservationRoutes");
+const contactRoutes = require("./routes/contactRoutes");
+const testimonialRoutes = require("./routes/testimonialRoutes");
+const galleryRoutes = require("./routes/galleryRoutes");
+
+
 // Connect to MongoDB
 connectDB();
 
@@ -32,6 +39,11 @@ const server = http.createServer(async (req, res) => {
   if (handled) return;
   if (await profileRoutes(req, res)) return; // Added 'await'
   if (await adminRoutes(req, res)) return; // Added 'await'
+  if (await menuRoutes(req, res)) return;
+  if (await reservationRoutes(req, res)) return;
+  if (await contactRoutes(req, res)) return;
+  if (await testimonialRoutes(req, res)) return;
+  if (await galleryRoutes(req, res)) return;
 
   // Default fallback
   res.writeHead(404, { "Content-Type": "application/json" });

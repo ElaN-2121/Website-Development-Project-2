@@ -1,27 +1,27 @@
-const MenuItem = require("../models/MenuItem");
+const ContactMessage = require("../models/ContactMessage");
 const getReqData = require("../utils/parseBody");
 
-const getMenuItems = async (req, res) => {
+const getContacts = async (req, res) => {
   try {
-    const items = await MenuItem.find();
+    const messages = await ContactMessage.find();
     res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify(items));
+    res.end(JSON.stringify(messages));
   } catch(err) {
     res.writeHead(500, { "Content-Type": "application/json" });
     res.end(JSON.stringify({ message: err.message }));
   }
 };
 
-const createMenuItem = async (req, res) => {
+const createContactMessage = async (req, res) => {
   try {
     const body = await getReqData(req);
-    const item = await MenuItem.create(body);
+    const message = await ContactMessage.create(body);
     res.writeHead(201, { "Content-Type": "application/json" });
-    res.end(JSON.stringify(item));
+    res.end(JSON.stringify(message));
   } catch(err) {
     res.writeHead(500, { "Content-Type": "application/json" });
     res.end(JSON.stringify({ message: err.message }));
   }
 };
 
-module.exports = { getMenuItems, createMenuItem };
+module.exports = { getContacts, createContactMessage };

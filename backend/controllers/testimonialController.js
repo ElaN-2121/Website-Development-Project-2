@@ -1,27 +1,27 @@
-const MenuItem = require("../models/MenuItem");
+const Testimonial = require("../models/Testimonial");
 const getReqData = require("../utils/parseBody");
 
-const getMenuItems = async (req, res) => {
+const getTestimonials = async (req, res) => {
   try {
-    const items = await MenuItem.find();
+    const testimonials = await Testimonial.find();
     res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify(items));
+    res.end(JSON.stringify(testimonials));
   } catch(err) {
     res.writeHead(500, { "Content-Type": "application/json" });
     res.end(JSON.stringify({ message: err.message }));
   }
 };
 
-const createMenuItem = async (req, res) => {
+const createTestimonial = async (req, res) => {
   try {
     const body = await getReqData(req);
-    const item = await MenuItem.create(body);
+    const testimonial = await Testimonial.create(body);
     res.writeHead(201, { "Content-Type": "application/json" });
-    res.end(JSON.stringify(item));
+    res.end(JSON.stringify(testimonial));
   } catch(err) {
     res.writeHead(500, { "Content-Type": "application/json" });
     res.end(JSON.stringify({ message: err.message }));
   }
 };
 
-module.exports = { getMenuItems, createMenuItem };
+module.exports = { getTestimonials, createTestimonial };
