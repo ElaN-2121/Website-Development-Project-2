@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import "../styles/EventsTestimonials.css";
+import Button from '../components/Button';
 
 // Asset Imports - Gallery
 import event from "../assets/Gallery/event.png";
@@ -102,8 +103,20 @@ const EventsTestimonials = () => {
                 Elevate your celebrations with customized event packages, exquisite catering, and seamless service.
               </p>
               <div style={{ display: "flex", gap: "10px" }}>
-                <button className="see-more-btn" onClick={() => scrollToSection(unforgettableRef)}>See More</button>
-                <button className="see-more-btn" onClick={() => scrollToSection(testimonialsRef)}>Testimonials</button>
+                <div style={{ display: "flex", gap: "10px" }}>
+                  <Button 
+                  text="See More" 
+                  variant="yellow" 
+                  className="see-more-btn" 
+                  onClick={() => scrollToSection(unforgettableRef)} 
+                  />
+                  <Button 
+                  text="Testimonials" 
+                  variant="white" 
+                  className="see-more-btn" 
+                  onClick={() => scrollToSection(testimonialsRef)} 
+                  />
+                  </div>
               </div>
             </div>
           </div>
@@ -164,7 +177,12 @@ const EventsTestimonials = () => {
       <section className="unforgettable-section" ref={unforgettableRef}>
         <h2 className="unforgettable-title">Unforgettable Moments, Beautifully Crafted</h2>
         <div className="carousel-view">
-          <button className="carousel-nav-btn left" onClick={prevSlide}>←</button>
+          <Button 
+          text="←" 
+          variant="white" 
+          className="carousel-nav-btn left" 
+          onClick={prevSlide} 
+          />
           <div className="carousel-stage">
             {carouselData.map((item, index) => {
               const len = carouselData.length;
@@ -190,7 +208,12 @@ const EventsTestimonials = () => {
               );
             })}
           </div>
-          <button className="carousel-nav-btn right" onClick={nextSlide}>→</button>
+          <Button 
+          text="→" 
+          variant="white" 
+          className="carousel-nav-btn right" 
+          onClick={nextSlide} 
+          />
         </div>
         <div className="unforgettable-footer">
           <h3 className="moment-name">{carouselData[activeCarouselIndex].title}</h3>
@@ -229,7 +252,12 @@ const EventsTestimonials = () => {
                 <label>How can we assist with your event inquiries?</label>
                 <textarea placeholder="Tell us your Specific Case"></textarea>
               </div>
-              <button type="submit" className="form-submit-btn">Send to Us</button>
+            <Button 
+            type="submit" 
+            text="Send to Us" 
+            variant="yellow" 
+            className="form-submit-btn" 
+            />
             </form>
             <div className="form-footer">
               <p className="terms-text">By Contacting us, you agree to our <span className="terms">Terms</span> of service and <span className="terms">privacy Policy</span></p>
@@ -279,8 +307,18 @@ const EventsTestimonials = () => {
               {testimonialsData[activeTestimonialIndex]?.name}
             </p>
             <div className="testimonial-nav-btns">
-              <button className="nav-circle" onClick={prevTestimonial}>←</button>
-              <button className="nav-circle" onClick={nextTestimonial}>→</button>
+              <Button 
+              text="←" 
+              variant="white" 
+              className="nav-circle" 
+              onClick={prevTestimonial} 
+              />
+              <Button 
+              text="→" 
+              variant="white" 
+              className="nav-circle" 
+              onClick={nextTestimonial} 
+              />
             </div>
           </div>
         </div>
@@ -338,8 +376,20 @@ const EventsTestimonials = () => {
 
             <div className="reviews-controls-block">
               <div className="testimonial-nav-btns">
-                <button className="nav-circle" onClick={prevTestimonial}>←</button>
-                <button className="nav-circle" onClick={nextTestimonial}>→</button>
+                <div className="testimonial-nav-btns">
+                  <Button 
+                  text="←" 
+                  variant="white" 
+                  className="nav-circle" 
+                  onClick={prevTestimonial} 
+                  />
+                  <Button 
+                  text="→" 
+                  variant="white" 
+                  className="nav-circle" 
+                  onClick={nextTestimonial} 
+                  />
+                  </div>
               </div>
             </div>
           </div>
