@@ -12,28 +12,40 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Admin from "./pages/Admin";
 
+// Routes protection
+import ProtectedRoute from "./routes_frontend/ProtectedRoute";
+import AdminRoute from "./routes_frontend/AdminRoute";
+
 const App = () => {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          {/* AUTH PAGES: No Navbar/Footer */}
+          {/* 1. PUBLIC ROUTES (Accessible to everyone) */}
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           
-          {/* MAIN SITE: Inside Layout (Navbar/Footer visible) */}
-          <Route element={<Layout />}>
-            <Route path="/home" element={<Home />} />
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/reservation" element={<Reservation />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/events" element={<EventsTestimonials />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/admin" element={<Admin />} />
+          {/* 2. PROTECTED USER ROUTES (Must be logged in) */}
+          <Route element={<ProtectedRoute />}>
+            <Route element={<Layout />}>
+              <Route path="/home" element={<Home />} />
+              <Route path="/menu" element={<Menu />} />
+              <Route path="/reservation" element={<Reservation />} />
+              <Route path="/gallery" element={<Gallery />} />
+              <Route path="/events" element={<EventsTestimonials />} />
+              <Route path="/contact" element={<Contact />} />
+            </Route>
           </Route>
 
-          {/* Fallback to Login if path doesn't exist */}
+          {/* 3. PROTECTED ADMIN ROUTES (Must be logged in AND an admin) */}
+          <Route element={<AdminRoute />}>
+            <Route element={<Layout />}>
+              <Route path="/admin" element={<Admin />} />
+            </Route>
+          </Route>
+
+          {/* Fallback */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </BrowserRouter>
