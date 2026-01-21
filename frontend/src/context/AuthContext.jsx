@@ -6,7 +6,6 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Check if user is logged in on load
   useEffect(() => {
     const savedUser = localStorage.getItem('habesha_user');
     if (savedUser) {
@@ -15,7 +14,6 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  // 1. LOGIN FUNCTION
   const login = async (email, password) => {
     try {
       const response = await fetch('http://localhost:5000/api/auth/login', {
@@ -30,7 +28,6 @@ export const AuthProvider = ({ children }) => {
         throw new Error(data.message || 'Login failed');
       }
 
-      // Save user and token
       setUser(data);
       localStorage.setItem('habesha_user', JSON.stringify(data));
       
@@ -42,13 +39,12 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // 2. REGISTER FUNCTION
   const register = async (name, email, password) => {
     try {
       const response = await fetch('http://localhost:5000/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password, role: 'user' }), // Default role is user
+        body: JSON.stringify({ name, email, password, role: 'user' }), 
       });
 
       const data = await response.json();
@@ -57,10 +53,7 @@ export const AuthProvider = ({ children }) => {
         throw new Error(data.message || 'Registration failed');
       }
 
-      // Auto-login after register
-      setUser(data);
-      localStorage.setItem('habesha_user', JSON.stringify(data));
-      
+    
       return { success: true };
 
     } catch (error) {
@@ -69,11 +62,9 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // 3. LOGOUT FUNCTION
   const logout = () => {
     setUser(null);
     localStorage.removeItem('habesha_user');
-    // Optional: Window reload to clear any state artifacts
     window.location.href = '/login'; 
   };
 

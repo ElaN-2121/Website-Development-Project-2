@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import Button from '../../components/Button'; // Added Button component to match Login.jsx
+import Button from '../../components/Button';
 import '../../styles/Auth.css';
 
 const Register = () => {
@@ -19,18 +19,38 @@ const Register = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Helper function to check email format
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
+    // 1. Check if email is valid format
+    if (!validateEmail(formData.email)) {
+      return setError("Please enter a valid email address (e.g., user@example.com)");
+    }
+
+    // 2. Check if passwords match
     if (formData.password !== formData.confirmPassword) {
       return setError("Passwords do not match!");
     }
 
+    // 3. Check password length (Security Best Practice)
+    if (formData.password.length < 6) {
+      return setError("Password must be at least 6 characters long.");
+    }
+
     try {
       const result = await register(formData.name, formData.email, formData.password);
+      
       if (result.success) {
-        navigate('/home');
+        alert("Account created successfully! Please login to continue.");
+        navigate('/login'); 
       } else {
         setError(result.message || 'Registration failed.');
       }
@@ -46,13 +66,12 @@ const Register = () => {
         <p className="auth-subtitle">Join Habesha Fest today</p>
         
         {error && (
-          <div className="auth-error-message" style={{ color: 'red', marginBottom: '1rem' }}>
+          <div className="auth-error-message" style={{ color: 'red', marginBottom: '1rem', textAlign: 'center', fontWeight: 'bold' }}>
             {error}
           </div>
         )}
 
         <form className="auth-form" onSubmit={handleSubmit}>
-          {/* Group 1: Name */}
           <div className="auth-input-group">
             <label>Full Name</label>
             <input
@@ -66,12 +85,11 @@ const Register = () => {
             />
           </div>
 
-          {/* Group 2: Email */}
           <div className="auth-input-group">
             <label>Email Address</label>
             <input
               className="auth-input"
-              type="email"
+              type="email" // This triggers browser-level validation
               name="email"
               placeholder="Enter your email"
               value={formData.email}
@@ -80,7 +98,6 @@ const Register = () => {
             />
           </div>
 
-          {/* Group 3: Password */}
           <div className="auth-input-group">
             <label>Password</label>
             <input
@@ -94,7 +111,6 @@ const Register = () => {
             />
           </div>
 
-          {/* Group 4: Confirm Password */}
           <div className="auth-input-group">
             <label>Confirm Password</label>
             <input
@@ -108,7 +124,6 @@ const Register = () => {
             />
           </div>
 
-          {/* Using your custom Button component to match the CSS class .auth-btn-full */}
           <Button 
             type="submit" 
             text="Register" 
