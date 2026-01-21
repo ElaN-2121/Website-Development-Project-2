@@ -1,3 +1,4 @@
+// routes/adminRoutes.js
 const { adminMiddleware } = require("../middleware/adminMiddleware");
 const {
   getAllUsers,
@@ -8,38 +9,45 @@ const {
 } = require("../controllers/adminController");
 
 const adminRoutes = async (req, res) => {
+  // Only process if URL starts with /api/admin
+  if (!req.url.startsWith("/api/admin")) return false;
+
+  // Security Check
+  if (!adminMiddleware(req, res)) return true;
+
   // USERS
   if (req.url === "/api/admin/users" && req.method === "GET") {
-    if (!adminMiddleware(req, res)) return;
-    return getAllUsers(req, res);
+    await getAllUsers(req, res);
+    return true;
   }
 
   // MENU
   if (req.url === "/api/admin/menu" && req.method === "GET") {
-    if (!adminMiddleware(req, res)) return;
-    return getAllMenuItems(req, res);
+    await getAllMenuItems(req, res);
+    return true;
   }
 
   if (req.url === "/api/admin/menu" && req.method === "POST") {
-    if (!adminMiddleware(req, res)) return;
-    return createMenuItem(req, res);
+    await createMenuItem(req, res);
+    return true;
   }
 
   // RESERVATIONS
   if (req.url === "/api/admin/reservations" && req.method === "GET") {
-    if (!adminMiddleware(req, res)) return;
-    return getAllReservations(req, res);
+    await getAllReservations(req, res);
+    return true;
   }
 
   // GALLERY
   if (req.url === "/api/admin/gallery" && req.method === "GET") {
-    if (!adminMiddleware(req, res)) return;
-    return getAllGalleryItems(req, res);
+    await getAllGalleryItems(req, res);
+    return true;
   }
 
   // Fallback for unknown admin route
   res.writeHead(404, { "Content-Type": "application/json" });
-  res.end(JSON.stringify({ message: "Admin route not found" }));
+  res.end(JSON.stringify({ message: "Admin sub-route not found" }));
+  return true;
 };
 
 module.exports = adminRoutes;

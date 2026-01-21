@@ -1,14 +1,29 @@
 // controllers/adminController.js
-
-const Menu = require("../models/Menu");
+const User = require("../models/User"); // Added this
+const Menu = require("../models/MenuItem");
 const Reservation = require("../models/Reservation");
-const Gallery = require("../models/Gallery");
+const Gallery = require("../models/GalleryItem");
+
+// ============================
+// USER CONTROLS
+// ============================
+
+// Get all registered users (Added this function)
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find({}, "-password"); // Fetch all but hide passwords
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify(users));
+  } catch (err) {
+    res.writeHead(500, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ message: "Error fetching users", error: err.message }));
+  }
+};
 
 // ============================
 // MENU CONTROLS
 // ============================
 
-// Get all menu items
 const getAllMenuItems = async (req, res) => {
   try {
     const items = await Menu.find();
@@ -20,7 +35,6 @@ const getAllMenuItems = async (req, res) => {
   }
 };
 
-// Create new menu item
 const createMenuItem = async (req, res) => {
   try {
     const { name, price, category, description, image } = req.body;
@@ -37,7 +51,6 @@ const createMenuItem = async (req, res) => {
 // RESERVATION CONTROLS
 // ============================
 
-// Get all reservations
 const getAllReservations = async (req, res) => {
   try {
     const reservations = await Reservation.find();
@@ -53,7 +66,6 @@ const getAllReservations = async (req, res) => {
 // GALLERY CONTROLS
 // ============================
 
-// Get all gallery items
 const getAllGalleryItems = async (req, res) => {
   try {
     const galleryItems = await Gallery.find();
@@ -69,6 +81,7 @@ const getAllGalleryItems = async (req, res) => {
 // EXPORT
 // ============================
 module.exports = {
+  getAllUsers, // Added this to exports
   getAllMenuItems,
   createMenuItem,
   getAllReservations,

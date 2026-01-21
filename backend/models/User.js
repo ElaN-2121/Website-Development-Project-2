@@ -11,15 +11,12 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-
 userSchema.pre("save", async function () { 
   if (!this.isModified("password")) return;
 
   try {
-    // Hash the password and assign it back to the document
     this.password = await bcrypt.hash(this.password, 10);
   } catch (err) {
-    // If an error occurs, throwing it allows Mongoose to catch it
     throw err;
   }
 });
