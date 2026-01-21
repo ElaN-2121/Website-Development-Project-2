@@ -171,7 +171,7 @@ const Services = () => {
           Rooted in passion, we curate unforgettable dining experiences and offer exceptional services, blending culinary artistry with warm hospitality.
         </p>
         
-        <Button text="Explore" variant="yellow" className="explore-btn" />
+        <Button text="Explore" variant="yellow" className="explore-btn"  to="/events"  />
       </div>
       <div className="services-grid">
         {services.map(s => (
@@ -230,7 +230,7 @@ const Testimonials = () => {
 <Button 
   text="View More" 
   className="btn-book-hero" 
-  to="/EventsTestimonials#testimonials" 
+  to="/events" 
 />
     </section>
   );
