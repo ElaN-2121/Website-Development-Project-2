@@ -22,7 +22,7 @@ const Navbar = () => {
         <li><NavLink to="/events">Events & Testimonials</NavLink></li>
         <li><NavLink to="/gallery">Gallery</NavLink></li>
         <li><NavLink to="/contact">Contact Us</NavLink></li>
-        
+        <li><NavLink to="/profile">Profile</NavLink></li>
         {/* Only show Dashboard link if Admin */}
         {user?.role === 'admin' && (
           <li><NavLink to="/admin">Dashboard</NavLink></li>

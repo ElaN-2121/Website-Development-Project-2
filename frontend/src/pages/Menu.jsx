@@ -157,7 +157,6 @@ export default function Menu() {
           </div>
         </section>
       </div>
-      <FAQ />
     </div>
   );
 }

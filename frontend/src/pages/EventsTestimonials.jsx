@@ -1,8 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "../styles/EventsTestimonials.css";
 import Button from '../components/Button';
 
-// Asset Imports - Gallery
+// Asset Imports
 import event from "../assets/Gallery/event.png";
 import wedding1 from "../assets/Gallery/wedding1.png";
 import privateDinner from "../assets/Gallery/privateDinner.png";
@@ -16,7 +16,6 @@ import celebration from "../assets/Gallery/Celebration.mp4";
 import DiningTogether from "../assets/Gallery/Dining Together.mp4";
 import eventFormInterior from "../assets/Gallery/event_form_interior.jpg";
 
-// Asset Imports - Customers
 import Hana from "../assets/customers/Hana Gebremedhin.jpg";
 import Lulit from "../assets/customers/Lulit Mekonnen.jpg";
 import Nati from "../assets/customers/Natnael Haile.jpg";
@@ -25,27 +24,13 @@ import Yonas from "../assets/customers/Yonas Birhan.jpg";
 import Dagim from "../assets/customers/Dagmawi Abebe.jpg";
 import testimonial_last_img from "../assets/Gallery/testimonials_img.jpg";
 
-const carouselData = [
-  { id: 0, type: "image", src: wedding1, title: "Grand Wedding Celebration", desc: "A spectacular wedding celebrated with grand decor, live entertainment, and a gourmet feast for hundreds of guests." },
-  { id: 1, type: "video", src: hangout, title: "Afternoon Social", desc: "A stylish midday gathering with delicious meals and happy customers enjoying our premium lounge atmosphere." },
-  { id: 2, type: "image", src: event, title: "Sun-Drenched Garden Luncheon", desc: "A vibrant afternoon celebration set against a backdrop of blooming florals and soft sunlight with a curated seasonal menu." },
-  { id: 3, type: "image", src: privateDinner, title: "Elegant Private Dinner", desc: "A beautifully curated dining experience featuring a five-course meal, candlelit ambiance, and live acoustic music." },
-  { id: 4, type: "video", src: celebration, title: "Joyous Moments", desc: "Capturing the energy of life's biggest wins with premium service and a festive environment for all your guests." },
-  { id: 5, type: "image", src: birthday, title: "Milestone Birthday Bash", desc: "A vibrant party with a custom theme, DJ, and a decadent dessert station to mark a truly special year." },
-  { id: 6, type: "image", src: corporateEvent, title: "Corporate Excellence", desc: "A sophisticated evening of networking, awards, and fine dining for industry leaders and corporate partners." },
-  { id: 7, type: "video", src: DiningTogether, title: "Group Dining Experience", desc: "Large-scale communal dining where flavor meets friendship. Perfect for family reunions or team outings." },
-  { id: 8, type: "image", src: habesharestaurant, title: "Authentic Habesha Dining", desc: "Foreign guests exploring the rich heritage of Ethiopian cuisine through our traditional communal platters." },
-  { id: 9, type: "image", src: birthday2, title: "Blastful Birthday", desc: "High-energy celebrations featuring custom lighting and personalized decor to make your birthday unforgettable." },
-  { id: 10, type: "image", src: wedding2, title: "Classic Wedding", desc: "Timeless elegance for your special day, featuring sophisticated floral arrangements and a refined white-glove service." },
-];
-
-const testimonialsData = [
-  { id: 0, name: "Hana Gebremedhin", image: Hana },
-  { id: 1, name: "Lulit Mekonnen", image: Lulit },
-  { id: 2, name: "Yonas Berhane", image: Yonas },
-  { id: 3, name: "Saba Tesfaye", image: Saba },
-  { id: 4, name: "Natnael Haile", image: Nati },
-  { id: 5, name: "Dagmawi Abebe", image: Dagim },
+const initialTestimonials = [
+  { id: 0, name: "Hana Gebremedhin", image: Hana, story: "Our wedding at Habesha Feast was absolutely magical!", rating: 5 },
+  { id: 1, name: "Lulit Mekonnen", image: Lulit, story: "The corporate event was handled with such professionalism.", rating: 5 },
+  { id: 2, name: "Yonas Berhane", image: Yonas, story: "A truly authentic experience! The flavors reminded me of home.", rating: 4 },
+  { id: 3, name: "Saba Tesfaye", image: Saba, story: "Best birthday celebration ever! The team went above and beyond.", rating: 5 },
+  { id: 4, name: "Natnael Haile", image: Nati, story: "Exceptional quality and atmosphere. We felt like royalty.", rating: 5 },
+  { id: 5, name: "Dagmawi Abebe", image: Dagim, story: "Unmatched level of service. Impressed by the logistics.", rating: 4 },
 ];
 
 const EventsTestimonials = () => {
@@ -53,33 +38,63 @@ const EventsTestimonials = () => {
   const [activeCarouselIndex, setActiveCarouselIndex] = useState(0);
   const [activeTestimonialIndex, setActiveTestimonialIndex] = useState(0);
 
+  // Persistence Logic: Initialize from LocalStorage
+  const [testimonials, setTestimonials] = useState(() => {
+    const saved = localStorage.getItem("restaurant_testimonials");
+    return saved ? JSON.parse(saved) : initialTestimonials;
+  });
+
+  const [newTestimonial, setNewTestimonial] = useState({ name: "", story: "", image: null, rating: 5 });
+  const [hoverRating, setHoverRating] = useState(0); 
+  const [previewURL, setPreviewURL] = useState(null);
+
   const unforgettableRef = useRef(null);
   const testimonialsRef = useRef(null);
+
+  // Persistence Logic: Save to LocalStorage whenever testimonials change
+  useEffect(() => {
+    localStorage.setItem("restaurant_testimonials", JSON.stringify(testimonials));
+  }, [testimonials]);
 
   const scrollToSection = (elementRef) => {
     elementRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const handleToggle = (id) => {
-    setActiveTab(activeTab === id ? null : id);
+  const handleToggle = (id) => setActiveTab(activeTab === id ? null : id);
+  const nextSlide = () => setActiveCarouselIndex((prev) => (prev === 10 ? 0 : prev + 1));
+  const prevSlide = () => setActiveCarouselIndex((prev) => (prev === 0 ? 10 : prev - 1));
+  const nextTestimonial = () => setActiveTestimonialIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+  const prevTestimonial = () => setActiveTestimonialIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
+
+  // Updated to handle Base64 strings for persistence
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewURL(reader.result);
+        setNewTestimonial({ ...newTestimonial, image: reader.result });
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
-  // Main Carousel Navigation
-  const nextSlide = () => {
-    setActiveCarouselIndex((prev) => (prev === carouselData.length - 1 ? 0 : prev + 1));
-  };
+  const handleTestimonialSubmit = (e) => {
+    e.preventDefault();
+    if (!newTestimonial.name || !newTestimonial.story) return;
 
-  const prevSlide = () => {
-    setActiveCarouselIndex((prev) => (prev === 0 ? carouselData.length - 1 : prev - 1));
-  };
+    const entry = {
+      id: Date.now(),
+      name: newTestimonial.name,
+      story: newTestimonial.story,
+      rating: newTestimonial.rating,
+      image: newTestimonial.image || testimonial_last_img, 
+    };
 
-  // Testimonial Navigation Functions
-  const nextTestimonial = () => {
-    setActiveTestimonialIndex((prev) => (prev === testimonialsData.length - 1 ? 0 : prev + 1));
-  };
-
-  const prevTestimonial = () => {
-    setActiveTestimonialIndex((prev) => (prev === 0 ? testimonialsData.length - 1 : prev - 1));
+    setTestimonials([entry, ...testimonials]);
+    setNewTestimonial({ name: "", story: "", image: null, rating: 5 });
+    setPreviewURL(null);
+    alert("Thank you! Your testimonial has been added.");
   };
 
   const eventData = [
@@ -91,9 +106,22 @@ const EventsTestimonials = () => {
     { id: 5, title: "Memorable Moments", desc: "Creating lasting memories through exceptional service and atmosphere." },
   ];
 
+  const carouselData = [
+    { id: 0, type: "image", src: wedding1, title: "Grand Wedding Celebration", desc: "A spectacular wedding celebrated with grand decor, live entertainment, and a gourmet feast for hundreds of guests." },
+    { id: 1, type: "video", src: hangout, title: "Afternoon Social", desc: "A stylish midday gathering with delicious meals and happy customers enjoying our premium lounge atmosphere." },
+    { id: 2, type: "image", src: event, title: "Sun-Drenched Garden Luncheon", desc: "A vibrant afternoon celebration set against a backdrop of blooming florals and soft sunlight with a curated seasonal menu." },
+    { id: 3, type: "image", src: privateDinner, title: "Elegant Private Dinner", desc: "A beautifully curated dining experience featuring a five-course meal, candlelit ambiance, and live acoustic music." },
+    { id: 4, type: "video", src: celebration, title: "Joyous Moments", desc: "Capturing the energy of life's biggest wins with premium service and a festive environment for all your guests." },
+    { id: 5, type: "image", src: birthday, title: "Milestone Birthday Bash", desc: "A vibrant party with a custom theme, DJ, and a decadent dessert station to mark a truly special year." },
+    { id: 6, type: "image", src: corporateEvent, title: "Corporate Excellence", desc: "A sophisticated evening of networking, awards, and fine dining for industry leaders and corporate partners." },
+    { id: 7, type: "video", src: DiningTogether, title: "Group Dining Experience", desc: "Large-scale communal dining where flavor meets friendship. Perfect for family reunions or team outings." },
+    { id: 8, type: "image", src: habesharestaurant, title: "Authentic Habesha Dining", desc: "Foreign guests exploring the rich heritage of Ethiopian cuisine through our traditional communal platters." },
+    { id: 9, type: "image", src: birthday2, title: "Blastful Birthday", desc: "High-energy celebrations featuring custom lighting and personalized decor to make your birthday unforgettable." },
+    { id: 10, type: "image", src: wedding2, title: "Classic Wedding", desc: "Timeless elegance for your special day, featuring sophisticated floral arrangements and a refined white-glove service." },
+  ];
+
   return (
     <div className="events-page-wrapper">
-      {/* SECTION 1: HEADER & ACCORDION */}
       <section className="container">
         <div className="content-wrapper">
           <div className="header-row">
@@ -103,20 +131,8 @@ const EventsTestimonials = () => {
                 Elevate your celebrations with customized event packages, exquisite catering, and seamless service.
               </p>
               <div style={{ display: "flex", gap: "10px" }}>
-                <div style={{ display: "flex", gap: "10px" }}>
-                  <Button 
-                  text="See More" 
-                  variant="yellow" 
-                  className="see-more-btn" 
-                  onClick={() => scrollToSection(unforgettableRef)} 
-                  />
-                  <Button 
-                  text="Testimonials" 
-                  variant="white" 
-                  className="see-more-btn" 
-                  onClick={() => scrollToSection(testimonialsRef)} 
-                  />
-                  </div>
+                <Button text="See More" variant="yellow" className="see-more-btn" onClick={() => scrollToSection(unforgettableRef)} />
+                <Button text="Testimonials" variant="white" className="see-more-btn" onClick={() => scrollToSection(testimonialsRef)} />
               </div>
             </div>
           </div>
@@ -124,11 +140,7 @@ const EventsTestimonials = () => {
           <div className="main-layout">
             <div className="accordion-container">
               {eventData.map((item) => (
-                <div
-                  key={item.id}
-                  className={`accordion-item ${activeTab === item.id ? "active" : ""}`}
-                  onClick={() => handleToggle(item.id)}
-                >
+                <div key={item.id} className={`accordion-item ${activeTab === item.id ? "active" : ""}`} onClick={() => handleToggle(item.id)}>
                   <div className="accordion-header">
                     <span className="item-title">{item.title}</span>
                     <div className="circle-btn">
@@ -148,7 +160,6 @@ const EventsTestimonials = () => {
         </div>
       </section>
 
-      {/* SECTION 2: PERFECT EVENTS GRID */}
       <section className="perfect-events-section">
         <div className="perfect-events-wrapper">
           <div className="perfect-events-header">
@@ -157,9 +168,7 @@ const EventsTestimonials = () => {
           </div>
           <div className="perfect-events-grid">
             <div className="perfect-events-col-left">
-              <div className="perfect-events-img-large">
-                <img src={birthday} alt="Birthday" className="perfect-events-image" />
-              </div>
+              <div className="perfect-events-img-large"><img src={birthday} alt="Birthday" className="perfect-events-image" /></div>
               <div className="perfect-events-row-bottom">
                 <div className="perfect-events-img-small"><img src={privateDinner} alt="Private Dinner" className="perfect-events-image" /></div>
                 <div className="perfect-events-img-small"><img src={wedding1} alt="Wedding" className="perfect-events-image" /></div>
@@ -173,16 +182,10 @@ const EventsTestimonials = () => {
         </div>
       </section>
 
-      {/* SECTION 3: 3D CAROUSEL */}
       <section className="unforgettable-section" ref={unforgettableRef}>
         <h2 className="unforgettable-title">Unforgettable Moments, Beautifully Crafted</h2>
         <div className="carousel-view">
-          <Button 
-          text="←" 
-          variant="white" 
-          className="carousel-nav-btn left" 
-          onClick={prevSlide} 
-          />
+          <Button text="←" variant="white" className="carousel-nav-btn left" onClick={prevSlide} />
           <div className="carousel-stage">
             {carouselData.map((item, index) => {
               const len = carouselData.length;
@@ -208,12 +211,7 @@ const EventsTestimonials = () => {
               );
             })}
           </div>
-          <Button 
-          text="→" 
-          variant="white" 
-          className="carousel-nav-btn right" 
-          onClick={nextSlide} 
-          />
+          <Button text="→" variant="white" className="carousel-nav-btn right" onClick={nextSlide} />
         </div>
         <div className="unforgettable-footer">
           <h3 className="moment-name">{carouselData[activeCarouselIndex].title}</h3>
@@ -221,7 +219,6 @@ const EventsTestimonials = () => {
         </div>
       </section>
 
-      {/* SECTION 4: EVENT FORM */}
       <section className="event-form-section">
         <div className="form-container-main">
           <div className="form-image-column">
@@ -230,59 +227,40 @@ const EventsTestimonials = () => {
           <div className="form-content-column">
             <div className="form-header">
               <h2 className="form-title">Your Event, Our Priority</h2>
-              <p className="form-subtitle">Have questions about your event? Fill out our dedicated form, and our team will assist you with personalized solutions</p>
+              <p className="form-subtitle">Have questions about your event? Fill out our dedicated form.</p>
             </div>
-
             <form className="event-inquiry-form" onSubmit={(e) => e.preventDefault()}>
-              <div className="form-row">
-                <div className="input-group">
-                  <label>First name</label>
-                  <input type="text" placeholder="Tell us who you are" />
+                <div className="form-row">
+                    <div className="input-group">
+                        <label>First name</label>
+                        <input type="text" placeholder="Tell us who you are" />
+                    </div>
+                    <div className="input-group">
+                        <label>Last name</label>
+                        <input type="text" placeholder="Tell us who you are" />
+                    </div>
                 </div>
-                <div className="input-group">
-                  <label>Last name</label>
-                  <input type="text" placeholder="Tell us who you are" />
+                <div className="input-group full-width">
+                    <label>Email address</label>
+                    <input type="email" placeholder="Where can we reach you?" />
                 </div>
-              </div>
-              <div className="input-group full-width">
-                <label>Email address</label>
-                <input type="email" placeholder="Where can we reach you?" />
-              </div>
-              <div className="input-group full-width">
-                <label>How can we assist with your event inquiries?</label>
-                <textarea placeholder="Tell us your Specific Case"></textarea>
-              </div>
-            <Button 
-            type="submit" 
-            text="Send to Us" 
-            variant="yellow" 
-            className="form-submit-btn" 
-            />
+                <div className="input-group full-width">
+                    <label>How can we assist?</label>
+                    <textarea placeholder="Tell us your Specific Case"></textarea>
+                </div>
+                <Button type="submit" text="Send to Us" variant="yellow" className="form-submit-btn" />
             </form>
-            <div className="form-footer">
-              <p className="terms-text">By Contacting us, you agree to our <span className="terms">Terms</span> of service and <span className="terms">privacy Policy</span></p>
-              <p className="copyright-text">© 2026 Habesha Feast, All right reserved</p>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* SECTION 5: TESTIMONIALS */}
       <section className="testimonials-section" ref={testimonialsRef} style={{ background: "#4E342E" }}>
         <h2 className="testimonials-title">TESTIMONIALS</h2>
-        <div className="quote-container">
-          <span className="big-quote left-quote">“</span>
-          <h2 className="testimonial-text">
-            <span className="gold-text">THE FOOD WAS ABSOLUTELY OUTSTANDING, AND THE SERVICE WAS EXCEPTIONAL!</span>
-            <span className="white-text"> EVERY DETAIL CONTRIBUTED TO AN UNFORGETTABLE MOMENT. CAN’T WAIT TO RETURN FOR ANOTHER AMAZING EXPERIENCE</span>
-          </h2>
-          <span className="big-quote right-quote">”</span>
-        </div>
-
+        
         <div className="testimonial-carousel-wrapper">
           <div className="testimonial-stage">
-            {testimonialsData.map((item, index) => {
-              const len = testimonialsData.length;
+            {testimonials.map((item, index) => {
+              const len = testimonials.length;
               let dist = index - activeTestimonialIndex;
               if (dist > len / 2) dist -= len;
               if (dist < -len / 2) dist += len;
@@ -301,40 +279,20 @@ const EventsTestimonials = () => {
               );
             })}
           </div>
-
           <div className="testimonial-info-block">
-            <p className="testimonial-name-active">
-              {testimonialsData[activeTestimonialIndex]?.name}
-            </p>
+            <p className="testimonial-name-active">{testimonials[activeTestimonialIndex]?.name}</p>
             <div className="testimonial-nav-btns">
-              <Button 
-              text="←" 
-              variant="white" 
-              className="nav-circle" 
-              onClick={prevTestimonial} 
-              />
-              <Button 
-              text="→" 
-              variant="white" 
-              className="nav-circle" 
-              onClick={nextTestimonial} 
-              />
+              <Button text="←" variant="white" className="nav-circle" onClick={prevTestimonial} />
+              <Button text="→" variant="white" className="nav-circle" onClick={nextTestimonial} />
             </div>
           </div>
         </div>
 
-        {/* SECTION 6: REVIEW CARDS SECTION */}
         <section className="reviews-display-section">
-          <div className="quote-container">
-            <h2 className="testimonial-text">
-              <span className="white-text">What Our Customers Say About Us!</span>
-            </h2>
-          </div>
-
           <div className="reviews-carousel-wrapper">
             <div className="reviews-stage-area">
-              {testimonialsData.map((item, index) => {
-                const len = testimonialsData.length;
+              {testimonials.map((item, index) => {
+                const len = testimonials.length;
                 let dist = index - activeTestimonialIndex;
                 if (dist > len / 2) dist -= len;
                 if (dist < -len / 2) dist += len;
@@ -344,21 +302,15 @@ const EventsTestimonials = () => {
                 else if (dist === -1) posClass = "rev-left";
                 else if (dist === 1) posClass = "rev-right";
 
-                const stories = [
-                  "Our wedding at Habesha Feast was absolutely magical! From the moment we arrived, the stunning venue took our breath away. The attention to detail was remarkable, and the staff was incredibly attentive, ensuring everything ran smoothly. The gourmet food was a highlight; our guests are still raving about the delicious menu and exceptional service. We truly felt like royalty throughout the entire day.",
-                  "The corporate event was handled with such professionalism. The catering was exquisite, and the ambiance was exactly what we needed for our partners. Every detail was taken care of, from the presentation of the appetizers to the seamless flow of the evening program. It provided the perfect sophisticated backdrop for our high-level networking and partnership discussions.",
-                  "A truly authentic experience! The flavors of the communal platters reminded me so much of home. The service was warm and personal, and the live music added a beautiful, soulful touch to our anniversary dinner. We've been to many restaurants, but none capture the heart and heritage of our culture quite like this place. It was more than just a meal; it was a celebration of identity.",
-                  "Best birthday celebration ever! The team went above and beyond with the decorations and the custom menu that reflected all my favorite flavors. My guests are still talking about the outstanding service and the unique honey wine selection. They managed to make a large party feel intimate and special, attending to every guest's needs with a smile and professional grace.",
-                  "Exceptional quality and atmosphere. We hosted a private dinner here, and the staff made us feel like royalty. The food is consistently delicious and the decor is breathtaking, blending modern luxury with traditional elements. It's rare to find a place that excels equally in culinary mastery and interior design. Every visit feels like a luxury getaway right in the heart of the city.",
-                  "The level of service provided by the Habesha Feast team is unmatched. As Dagmawi Abebe, I was particularly impressed by how they managed the guest flow and logistics during our gala. A flawless execution that allowed us to focus entirely on our guests. Their coordination between the kitchen and the front-of-house is a masterclass in event management. I highly recommend them for high-stakes events."
-                ];
-
                 return (
                   <div key={item.id} className={`review-card-3d ${posClass}`}>
                     <div className="review-glass-container">
-                      <div className="stars-row">⭐⭐⭐⭐⭐</div>
-                      <p className="review-body-text">{stories[index % stories.length]}</p>
-
+                      <div className="stars-row">
+                        {[...Array(5)].map((_, i) => (
+                          <span key={i} style={{ color: i < item.rating ? "#FFD700" : "#ffffff40" }}>★</span>
+                        ))}
+                      </div>
+                      <p className="review-body-text">{item.story}</p>
                       <div className="review-footer-avatar-row">
                         <div className="rev-avatar-circle">
                           <img src={item.image} alt={item.name} className="rev-img" />
@@ -373,39 +325,94 @@ const EventsTestimonials = () => {
                 );
               })}
             </div>
-
-            <div className="reviews-controls-block">
-              <div className="testimonial-nav-btns">
-                <div className="testimonial-nav-btns">
-                  <Button 
-                  text="←" 
-                  variant="white" 
-                  className="nav-circle" 
-                  onClick={prevTestimonial} 
-                  />
-                  <Button 
-                  text="→" 
-                  variant="white" 
-                  className="nav-circle" 
-                  onClick={nextTestimonial} 
-                  />
-                  </div>
-              </div>
-            </div>
           </div>
         </section>
 
-        {/* SECTION 7: FINAL TESTIMONIAL IMAGE & QUOTE */}
+        <section className="testimonial-form-entry">
+            <div className="form-container-main">
+                <div style={{ flex: "1", minWidth: "300px" }}>
+                    <h2 className="form-title" >Share Your Experience</h2>
+                    <p style={{ color: "white", marginBottom: "25px", fontSize: "0.9rem" }}>Upload a photo and tell us about your visit!</p>
+                    
+                    <form className="event-inquiry-form" onSubmit={handleTestimonialSubmit}>
+                        <div className="input-group full-width">
+                            <label className="testimonial-inputs">Your Name</label>
+                            <input 
+                                type="text" 
+                                placeholder="Name" 
+                                value={newTestimonial.name}
+                                onChange={(e) => setNewTestimonial({...newTestimonial, name: e.target.value})}
+                                required 
+                            />
+                        </div>
+
+                        <div className="input-group full-width">
+                            <label className="testimonial-inputs">Your Rating</label>
+                            <div>
+                                {[1, 2, 3, 4, 5].map((star) => (
+                                    <span
+                                        key={star}
+                                        onMouseEnter={() => setHoverRating(star)}
+                                        onMouseLeave={() => setHoverRating(0)}
+                                        onClick={() => setNewTestimonial({ ...newTestimonial, rating: star })}
+                                        style={{
+                                            color: (hoverRating || newTestimonial.rating) >= star ? "#FFD700" : "#ffffff40",
+                                            transition: "color 0.2s",
+                                            cursor: "pointer",
+                                            fontSize: "1.5rem"
+                                        }}
+                                    >
+                                        ★
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="input-group full-width">
+                            <label className="testimonial-inputs">Your Story</label>
+                            <textarea 
+                                placeholder="How was the food and service?" 
+                                value={newTestimonial.story}
+                                onChange={(e) => setNewTestimonial({...newTestimonial, story: e.target.value})}
+                                required
+                            ></textarea>
+                        </div>
+                        <div className="input-group full-width">
+                            <label className="testimonial-inputs">Add a Photo</label>
+                            <input 
+                                type="file" 
+                                accept="image/*" 
+                                onChange={handleImageChange} 
+                                style={{ border: "none", color: "white", padding: "5px 0" }}
+                            />
+                        </div>
+                        <Button type="submit" text="Post Testimonial" variant="yellow" className="form-submit-btn" />
+                    </form>
+                </div>
+
+                <div className="upload-image">
+                    {previewURL ? (
+                        <>
+                            <p style={{ color: "#FFD700", marginBottom: "10px", fontSize: "0.8rem" }}>Image Preview:</p>
+                            <img src={previewURL} alt="Preview" style={{ width: "100%", height: "200px", objectFit: "cover", borderRadius: "10px" }} />
+                        </>
+                    ) : (
+                        <p style={{ color: "#ffffff60", textAlign: "center" }}>Your uploaded photo will appear here</p>
+                    )}
+                </div>
+            </div>
+        </section>
+
         <section className="last-testimonial-section">
           <div className="testimonial-container">
             <img src={testimonial_last_img} alt="Event" className="header-image" />
             <div className="yellow-card">
               <blockquote className="quote">
-                “When a leading tech company approached us to host their annual corporate retreat, they wanted to create an event that would inspire creativity and strengthen team bonds. Our team worked closely with their organizers to understand their goals and vision”
+                “When a leading tech company approached us... Our team worked closely with their organizers to understand their goals.”
               </blockquote>
               <div className="author-info">
                 <h3 className="author-name">Michael Richard Klein</h3>
-                <p className="author-description">A successful entrepreneur managing operations across various industries and sectors</p>
+                <p className="author-description">Entrepreneur & Operations Manager</p>
               </div>
             </div>
           </div>

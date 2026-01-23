@@ -162,9 +162,7 @@ const Reservation = () => {
         </div>
       </section>
 
-      <section className="reservation-faq-section">
-        <FAQ />
-      </section>
+      
     </div>
   );
 };
