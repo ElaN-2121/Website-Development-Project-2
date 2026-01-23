@@ -1,54 +1,42 @@
-require("dotenv").config();
 const http = require("http");
-const connectDB = require("./config/db");
-
-// Route Imports
-const authRoutes = require("./routes/authRoutes");
-const profileRoutes = require("./routes/profileRoutes");
+const dotenv = require("dotenv");
+const mongoose = require("mongoose");
+// Note: We removed 'require("cors")' because we handle it manually below
 const adminRoutes = require("./routes/adminRoutes");
 const menuRoutes = require("./routes/menuRoutes");
-const reservationRoutes = require("./routes/reservationRoutes");
-const contactRoutes = require("./routes/contactRoutes");
-const testimonialRoutes = require("./routes/testimonialRoutes");
-const galleryRoutes = require("./routes/galleryRoutes");
+const authRoutes = require("./routes/authRoutes");
 
-// Connect to MongoDB
-connectDB();
+dotenv.config();
 
-// CORS helper
-const setCorsHeaders = (res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, OPTIONS"
-  );
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-};
+const PORT = process.env.PORT || 5000;
+
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.log(err));
 
 const server = http.createServer(async (req, res) => {
-  setCorsHeaders(res);
+  // 1. Handle CORS Manually (Permissions for Frontend to talk to Backend)
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
-  // Handle preflight requests
+  // 2. Handle Pre-flight requests (Browser checks permissions first)
   if (req.method === "OPTIONS") {
-    res.writeHead(200);
-    return res.end();
+    res.writeHead(204);
+    res.end();
+    return;
   }
 
-  // Waterfall Routing System
-  // Each route returns true if handled, false if not.
-  if (await authRoutes(req, res)) return; 
-  if (await profileRoutes(req, res)) return; 
-  if (await adminRoutes(req, res)) return; 
+  // 3. Route Handlers
+  // If a route returns 'true', it means it handled the request.
+  if (await authRoutes(req, res)) return;
+  if (await adminRoutes(req, res)) return;
   if (await menuRoutes(req, res)) return;
-  if (await reservationRoutes(req, res)) return;
-  if (await contactRoutes(req, res)) return;
-  if (await testimonialRoutes(req, res)) return;
-  if (await galleryRoutes(req, res)) return;
 
-  // Default fallback if no route matches
+  // 4. 404 Fallback
   res.writeHead(404, { "Content-Type": "application/json" });
   res.end(JSON.stringify({ message: "Route not found" }));
 });
 
-const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));

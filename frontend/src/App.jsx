@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import { AuthProvider } from "./context/AuthContext";
 
+// User Pages
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
 import Reservation from "./pages/Reservation";
@@ -10,7 +11,15 @@ import EventsTestimonials from "./pages/EventsTestimonials";
 import Contact from "./pages/Contact";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
-import Admin from "./pages/Admin";
+
+// Admin Layout and Pages
+import AdminLayout from "./admin/layout/AdminLayout";
+import Dashboard from "./admin/pages/Dashboard";
+import Reservations from "./admin/pages/Reservations";
+import MenuManagement from "./admin/pages/MenuManagement"; // Ensure spelling matches your filename
+import Testimonials from "./admin/pages/Testimonials";
+import Messages from "./admin/pages/Messages";
+import GalleryAdmin from "./admin/pages/Gallery";
 
 // Routes protection
 import ProtectedRoute from "./routes_frontend/ProtectedRoute";
@@ -21,11 +30,11 @@ const App = () => {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          {/* 1. PUBLIC ROUTES (Accessible to everyone) */}
+          {/* 1. PUBLIC ROUTES */}
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          
+
           {/* 2. PROTECTED USER ROUTES (Must be logged in) */}
           <Route element={<ProtectedRoute />}>
             <Route element={<Layout />}>
@@ -40,12 +49,19 @@ const App = () => {
 
           {/* 3. PROTECTED ADMIN ROUTES (Must be logged in AND an admin) */}
           <Route element={<AdminRoute />}>
-            <Route element={<Layout />}>
-              <Route path="/admin" element={<Admin />} />
+            <Route path="/admin" element={<AdminLayout />}>
+              {/* This is the /admin default page */}
+              <Route index element={<Dashboard />} />
+              
+              <Route path="reservations" element={<Reservations />} />
+              <Route path="menu" element={<MenuManagement />} />
+              <Route path="testimonials" element={<Testimonials />} />
+              <Route path="messages" element={<Messages />} />
+              <Route path="gallery" element={<GalleryAdmin />} />
             </Route>
           </Route>
 
-          {/* Fallback */}
+          {/* Fallback - Redirect to login if route doesn't exist */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </BrowserRouter>

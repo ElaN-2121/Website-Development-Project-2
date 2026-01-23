@@ -1,29 +1,10 @@
-// controllers/adminController.js
-const User = require("../models/User"); // Added this
+const User = require("../models/User");
 const Menu = require("../models/MenuItem");
 const Reservation = require("../models/Reservation");
 const Gallery = require("../models/GalleryItem");
+const getReqData = require("../utils/parseBody");
 
-// ============================
-// USER CONTROLS
-// ============================
-
-// Get all registered users (Added this function)
-const getAllUsers = async (req, res) => {
-  try {
-    const users = await User.find({}, "-password"); // Fetch all but hide passwords
-    res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify(users));
-  } catch (err) {
-    res.writeHead(500, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ message: "Error fetching users", error: err.message }));
-  }
-};
-
-// ============================
 // MENU CONTROLS
-// ============================
-
 const getAllMenuItems = async (req, res) => {
   try {
     const items = await Menu.find();
@@ -37,8 +18,8 @@ const getAllMenuItems = async (req, res) => {
 
 const createMenuItem = async (req, res) => {
   try {
-    const { name, price, category, description, image } = req.body;
-    const newItem = await Menu.create({ name, price, category, description, image });
+    const body = await getReqData(req);
+    const newItem = await Menu.create(body);
     res.writeHead(201, { "Content-Type": "application/json" });
     res.end(JSON.stringify(newItem));
   } catch (err) {
@@ -47,43 +28,44 @@ const createMenuItem = async (req, res) => {
   }
 };
 
-// ============================
-// RESERVATION CONTROLS
-// ============================
-
-const getAllReservations = async (req, res) => {
+const updateMenuItem = async (req, res, id) => {
   try {
-    const reservations = await Reservation.find();
+    const body = await getReqData(req);
+    const updatedItem = await Menu.findByIdAndUpdate(id, body, { new: true });
     res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify(reservations));
+    res.end(JSON.stringify(updatedItem));
   } catch (err) {
     res.writeHead(500, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ message: "Error fetching reservations", error: err.message }));
+    res.end(JSON.stringify({ message: "Error updating item", error: err.message }));
   }
 };
 
-// ============================
-// GALLERY CONTROLS
-// ============================
-
-const getAllGalleryItems = async (req, res) => {
+const deleteMenuItem = async (req, res, id) => {
   try {
-    const galleryItems = await Gallery.find();
+    await Menu.findByIdAndDelete(id);
     res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify(galleryItems));
+    res.end(JSON.stringify({ message: "Item deleted successfully" }));
   } catch (err) {
     res.writeHead(500, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ message: "Error fetching gallery items", error: err.message }));
+    res.end(JSON.stringify({ message: "Error deleting item", error: err.message }));
   }
 };
 
-// ============================
-// EXPORT
-// ============================
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find({}, "-password");
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify(users));
+  } catch (err) {
+    res.writeHead(500, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ message: "Error", error: err.message }));
+  }
+};
+
 module.exports = {
-  getAllUsers, // Added this to exports
+  getAllUsers,
   getAllMenuItems,
   createMenuItem,
-  getAllReservations,
-  getAllGalleryItems,
+  updateMenuItem,
+  deleteMenuItem
 };
