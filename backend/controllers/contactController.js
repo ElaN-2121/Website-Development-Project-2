@@ -3,7 +3,7 @@ const getReqData = require("../utils/parseBody");
 
 const getContacts = async (req, res) => {
   try {
-    const messages = await ContactMessage.find();
+    const messages = await ContactMessage.find().sort({ createdAt: -1 }); // Newest first
     res.writeHead(200, { "Content-Type": "application/json" });
     res.end(JSON.stringify(messages));
   } catch(err) {
@@ -24,4 +24,17 @@ const createContactMessage = async (req, res) => {
   }
 };
 
-module.exports = { getContacts, createContactMessage };
+// ADD THIS DELETE FUNCTION
+const deleteContact = async (req, res) => {
+  try {
+    const id = req.url.split("/")[3]; // Gets ID from /api/contact/ID
+    await ContactMessage.findByIdAndDelete(id);
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ message: "Message deleted" }));
+  } catch (err) {
+    res.writeHead(500, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ message: err.message }));
+  }
+};
+
+module.exports = { getContacts, createContactMessage, deleteContact };

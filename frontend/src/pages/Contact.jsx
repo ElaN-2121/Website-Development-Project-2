@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import api from "../services/api";
 import "../styles/Contact.css";
 import Button from "../components/Button";
 import FAQ from "../components/FAQ";
@@ -28,6 +29,36 @@ const InfoCard = ({ icon, title, desc, link }) => (
 );
 
 const Contact = () => {
+  // 1. Setup Form State
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    message: "",
+  });
+
+  // 2. Handle Submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const payload = {
+        name: `${formData.firstName} ${formData.lastName}`,
+        email: formData.email,
+        message: formData.message,
+        subject: "General Inquiry",
+      };
+      
+      await api.post("/contact", payload);
+      alert("Message sent successfully!");
+      
+      // Clear form after success
+      setFormData({ firstName: "", lastName: "", email: "", message: "" });
+    } catch (err) {
+      console.error(err);
+      alert("Failed to send message. Please try again.");
+    }
+  };
+
   return (
     <div className="contact-page">
       <section className="contact-hero">
@@ -118,7 +149,9 @@ const Contact = () => {
                 get the support and information you need.
               </p>
             </div>
-            <form className="contact-form">
+            
+            {/* 3. Bind handleSubmit to Form */}
+            <form className="contact-form" onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="firstName" className="form-label">
                   First name
@@ -128,6 +161,9 @@ const Contact = () => {
                   type="text"
                   className="form-input"
                   placeholder="Tell us who you are"
+                  required
+                  value={formData.firstName}
+                  onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                 />
               </div>
               <div className="form-group">
@@ -139,6 +175,9 @@ const Contact = () => {
                   type="text"
                   className="form-input"
                   placeholder="Tell us who you are"
+                  required
+                  value={formData.lastName}
+                  onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                 />
               </div>
               <div className="form-group full-width">
@@ -150,6 +189,9 @@ const Contact = () => {
                   type="email"
                   className="form-input"
                   placeholder="Where can we reach you?"
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 />
               </div>
               <div className="form-group full-width">
@@ -160,11 +202,19 @@ const Contact = () => {
                   id="message2"
                   className="form-textarea"
                   placeholder="Tell us your Specific Cause"
+                  required
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 />
               </div>
+              
               <div className="form-submit">
-                <Button text="Send to Us" variant="yellow" />
+                {/* 4. Use a standard button or wrap your component to trigger type="submit" */}
+                <button type="submit" style={{ background: 'none', border: 'none', padding: 0 }}>
+                  <Button text="Send to Us" variant="yellow" />
+                </button>
               </div>
+              
               <p className="legal-copy">
                 By Contacting us, you agree to our{" "}
                 <a href="#">Terms of service</a> and{" "}

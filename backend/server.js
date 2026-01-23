@@ -9,6 +9,7 @@ const adminRoutes = require("./routes/adminRoutes");
 const menuRoutes = require("./routes/menuRoutes");
 const authRoutes = require("./routes/authRoutes");
 const reservationRoutes = require("./routes/reservationRoutes");
+const contactRoutes = require("./routes/contactRoutes"); // <--- 1. ADD THIS LINE
 
 dotenv.config();
 
@@ -53,6 +54,7 @@ const server = http.createServer(async (req, res) => {
   if (await adminRoutes(req, res)) return;
   if (await menuRoutes(req, res)) return;
   if (await reservationRoutes(req, res)) return;
+  if (await contactRoutes(req, res)) return; // <--- 2. ADD THIS LINE
 
   // 404 Handler
   res.writeHead(404, { "Content-Type": "application/json" });
