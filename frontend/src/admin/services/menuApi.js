@@ -1,10 +1,12 @@
 import api from '../../services/api';
 
+// Fixed URL: Changed from /admin/menu to /menu
 export const fetchMenu = async () => {
-  const response = await api.get('/admin/menu');
+  const response = await api.get('/menu'); 
   return response.data;
 };
 
+// Fixed: Removed hardcoded headers so Axios handles FormData boundaries automatically
 export const addMenuItem = async (itemData) => {
   const response = await api.post('/admin/menu', itemData);
   return response.data;

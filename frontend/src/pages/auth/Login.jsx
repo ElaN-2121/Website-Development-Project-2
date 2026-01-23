@@ -7,25 +7,24 @@ import '../../styles/Auth.css';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(''); // State to show error messages
-  
   const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleLoginSubmit = async (e) => {
-    e.preventDefault();
-    setError(''); // Clear previous errors
-
-    const result = await login(email, password);
+    if (e) e.preventDefault();
     
-    if (result.success) {
-      if (result.role === 'admin') {
-        navigate('/admin');
+    // Call login from Context - it returns the userData object
+    const userData = await login(email, password);
+    
+    if (userData) {
+      // CHECK ROLE AND REDIRECT
+      if (userData.role === 'admin') {
+        navigate('/Admin'); // Leads to Admin.jsx for administrators
       } else {
-        navigate('/home');
+        navigate('/home');  // Leads to Home.jsx for regular users
       }
     } else {
-      setError(result.message); // Show error from backend
+      alert("Login failed. Please check your credentials.");
     }
   };
 
@@ -33,28 +32,39 @@ const Login = () => {
     <div className="auth-page-wrapper">
       <div className="auth-container">
         <h1 className="auth-title">Welcome Back</h1>
-        <p className="auth-subtitle">Sign in to Habesha Fest</p>
-        
-        {error && <div className="auth-error-message" style={{color: 'red', marginBottom: '1rem'}}>{error}</div>}
+        <p className="auth-subtitle">Please enter your details to sign in</p>
         
         <form className="auth-form" onSubmit={handleLoginSubmit}>
           <div className="auth-input-group">
             <label>Email Address</label>
             <input 
-              className="auth-input" type="email" placeholder="Enter your email" 
-              value={email} onChange={(e) => setEmail(e.target.value)} required 
+              className="auth-input"
+              type="email" 
+              placeholder="Enter your email" 
+              value={email}
+              onChange={(e) => setEmail(e.target.value)} 
+              required 
             />
           </div>
 
           <div className="auth-input-group">
             <label>Password</label>
             <input 
-              className="auth-input" type="password" placeholder="••••••••" 
-              value={password} onChange={(e) => setPassword(e.target.value)} required 
+              className="auth-input"
+              type="password" 
+              placeholder="••••••••" 
+              value={password}
+              onChange={(e) => setPassword(e.target.value)} 
+              required 
             />
           </div>
 
-          <Button type="submit" text="Login" variant="default" className="auth-btn-full" />
+          <Button 
+            type="submit"
+            text="Login" 
+            variant="default" 
+            className="auth-btn-full" 
+          />
         </form>
 
         <p className="auth-switch">

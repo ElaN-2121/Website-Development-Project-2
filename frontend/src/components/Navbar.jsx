@@ -8,15 +8,15 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      {/* 1. Logo Section */}
-      <Link to="/home" className="logo">
+      {/* 1. Logo Section - Link to root "/" */}
+      <Link to="/" className="logo">
         <img src={LogoImg} alt="Habesha Fest Logo" className="logo-img" />
         <h1 className="logo-text">Habesha Fest</h1>
       </Link>
 
-      {/* 2. Navigation Links (Middle) */}
+      {/* 2. Navigation Links  */}
       <ul className="nav-links">
-        <li><NavLink to="/home" end>Home</NavLink></li>
+        <li><NavLink to="/" end>Home</NavLink></li>
         <li><NavLink to="/menu">Menu</NavLink></li>
         <li><NavLink to="/reservation">Reservation</NavLink></li>
         <li><NavLink to="/events">Events & Testimonials</NavLink></li>
@@ -28,7 +28,7 @@ const Navbar = () => {
           <li><NavLink to="/admin">Dashboard</NavLink></li>
         )}
 
-        {/* Logout as a text link instead of a button */}
+        {/* Logout link */}
         {user && (
           <li>
             <button 
@@ -48,10 +48,12 @@ const Navbar = () => {
         )}
       </ul>
 
-      {/* 3. Action Button (Right) */}
-      <NavLink to="/reservation" className="nav-btn">
-        Book a table
-      </NavLink>
+      {/* 3. Action Button (Right) - HIDDEN if user is an admin */}
+      {user?.role !== 'admin' && (
+        <NavLink to="/reservation" className="nav-btn">
+          Book a table
+        </NavLink>
+      )}
     </nav>
   );
 };

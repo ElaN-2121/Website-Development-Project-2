@@ -40,7 +40,7 @@ const Register = () => {
       return setError("Passwords do not match!");
     }
 
-    // 3. Check password length (Security Best Practice)
+    // 3. Check password length 
     if (formData.password.length < 6) {
       return setError("Password must be at least 6 characters long.");
     }
@@ -89,7 +89,7 @@ const Register = () => {
             <label>Email Address</label>
             <input
               className="auth-input"
-              type="email" // This triggers browser-level validation
+              type="email" 
               name="email"
               placeholder="Enter your email"
               value={formData.email}

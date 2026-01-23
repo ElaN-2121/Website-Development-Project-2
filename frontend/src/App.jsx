@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
-import { AuthProvider } from "./context/AuthContext";
+
+import { AuthProvider } from "./context/AuthContext"; 
 
 // User Pages
 import Home from "./pages/Home";
@@ -16,7 +17,7 @@ import Register from "./pages/auth/Register";
 import AdminLayout from "./admin/layout/AdminLayout";
 import Dashboard from "./admin/pages/Dashboard";
 import Reservations from "./admin/pages/Reservations";
-import MenuManagement from "./admin/pages/MenuManagement"; // Ensure spelling matches your filename
+import MenuManagement from "./admin/pages/MenuManagement"; 
 import Testimonials from "./admin/pages/Testimonials";
 import Messages from "./admin/pages/Messages";
 import GalleryAdmin from "./admin/pages/Gallery";
@@ -30,15 +31,17 @@ const App = () => {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          {/* 1. PUBLIC ROUTES */}
-          <Route path="/" element={<Login />} />
+          {/* Landing Page */}
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />} />
+          </Route>
+          
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-          {/* 2. PROTECTED USER ROUTES (Must be logged in) */}
+          {/* User Protected Routes */}
           <Route element={<ProtectedRoute />}>
             <Route element={<Layout />}>
-              <Route path="/home" element={<Home />} />
               <Route path="/menu" element={<Menu />} />
               <Route path="/reservation" element={<Reservation />} />
               <Route path="/gallery" element={<Gallery />} />
@@ -47,12 +50,10 @@ const App = () => {
             </Route>
           </Route>
 
-          {/* 3. PROTECTED ADMIN ROUTES (Must be logged in AND an admin) */}
+          {/* Admin Protected Routes */}
           <Route element={<AdminRoute />}>
             <Route path="/admin" element={<AdminLayout />}>
-              {/* This is the /admin default page */}
               <Route index element={<Dashboard />} />
-              
               <Route path="reservations" element={<Reservations />} />
               <Route path="menu" element={<MenuManagement />} />
               <Route path="testimonials" element={<Testimonials />} />
@@ -61,7 +62,6 @@ const App = () => {
             </Route>
           </Route>
 
-          {/* Fallback - Redirect to login if route doesn't exist */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </BrowserRouter>

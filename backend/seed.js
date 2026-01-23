@@ -26,7 +26,7 @@ const menuItems = [
 mongoose.connect(process.env.MONGO_URI)
   .then(async () => {
     console.log("Connected to MongoDB for seeding...");
-    await MenuItem.deleteMany({}); // Clears old data so you don't have duplicates
+    await MenuItem.deleteMany({}); 
     await MenuItem.insertMany(menuItems);
     console.log("Database Seeded Successfully!");
     process.exit();

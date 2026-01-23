@@ -1,157 +1,119 @@
-/* src/styles/MenuCard.css */
-
 .menu-card {
-  background: #FFFFFF;
-  border-radius: 20px;
+  background: #1a1a1a; 
+  border-radius: 12px;
   overflow: hidden;
-  position: relative;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease;
   height: 100%;
   display: flex;
   flex-direction: column;
+  border: 1px solid #333;
 }
 
-.menu-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+/* Image container*/
+.menu-card-image {
+  width: 100%;
+  height: 220px; 
+  background-color: #2a2a2a;
+  overflow: hidden;
 }
 
 .menu-card-image img {
   width: 100%;
-  height: 220px;
-  object-fit: cover; /* Ensures consistent cropping */
+  height: 100%;
+  object-fit: cover; 
+  display: block;
 }
 
+/* Content Box */
 .menu-card-info {
-  padding: 24px;
+  padding: 20px;
+  background-color: #ffffff;
+  color: #231916;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-}
-
-.menu-card-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 12px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .menu-item-name {
-  font-family: var(--font-family-heading);
-  color: var(--color-primary-brown);
+  font-family: 'Playfair Display', serif;
   font-size: 20px;
-  margin: 0;
-}
-
-.menu-item-price {
-  color: var(--color-secondary-yellow);
-  font-weight: 700;
-  font-size: 18px;
+  margin: 0 0 10px 0;
+  color: inherit; 
 }
 
 .menu-item-description {
   font-size: 14px;
-  color: var(--color-text-gray);
-  line-height: 1.6;
+  line-height: 1.5;
   margin-bottom: 15px;
-}
-
-.add-to-cart-btn {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  background: var(--color-primary-brown);
-  color: white;
-  border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.3s ease;
-}
-
-.add-to-cart-btn:hover {
-  background: var(--color-secondary-yellow);
-}/* Highlighted Gold Card Logic */
-.card-gold-active {
-  background-color: var(--color-secondary-yellow) !important;
-  color: #231916 !important;
-}
-
-.card-gold-active .menu-item-name,
-.card-gold-active .menu-item-price {
-  color: #231916;
-}
-
-.floating-add-btn {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: rgba(255, 255, 255, 0.9);
-  border: none;
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  font-size: 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-/* Layout Tweaks */
-.menu-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Forces 4 columns as per design */
-  gap: 24px;
-  margin-top: 40px;
-}
-
-/* Gold Card Specifics */
-.card-gold-active {
-  background-color: #E8B931 !important; /* The Gold from design */
-  color: #231916 !important;
-  border-radius: 12px;
-}
-
-.card-gold-active .menu-item-name,
-.card-gold-active .menu-item-description,
-.card-gold-active .menu-item-price {
-  color: #231916 !important;
+  color: #555; 
 }
 
 .menu-card-footer {
+  margin-top: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: auto;
+}
+
+.menu-item-price {
+  font-weight: bold;
+  font-size: 18px;
 }
 
 .rating-stars {
   color: #E8B931;
-  letter-spacing: 2px;
-}
-.rating-stars:hover{
-  color: #ffffff;
+  font-size: 14px;
 }
 
-/* Hero Badge Style */
-.quality-badge-box {
-  background: white;
-  padding: 10px 15px;
+.menu-card:hover .menu-card-info {
+  background-color: #E8B931; 
+  color: #231916;
+}
+
+.menu-card:hover .menu-item-description {
+  color: #231916; 
+}
+
+.menu-card:hover {
+  transform: translateY(-10px);
+}
+
+.menu-card-image {
+  width: 100%;
+  height: 250px; 
+  overflow: hidden; 
+  border-radius: 15px 15px 0 0; 
+}
+
+/* Find the actual img tag */
+.menu-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  object-position: center; 
+  display: block;
+}
+/* ADMIN BUTTONS:*/
+.admin-actions {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  width: fit-content;
+  flex-direction: row; 
+  gap: 8px; 
+  margin-top: 15px;
+  width: 100%;
 }
 
-.badge-icon {
-  background: #E8B931;
-  padding: 8px;
-  border-radius: 6px;
+.admin-actions .edit-btn, 
+.admin-actions .delete-btn {
+  flex: 1;
+  height: 34px !important; 
+  min-width: 0 !important; 
+  padding: 0 5px !important; 
+  font-size: 13px !important; 
+  border-radius: 8px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
+

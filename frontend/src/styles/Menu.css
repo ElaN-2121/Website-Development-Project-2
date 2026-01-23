@@ -417,8 +417,6 @@ html {
     transform: translateY(0);
   }
 }
-
-
 .menu-page-wrapper {
   font-family: var(--font-main);
   background-color: var(--color-cream);

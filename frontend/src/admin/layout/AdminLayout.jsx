@@ -26,15 +26,37 @@ export default function AdminLayout() {
         <h2>Admin Panel</h2>
         <nav className="admin-nav">
           {navItems.map((item) => (
-            <NavLink key={item.path} to={item.path} end className="admin-nav-link">
+            <NavLink 
+              key={item.path} 
+              to={item.path} 
+              end 
+              className="admin-nav-link"
+            >
               {item.name}
             </NavLink>
           ))}
+
+          {/* Moved buttons inside the nav and removed marginTop: auto */}
+          <div className="admin-sidebar-actions" style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '20px' }}>
+            <Button 
+              text="Back to Home" 
+              variant="yellow" 
+              to="/" 
+              className="admin-sidebar-btn" 
+              style={{ width: '100%' }}
+            />
+            
+            <Button 
+              text="Logout" 
+              variant="yellow" 
+              onClick={handleLogout} 
+              className="admin-sidebar-btn"
+              style={{ width: '100%' }}
+            />
+          </div>
         </nav>
-        <Button text="Back to Home" variant="white" to="src/pages/Home" className="admin-back-to-home" />
-        <Button text="Logout" variant="white" onClick={handleLogout} className="admin-logout"/>
-        
       </aside>
+
       <main className="admin-main-content">
         <Outlet />
       </main>
