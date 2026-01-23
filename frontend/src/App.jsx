@@ -11,6 +11,7 @@ import EventsTestimonials from "./pages/EventsTestimonials";
 import Contact from "./pages/Contact";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
+import Profile from "./pages/Profile";
 
 // Admin Layout and Pages
 import AdminLayout from "./admin/layout/AdminLayout";
@@ -44,6 +45,7 @@ const App = () => {
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/events" element={<EventsTestimonials />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/profile" element={<Profile />} />
             </Route>
           </Route>
 

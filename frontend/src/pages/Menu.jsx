@@ -111,7 +111,6 @@ export default function Menu() {
       <div className="menu-dark-container">
         <FullMenu />
       </div>
-      <FAQ />
     </div>
   );
 }
