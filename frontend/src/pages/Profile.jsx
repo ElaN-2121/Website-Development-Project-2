@@ -1,130 +1,105 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "../styles/Profile.css";
-import Button from "../components/Button";
-import defaultAvatar from "../assets/customers/Yonas Birhan.jpg";
 
 const Profile = () => {
-  const [isEditing, setIsEditing] = useState(false);
-  
-  // User state to handle updates
-  const [user, setUser] = useState({
-    name: "Natnael Haile",
-    email: "natnael.h@example.com",
-    phone: "+251 911 22 33 44",
-    address: "Bole Atlas, Addis Ababa",
-    memberSince: "May 2024",
-    points: 450,
-  });
+  const [user, setUser] = useState({ name: "", email: "", phone: "", profilePic: "" });
+  const [editMode, setEditMode] = useState(false);
+  const [previewPic, setPreviewPic] = useState(""); 
+  const [selectedFile, setSelectedFile] = useState(null);
 
-  // Temporary state for the form while editing
-  const [formData, setFormData] = useState({ ...user });
+  const BACKEND_URL = "http://localhost:5000";
 
-  const handleInputChange = (e, field) => {
-    setFormData({ ...formData, [field]: e.target.value });
-  };
+  // Dummy effect for UI testing - replace with fetch logic later
+  useEffect(() => {
+    // Initial UI state setup
+    setPreviewPic(user.profilePic || "https://via.placeholder.com/150");
+  }, [user.profilePic]);
 
-  const handleSave = (e) => {
-    e.preventDefault();
-    setUser({ ...formData }); // Commit changes to the main user state
-    setIsEditing(false);
-    alert("Profile updated successfully!");
-  };
-
-  const handleCancel = () => {
-    setFormData({ ...user }); // Revert changes to original user data
-    setIsEditing(false);
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+      setPreviewPic(URL.createObjectURL(file)); 
+    }
   };
 
   return (
-    <div className="profile-page-wrapper">
+    <div className="profile-page">
       <div className="profile-container">
         
-        {/* LEFT COLUMN: STATIC INFO */}
+        {/* Left Section: User Card */}
         <aside className="profile-sidebar">
-          <div className="profile-card user-main-info">
-            <div className="avatar-wrapper">
-              <img src={defaultAvatar} alt="Profile" className="profile-avatar" />
-              <div className="avatar-overlay">
-                 <span className="camera-icon">📷</span>
-              </div>
-            </div>
-            <h2 className="user-name">{user.name}</h2>
-            <p className="user-membership">Gold Member • {user.points} Points</p>
-            <hr className="divider" />
+          <div className="profile-image-wrapper">
+            <img src={previewPic} alt="User" className="profile-avatar" />
+            {editMode && (
+              <label className="upload-badge">
+                <i className="fas fa-camera">📸</i>
+                <input type="file" hidden onChange={handleImageChange} />
+              </label>
+            )}
           </div>
-
-          <nav className="profile-nav">
-            <button className="nav-link logout">Sign Out</button>
-          </nav>
+          <h2 className="user-name">{user.name || "User Name"}</h2>
+          <p className="user-status">Verified Customer</p>
+          
+          <div className="sidebar-stats">
+            <div className="stat-item">
+              <span>05</span>
+              <label>Reservations</label>
+            </div>
+          </div>
         </aside>
 
-        {/* RIGHT COLUMN: EDITABLE CONTENT */}
-        <main className="profile-content">
-          <section className="profile-card">
-            <div className="card-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
-              <h3 style={{ color: "#FFD700", margin: 0 }}>Account Details</h3>
-              {!isEditing ? (
-                <Button text="Edit Profile" variant="yellow" onClick={() => setIsEditing(true)} />
-              ) : (
-                <Button text="Cancel" variant="white" onClick={handleCancel} />
-              )}
+        {/* Right Section: Form Details */}
+        <main className="profile-details">
+          <div className="details-header">
+            <h3>Profile Settings</h3>
+            <button 
+              className={editMode ? "btn-cancel" : "btn-edit"} 
+              onClick={() => setEditMode(!editMode)}
+            >
+              {editMode ? "Cancel" : "Edit Profile"}
+            </button>
+          </div>
+
+          <div className="form-grid">
+            <div className="input-group">
+              <label>Full Name</label>
+              <input 
+                type="text" 
+                name="name" 
+                value={user.name} 
+                disabled={!editMode} 
+                placeholder="Enter your name"
+                onChange={(e) => setUser({...user, name: e.target.value})}
+              />
             </div>
 
-            
+            <div className="input-group">
+              <label>Email Address</label>
+              <input type="email" value={user.email} disabled placeholder="email@example.com" />
+              <small>Email cannot be changed.</small>
+            </div>
 
-            <form className="profile-form" onSubmit={handleSave}>
-              <div className="form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
-                
-                {/* Full Name */}
-                <div className="input-group">
-                  <label>Full Name</label>
-                  {isEditing ? (
-                    <input type="text" value={formData.name} onChange={(e) => handleInputChange(e, "name")} className="edit-input" />
-                  ) : (
-                    <p className="view-text">{user.name}</p>
-                  )}
-                </div>
+            <div className="input-group">
+              <label>Phone Number</label>
+              <input 
+                type="text" 
+                name="phone" 
+                value={user.phone} 
+                disabled={!editMode} 
+                placeholder="+1 234 567 890"
+                onChange={(e) => setUser({...user, phone: e.target.value})}
+              />
+            </div>
+          </div>
 
-                {/* Email */}
-                <div className="input-group">
-                  <label>Email Address</label>
-                  {isEditing ? (
-                    <input type="email" value={formData.email} onChange={(e) => handleInputChange(e, "email")} className="edit-input" />
-                  ) : (
-                    <p className="view-text">{user.email}</p>
-                  )}
-                </div>
-
-                {/* Phone */}
-                <div className="input-group">
-                  <label>Phone Number</label>
-                  {isEditing ? (
-                    <input type="text" value={formData.phone} onChange={(e) => handleInputChange(e, "phone")} className="edit-input" />
-                  ) : (
-                    <p className="view-text">{user.phone}</p>
-                  )}
-                </div>
-
-                {/* Address */}
-                <div className="input-group">
-                  <label>Primary Address</label>
-                  {isEditing ? (
-                    <input type="text" value={formData.address} onChange={(e) => handleInputChange(e, "address")} className="edit-input" />
-                  ) : (
-                    <p className="view-text">{user.address}</p>
-                  )}
-                </div>
-              </div>
-
-              {isEditing && (
-                <div className="form-actions" style={{ marginTop: "30px" }}>
-                  <Button type="submit" text="Save Changes" variant="yellow" style={{ width: "100%" }} />
-                </div>
-              )}
-            </form>
-          </section>
+          {editMode && (
+            <div className="form-actions">
+              <button className="btn-save">Update Profile</button>
+            </div>
+          )}
         </main>
-
       </div>
     </div>
   );
