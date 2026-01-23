@@ -1,0 +1,66 @@
+/* Overlay background */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* The Card itself */
+.modal-content {
+  background-color: #1e1e1e;
+  padding: 30px;
+  border-radius: 15px;
+  width: 450px;
+  border: 1px solid #efb40e;
+}
+
+/* Force all text inside the modal to be white */
+.modal-content h2,
+.modal-content p,
+.modal-content strong {
+  color: #ffffff !important;
+}
+
+.modal-content h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Column layout for details */
+.detail-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1.6;
+}
+
+.detail-row p {
+  margin: 5px 0;
+}
+
+/* The dark box for notes */
+.notes-box {
+  background-color: #2a2a2a;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: #ffffff !important;
+  border: 1px solid #444;
+  min-height: 60px;
+}
+
+/* Center the close button */
+.modal-button-container {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}

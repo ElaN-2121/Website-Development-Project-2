@@ -4,3 +4,5 @@ dist/
 build/
 *.log
 et --hard HASH_ID*
+node_modules/
+.DS_Store
