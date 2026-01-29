@@ -2,8 +2,12 @@ const {
   getMenuItems,
   createMenuItem,
   updateMenuItem,
-  deleteMenuItem
+  deleteMenuItem,
 } = require("../controllers/menuController");
+const {
+  getAdminProfile,
+  updateAdminProfile,
+} = require("../controllers/adminController");
 
 const adminRoutes = async (req, res) => {
   if (req.url === "/api/admin/menu" && req.method === "GET") {
@@ -29,7 +33,20 @@ const adminRoutes = async (req, res) => {
       return true;
     }
   }
+  // ===== ADMIN PROFILE =====
+  const url = req.url.split("?")[0].replace(/\/$/, ""); // normalize URL
 
+  if (url === "/api/admin/profile" && req.method === "GET") {
+    if (!adminMiddleware(req, res)) return true;
+    await getAdminProfile(req, res);
+    return true;
+  }
+
+  if (url === "/api/admin/profile" && req.method === "PUT") {
+    if (!adminMiddleware(req, res)) return true;
+    await updateAdminProfile(req, res);
+    return true;
+  }
   return false;
 };
 

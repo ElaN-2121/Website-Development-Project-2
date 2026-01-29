@@ -14,10 +14,10 @@ export default function AdminLayout() {
   };
 
   const navItems = [
-    { name: "Dashboard", path: "/admin" },
     { name: "Menu Management", path: "/admin/menu" },
     { name: "Reservations", path: "/admin/reservations" },
     { name: "Messages", path: "/admin/messages" },
+    { name: "Profile", path: "/admin/profile" },
   ];
 
   return (

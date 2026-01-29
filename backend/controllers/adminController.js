@@ -1,8 +1,10 @@
-// controllers/adminController.js
-
 const Menu = require("../models/Menu");
 const Reservation = require("../models/Reservation");
 const Gallery = require("../models/Gallery");
+
+const User = require("../models/User");
+const getReqData = require("../utils/parseBody");
+const bcrypt = require("bcryptjs");
 
 // ============================
 // MENU CONTROLS
@@ -66,6 +68,50 @@ const getAllGalleryItems = async (req, res) => {
 };
 
 // ============================
+// ADMIN PROFILE CONTROLS
+// ============================
+
+// GET admin profile
+const getAdminProfile = async (req, res) => {
+  try {
+    const adminId = req.user.id; // set by adminMiddleware
+    const admin = await User.findById(adminId).select("-password");
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ admin }));
+  } catch (err) {
+    res.writeHead(500, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ message: "Server error", error: err.message }));
+  }
+};
+
+// UPDATE admin profile
+const updateAdminProfile = async (req, res) => {
+  try {
+    const adminId = req.user.id;
+    const body = await getReqData(req);
+
+    const updateData = {
+      email: body.email,
+      name: body.name,
+    };
+
+    // Optional password update
+    if (body.password) {
+      const salt = await bcrypt.genSalt(10);
+      updateData.password = await bcrypt.hash(body.password, salt);
+    }
+
+    const updatedAdmin = await User.findByIdAndUpdate(adminId, updateData, { new: true }).select("-password");
+
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ message: "Admin updated successfully", admin: updatedAdmin }));
+  } catch (err) {
+    res.writeHead(500, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ message: "Server error", error: err.message }));
+  }
+};
+
+// ============================
 // EXPORT
 // ============================
 module.exports = {
@@ -73,4 +119,6 @@ module.exports = {
   createMenuItem,
   getAllReservations,
   getAllGalleryItems,
+  updateAdminProfile,
+  getAdminProfile,
 };

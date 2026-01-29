@@ -1,27 +1,22 @@
-const jwt = require("jsonwebtoken");
+const { adminMiddleware } = require("../middleware/adminMiddleware");
+const { getProfile, updateProfile } = require("../controllers/profileController");
 
-const adminMiddleware = (req, res) => {
-  const authHeader = req.headers.authorization;
-  if (!authHeader) {
-    res.writeHead(401, {"Content-Type":"application/json"});
-    res.end(JSON.stringify({ message: "No token provided" }));
-    return false;
-  }
-  const token = authHeader.split(" ")[1];
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    if (decoded.role !== "admin") {
-      res.writeHead(403, {"Content-Type":"application/json"});
-      res.end(JSON.stringify({ message: "Admin access required" }));
-      return false;
-    }
-    req.user = decoded;
+const profileRoutes = async (req, res) => {
+  console.log("PROFILE ROUTE CHECK:", req.method, req.url);
+
+  if (req.url.startsWith("/api/profile") && req.method === "GET") {
+    if (!adminMiddleware(req, res)) return true;
+    await getProfile(req, res);
     return true;
-  } catch(err) {
-    res.writeHead(401, {"Content-Type":"application/json"});
-    res.end(JSON.stringify({ message: "Invalid token" }));
-    return false;
   }
+
+  if (req.url.startsWith("/api/profile") && req.method === "PUT") {
+    if (!adminMiddleware(req, res)) return true;
+    await updateProfile(req, res);
+    return true;
+  }
+
+  return false;
 };
 
-module.exports = { adminMiddleware };
+module.exports = profileRoutes;

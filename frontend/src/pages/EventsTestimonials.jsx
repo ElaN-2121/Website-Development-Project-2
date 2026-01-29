@@ -219,41 +219,6 @@ const EventsTestimonials = () => {
         </div>
       </section>
 
-      <section className="event-form-section">
-        <div className="form-container-main">
-          <div className="form-image-column">
-            <img src={eventFormInterior} alt="Event Venue" className="form-hero-img" />
-          </div>
-          <div className="form-content-column">
-            <div className="form-header">
-              <h2 className="form-title">Your Event, Our Priority</h2>
-              <p className="form-subtitle">Have questions about your event? Fill out our dedicated form.</p>
-            </div>
-            <form className="event-inquiry-form" onSubmit={(e) => e.preventDefault()}>
-                <div className="form-row">
-                    <div className="input-group">
-                        <label>First name</label>
-                        <input type="text" placeholder="Tell us who you are" />
-                    </div>
-                    <div className="input-group">
-                        <label>Last name</label>
-                        <input type="text" placeholder="Tell us who you are" />
-                    </div>
-                </div>
-                <div className="input-group full-width">
-                    <label>Email address</label>
-                    <input type="email" placeholder="Where can we reach you?" />
-                </div>
-                <div className="input-group full-width">
-                    <label>How can we assist?</label>
-                    <textarea placeholder="Tell us your Specific Case"></textarea>
-                </div>
-                <Button type="submit" text="Send to Us" variant="yellow" className="form-submit-btn" />
-            </form>
-          </div>
-        </div>
-      </section>
-
       <section className="testimonials-section" ref={testimonialsRef} style={{ background: "#4E342E" }}>
         <h2 className="testimonials-title">TESTIMONIALS</h2>
         

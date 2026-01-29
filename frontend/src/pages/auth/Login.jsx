@@ -7,24 +7,27 @@ import '../../styles/Auth.css';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(''); // Added to display error messages on screen
   const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleLoginSubmit = async (e) => {
     if (e) e.preventDefault();
+    setError(''); // Clear previous errors
     
-    // Call login from Context - it returns the userData object
-    const userData = await login(email, password);
+    // Call login from Context - result is { success: boolean, role: string, message: string }
+    const result = await login(email, password);
     
-    if (userData) {
-      // CHECK ROLE AND REDIRECT
-      if (userData.role === 'admin') {
-        navigate('/Admin'); // Leads to Admin.jsx for administrators
+    // Check for the specific success flag
+    if (result && result.success) {
+      if (result.role === 'admin') {
+        navigate('/Admin'); 
       } else {
-        navigate('/home');  // Leads to Home.jsx for regular users
+        navigate('/home');  
       }
     } else {
-      alert("Login failed. Please check your credentials.");
+      // If success is false, show the error message from the backend
+      setError(result.message || "Login failed. Please check your credentials.");
     }
   };
 
@@ -34,6 +37,9 @@ const Login = () => {
         <h1 className="auth-title">Welcome Back</h1>
         <p className="auth-subtitle">Please enter your details to sign in</p>
         
+        {/* Error Message Display */}
+        {error && <div className="auth-error-message" style={{ color: 'red', marginBottom: '15px', textAlign: 'center' }}>{error}</div>}
+
         <form className="auth-form" onSubmit={handleLoginSubmit}>
           <div className="auth-input-group">
             <label>Email Address</label>

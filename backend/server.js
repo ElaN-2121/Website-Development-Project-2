@@ -9,7 +9,8 @@ const adminRoutes = require("./routes/adminRoutes");
 const menuRoutes = require("./routes/menuRoutes");
 const authRoutes = require("./routes/authRoutes");
 const reservationRoutes = require("./routes/reservationRoutes");
-const contactRoutes = require("./routes/contactRoutes"); // <--- 1. ADD THIS LINE
+const contactRoutes = require("./routes/contactRoutes");
+const profileRoutes = require("./routes/profileRoutes");
 
 dotenv.config();
 
@@ -21,14 +22,18 @@ if (!fs.existsSync(uploadsPath)) {
   fs.mkdirSync(uploadsPath);
 }
 
-mongoose.connect(process.env.MONGO_URI)
+mongoose
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
 
 const server = http.createServer(async (req, res) => {
   // CORS Headers
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, OPTIONS",
+  );
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
   if (req.method === "OPTIONS") {
@@ -42,8 +47,15 @@ const server = http.createServer(async (req, res) => {
     const filePath = path.join(__dirname, req.url);
     if (fs.existsSync(filePath)) {
       const ext = path.extname(filePath).toLowerCase();
-      const mimeTypes = { ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp" };
-      res.writeHead(200, { "Content-Type": mimeTypes[ext] || "application/octet-stream" });
+      const mimeTypes = {
+        ".png": "image/png",
+        ".jpg": "image/jpeg",
+        ".jpeg": "image/jpeg",
+        ".webp": "image/webp",
+      };
+      res.writeHead(200, {
+        "Content-Type": mimeTypes[ext] || "application/octet-stream",
+      });
       fs.createReadStream(filePath).pipe(res);
       return;
     }
@@ -51,10 +63,11 @@ const server = http.createServer(async (req, res) => {
 
   // API Route Handling
   if (await authRoutes(req, res)) return;
+  if (await profileRoutes(req, res)) return; 
   if (await adminRoutes(req, res)) return;
   if (await menuRoutes(req, res)) return;
   if (await reservationRoutes(req, res)) return;
-  if (await contactRoutes(req, res)) return; // <--- 2. ADD THIS LINE
+  if (await contactRoutes(req, res)) return;
 
   // 404 Handler
   res.writeHead(404, { "Content-Type": "application/json" });

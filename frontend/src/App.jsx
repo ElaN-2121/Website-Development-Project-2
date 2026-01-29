@@ -12,16 +12,14 @@ import EventsTestimonials from "./pages/EventsTestimonials";
 import Contact from "./pages/Contact";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
-import Profile from "./pages/Profile";
+import Testimonials from "./admin/pages/Testimonials";
 
 // Admin Layout and Pages
 import AdminLayout from "./admin/layout/AdminLayout";
-import Dashboard from "./admin/pages/Dashboard";
 import Reservations from "./admin/pages/Reservations";
-import MenuManagement from "./admin/pages/MenuManagement"; 
-import Testimonials from "./admin/pages/Testimonials";
+import MenuManagement from "./admin/pages/MenuManagement";
 import Messages from "./admin/pages/Messages";
-import GalleryAdmin from "./admin/pages/Gallery";
+import Profile from "./admin/pages/Profile";
 
 // Routes protection
 import ProtectedRoute from "./routes_frontend/ProtectedRoute";
@@ -48,19 +46,16 @@ const App = () => {
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/events" element={<EventsTestimonials />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/profile" element={<Profile />} />
             </Route>
           </Route>
 
           {/* Admin Protected Routes */}
           <Route element={<AdminRoute />}>
             <Route path="/admin" element={<AdminLayout />}>
-              <Route index element={<Dashboard />} />
               <Route path="reservations" element={<Reservations />} />
               <Route path="menu" element={<MenuManagement />} />
-              <Route path="testimonials" element={<Testimonials />} />
               <Route path="messages" element={<Messages />} />
-              <Route path="gallery" element={<GalleryAdmin />} />
+              <Route path="profile" element={<Profile />} />
             </Route>
           </Route>
 
