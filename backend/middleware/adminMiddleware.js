@@ -1,22 +1,15 @@
-const { adminMiddleware } = require("../middleware/adminMiddleware");
-const { getProfile, updateProfile } = require("../controllers/profileController");
+const authMiddleware = require("./authMiddleware");
 
-const profileRoutes = async (req, res) => {
-  console.log("PROFILE ROUTE CHECK:", req.method, req.url);
+const adminMiddleware = (req, res) => {
+  if (!authMiddleware(req, res)) return false;
 
-  if (req.url.startsWith("/api/profile") && req.method === "GET") {
-    if (!adminMiddleware(req, res)) return true;
-    await getProfile(req, res);
-    return true;
+  if (!req.user || req.user.role !== "admin") {
+    res.writeHead(403, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ message: "Forbidden: Admin access required" }));
+    return false;
   }
 
-  if (req.url.startsWith("/api/profile") && req.method === "PUT") {
-    if (!adminMiddleware(req, res)) return true;
-    await updateProfile(req, res);
-    return true;
-  }
-
-  return false;
+  return true;
 };
 
-module.exports = profileRoutes;
+module.exports = adminMiddleware;
