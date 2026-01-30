@@ -6,7 +6,10 @@
 }
 .contact-page {
   background-color: var(--contact-cream);
+  animation: fadeInUp 1.2s ease-out forwards;
+  will-change: transform, opacity; 
 }
+
 .contact-hero {
   position: relative;
   text-align: center;

@@ -12,6 +12,8 @@
 .reservation-page {
   width: 100%;
   overflow-x: hidden;
+  animation: fadeInUp 1.2s ease-out forwards;
+  will-change: transform, opacity; 
 }
 
 /*Hero section*/

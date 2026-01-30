@@ -1,6 +1,7 @@
 const Reservation = require("../models/Reservation");
 const getReqData = require("../utils/parseBody");
 
+//get
 const getReservations = async (req, res) => {
   try {
     const reservations = await Reservation.find().sort({ createdAt: -1 });
@@ -12,6 +13,7 @@ const getReservations = async (req, res) => {
   }
 };
 
+//post
 const createReservation = async (req, res) => {
   try {
     const body = await getReqData(req);
@@ -24,6 +26,7 @@ const createReservation = async (req, res) => {
   }
 };
 
+//update
 const updateReservationStatus = async (req, res) => {
   try {
     const body = await getReqData(req);
@@ -37,6 +40,7 @@ const updateReservationStatus = async (req, res) => {
   }
 };
 
+//delete
 const deleteReservation = async (req, res) => {
   try {
     const urlParts = req.url.split("/");
