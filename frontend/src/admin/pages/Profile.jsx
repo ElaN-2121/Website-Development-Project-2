@@ -6,6 +6,7 @@ const Profile = () => {
   const [user, setUser] = useState({ name: "", email: "", password: "" });
   const [editMode, setEditMode] = useState(false);
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const token = localStorage.getItem("token");
 
@@ -13,13 +14,20 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
+        setLoading(true);
         const res = await axios.get("http://localhost:5000/api/admin/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setUser(res.data.admin);
+        setUser(res.data);
+        setMessage("");
       } catch (err) {
-        console.error("Error fetching profile", err);
-        setMessage("Failed to load profile");
+        console.error(
+          "Profile Fetch Error:",
+          err.response?.data || err.message,
+        );
+        setMessage(err.response?.data?.message || "Failed to load profile");
+      } finally {
+        setLoading(false);
       }
     };
     fetchProfile();
@@ -42,8 +50,8 @@ const Profile = () => {
       setEditMode(false);
       setUser({ ...user, password: "" });
     } catch (err) {
-      console.error(err);
-      setMessage("Update failed");
+      console.error("Profile Update Error:", err.response?.data || err.message);
+      setMessage(err.response?.data?.message || "Update failed");
     }
   };
 
@@ -57,8 +65,8 @@ const Profile = () => {
               {editMode ? "Cancel" : "Edit Credentials"}
             </button>
           </div>
-
-          {message && <p className="status-msg">{message}</p>}
+          {loading && <p className="status-msg">Loading profile...</p>}
+          {!loading && message && <p className="status-msg">{message}</p>}
 
           <form onSubmit={handleUpdate} className="form-grid">
             <div className="input-group">
