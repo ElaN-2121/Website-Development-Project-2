@@ -9,7 +9,7 @@ const {
   getAdminProfile,
   updateAdminProfile,
 } = require("../controllers/adminController");
-
+const adminMiddleware = require("../middleware/adminMiddleware");
 const adminRoutes = async (req, res) => {
   if (req.url === "/api/admin/menu" && req.method === "GET") {
     await getMenuItems(req, res);

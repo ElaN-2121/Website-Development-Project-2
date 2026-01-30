@@ -18,7 +18,12 @@ const getAllMenuItems = async (req, res) => {
     res.end(JSON.stringify(items));
   } catch (err) {
     res.writeHead(500, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ message: "Error fetching menu items", error: err.message }));
+    res.end(
+      JSON.stringify({
+        message: "Error fetching menu items",
+        error: err.message,
+      }),
+    );
   }
 };
 
@@ -26,12 +31,23 @@ const getAllMenuItems = async (req, res) => {
 const createMenuItem = async (req, res) => {
   try {
     const { name, price, category, description, image } = req.body;
-    const newItem = await Menu.create({ name, price, category, description, image });
+    const newItem = await Menu.create({
+      name,
+      price,
+      category,
+      description,
+      image,
+    });
     res.writeHead(201, { "Content-Type": "application/json" });
     res.end(JSON.stringify(newItem));
   } catch (err) {
     res.writeHead(500, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ message: "Error creating menu item", error: err.message }));
+    res.end(
+      JSON.stringify({
+        message: "Error creating menu item",
+        error: err.message,
+      }),
+    );
   }
 };
 
@@ -47,7 +63,12 @@ const getAllReservations = async (req, res) => {
     res.end(JSON.stringify(reservations));
   } catch (err) {
     res.writeHead(500, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ message: "Error fetching reservations", error: err.message }));
+    res.end(
+      JSON.stringify({
+        message: "Error fetching reservations",
+        error: err.message,
+      }),
+    );
   }
 };
 
@@ -63,7 +84,12 @@ const getAllGalleryItems = async (req, res) => {
     res.end(JSON.stringify(galleryItems));
   } catch (err) {
     res.writeHead(500, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ message: "Error fetching gallery items", error: err.message }));
+    res.end(
+      JSON.stringify({
+        message: "Error fetching gallery items",
+        error: err.message,
+      }),
+    );
   }
 };
 
@@ -75,9 +101,11 @@ const getAllGalleryItems = async (req, res) => {
 const getAdminProfile = async (req, res) => {
   try {
     const adminId = req.user.id; // set by adminMiddleware
-    const admin = await User.findById(adminId).select("-password");
+    const admin = await User.findById(adminId).select("name email");
     res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ admin }));
+    res.end(
+      JSON.stringify({ name: admin?.name || "", email: admin?.email || "" }),
+    );
   } catch (err) {
     res.writeHead(500, { "Content-Type": "application/json" });
     res.end(JSON.stringify({ message: "Server error", error: err.message }));
@@ -101,10 +129,17 @@ const updateAdminProfile = async (req, res) => {
       updateData.password = await bcrypt.hash(body.password, salt);
     }
 
-    const updatedAdmin = await User.findByIdAndUpdate(adminId, updateData, { new: true }).select("-password");
+    const updatedAdmin = await User.findByIdAndUpdate(adminId, updateData, {
+      new: true,
+    }).select("-password");
 
     res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ message: "Admin updated successfully", admin: updatedAdmin }));
+    res.end(
+      JSON.stringify({
+        message: "Admin updated successfully",
+        admin: updatedAdmin,
+      }),
+    );
   } catch (err) {
     res.writeHead(500, { "Content-Type": "application/json" });
     res.end(JSON.stringify({ message: "Server error", error: err.message }));
