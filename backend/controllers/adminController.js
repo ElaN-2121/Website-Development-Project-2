@@ -1,6 +1,6 @@
-const Menu = require("../models/Menu");
+const Menu = require("../models/MenuItem");
 const Reservation = require("../models/Reservation");
-const Gallery = require("../models/Gallery");
+const Gallery = require("../models/GalleryItem");
 
 const User = require("../models/User");
 const getReqData = require("../utils/parseBody");
