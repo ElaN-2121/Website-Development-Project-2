@@ -8,7 +8,7 @@ const profileRoutes = async (req, res) => {
   if (req.url === "/api/profile" && req.method === "GET") {
     if (!adminMiddleware(req, res)) return true;
     await getProfile(req, res);
-    return true; // 🔥 REQUIRED
+    return true; 
   }
 
   if (req.url === "/api/profile" && req.method === "PUT") {
